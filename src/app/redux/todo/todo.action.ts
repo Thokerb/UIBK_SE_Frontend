@@ -1,10 +1,16 @@
 import { createAction, props } from '@ngrx/store';
+import {Injectable} from '@angular/core';
 
-export const addItem = createAction(
-  '[TODO] Add',
-  props<{ item: string; }>()
-);
+@Injectable()
+export class TodoAction{
+  addItem = createAction(
+    '[TODO] Add',
+    props<{ item: string; }>()
+  );
 
-export const clearList = createAction(
-  '[TODO] Clear List'
-);
+   clearList = createAction(
+    '[TODO] Clear List'
+  );
+
+}
+

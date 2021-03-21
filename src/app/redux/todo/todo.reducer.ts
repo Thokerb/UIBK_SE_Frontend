@@ -1,5 +1,6 @@
-import * as todoActions from './todo.action';
-import {Action, createReducer, on, State} from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
+import {Injectable} from '@angular/core';
+import {TodoAction} from './todo.action';
 
 
 export interface TodoState {
@@ -10,12 +11,17 @@ export const initialState: TodoState = {
   todos: ['eat', 'sleep', 'party', 'repeat']
 };
 
-const scoreboardReducer = createReducer(
-  initialState,
-  on(todoActions.addItem, (state, {item}) => ({ ...state, todos: [...state.todos, item] })),
-  on(todoActions.clearList, state => ({ ...state, todos: [] })),
-);
+@Injectable()
+export class TodoReducer{
 
-export function reducer(state: TodoState | undefined, action: Action): TodoState {
-  return scoreboardReducer(state, action);
+  constructor(private todoActions: TodoAction) {
+  }
+
+  reducer = createReducer(
+    initialState,
+    on(this.todoActions.addItem, (state, {item}) => ({ ...state, todos: [...state.todos, item] })),
+    on(this.todoActions.clearList, state => ({ ...state, todos: [] })),
+  );
 }
+
+

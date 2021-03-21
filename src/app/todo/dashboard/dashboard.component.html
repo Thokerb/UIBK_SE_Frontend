@@ -1,2 +1,6 @@
 <p>dashboard works!</p>
-<p *ngFor="let value of todo">{{value}}</p>
+<div *ngIf="(todo | async) as todoObject">
+<p *ngFor="let value of todoObject">{{value}}</p>
+</div>
+
+<button (click)="addItem('study hard')">Add 'study hard'</button>
