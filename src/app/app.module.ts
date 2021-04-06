@@ -2,7 +2,7 @@ import {inject, InjectionToken, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {ActionReducerMap, StoreModule} from '@ngrx/store';
+import {ActionReducer, ActionReducerMap, StoreModule} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,7 @@ import * as fromRoot from './redux/AppState';
 import {TodoModule} from './todo/todo.module';
 import {ReduxModule} from './redux/redux.module';
 import {AppReducer} from './redux/AppReducer';
+import {storeLogger} from 'ngrx-store-logger';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -21,6 +22,12 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppSta
   }
 });
 
+export function logger(reducer: ActionReducer<fromRoot.AppState>): any {
+  // default, no options
+  return storeLogger()(reducer);
+}
+export const metaReducers = environment.production ? [] : [logger];
+
 @NgModule({
   declarations: [
     AppComponent
@@ -30,7 +37,9 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppSta
     AppRoutingModule,
     TodoModule,
     ReduxModule,
-    StoreModule.forRoot(REDUCER_TOKEN, {
+    StoreModule.forRoot(REDUCER_TOKEN,
+      {
+      metaReducers,
       runtimeChecks: {
         strictActionImmutability: true,
         strictActionSerializability: false, // TODO: personally don't like this pattern, but we can discuss it
