@@ -12,7 +12,11 @@ export class RestServiceService {
   constructor(private http: HttpClient) { }
 
   getConfig(): Observable<GameDTO> {
-    return this.http.get<GameDTO>(config.Game);
+    return this.http.get<GameDTO>(config.baseURI + config.Game);
+  }
+
+  getTeam(): Observable<any> {
+    return this.http.get<any>(config.baseURI + config.Team + '/0');
   }
 
 }

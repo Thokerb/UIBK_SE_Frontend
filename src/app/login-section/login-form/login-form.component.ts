@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
     this.isAuthenticated = this.store.select(this.selector.selectAuthStatus);
     this.isAuthenticated.subscribe(value => {
       if (value){
-        router.navigateByUrl('/home');
+        router.navigateByUrl('/dashboard');
       }
       else{
 

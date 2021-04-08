@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {TodoSelector} from '../../redux/todo/todo.selector';
 import {TodoReducer} from '../../redux/todo/todo.reducer';
 import {TodoAction} from '../../redux/todo/todo.action';
+import {RestServiceService} from '../../api/rest-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import {TodoAction} from '../../redux/todo/todo.action';
 export class DashboardComponent implements OnInit {
 
   todo: Observable<string[]>;
-  constructor(private store: Store, private todoSelector: TodoSelector, private todoActions: TodoAction) { }
+  constructor(private store: Store, private todoSelector: TodoSelector, private todoActions: TodoAction, private restService: RestServiceService) { }
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
@@ -21,6 +22,12 @@ export class DashboardComponent implements OnInit {
 
   addItem(value: string): void {
     this.store.dispatch(this.todoActions.addItem({item: value}));
+  }
+
+  callResource(): void {
+    this.restService.getTeam().subscribe(next=>{
+      console.log(next);
+    });
   }
 
 }
