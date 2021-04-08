@@ -3,5 +3,5 @@
   "Game": "/Game",
   "login": "/api/auth/signin",
   "register": "/api/auth/signup",
-  "Team": "/teams"
+  "Team": "/api/test/admin"
 }

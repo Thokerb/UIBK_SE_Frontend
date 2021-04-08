@@ -16,7 +16,7 @@ export class RestServiceService {
   }
 
   getTeam(): Observable<any> {
-    return this.http.get<any>(config.baseURI + config.Team + '/0');
+    return this.http.get<any>(config.baseURI + config.Team);
   }
 
 }
