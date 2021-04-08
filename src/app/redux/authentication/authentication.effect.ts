@@ -13,7 +13,7 @@ export class AuthenticationEffects {
   GetToDos$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(this.authActions.login.type),
-      switchMap(action => this.authService.login(action)),
+      switchMap(({credentials}) => this.authService.login(credentials)),
       switchMap(data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);

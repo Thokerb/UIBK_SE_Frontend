@@ -31,7 +31,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login(): void{
-    console.log("called");
+    console.log(this.username,this.password);
     this.store.dispatch(this.authAction.login({credentials: {password: this.password, username: this.username }}));
 
   }
