@@ -1,20 +1,17 @@
-<p>login-form works!</p>
-<p-card>
-  <form (submit)="login()">
-<div class="p-fluid">
-  <div class="p-field p-grid">
-    <label for="firstname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Username</label>
-    <div class="p-col-12 p-md-10">
-      <input id="firstname" type="text" name="username" [(ngModel)]="username" pInputText>
+<form (submit)="login()">
+  <div class="p-fluid">
+    <div class="p-field p-grid">
+      <label for="firstname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Username</label>
+      <div class="p-col-12 p-md-10">
+        <input id="firstname" type="text" name="username" [(ngModel)]="username" pInputText>
+      </div>
     </div>
-  </div>
-  <div class="p-field p-grid">
-    <label for="lastname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Password</label>
-    <div class="p-col-12 p-md-10">
-      <input id="lastname" type="password" name="password" [(ngModel)]="password" pInputText>
+    <div class="p-field p-grid">
+      <label for="lastname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Password</label>
+      <div class="p-col-12 p-md-10">
+        <input id="lastname" type="password" name="password" [(ngModel)]="password" pInputText>
+      </div>
     </div>
+    <button pButton pRipple type="submit" label="Submit"></button>
   </div>
-  <button pButton pRipple type="submit" label="Submit"></button>
-</div>
-  </form>
-</p-card>
+</form>
