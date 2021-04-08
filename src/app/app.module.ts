@@ -11,13 +11,19 @@ import {TodoModule} from './todo/todo.module';
 import {ReduxModule} from './redux/redux.module';
 import {AppReducer} from './redux/AppReducer';
 import {storeLogger} from 'ngrx-store-logger';
+import {authInterceptorProviders} from './security/auth.interceptor';
+import {LoginSectionModule} from './login-section/login-section.module';
+import { EffectsModule } from '@ngrx/effects';
+import {AuthenticationEffects} from './redux/authentication/authentication.effect';
+import {HttpClientModule} from '@angular/common/http';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
     const serv = inject(AppReducer);
     // return reducers synchronously
     return{
-      TodoState: serv.todoReducer
+      TodoState: serv.todoReducer,
+      AuthenticationState: serv.authReducer
     };
   }
 });
@@ -36,6 +42,7 @@ export const metaReducers = environment.production ? [] : [logger];
     BrowserModule,
     AppRoutingModule,
     TodoModule,
+    HttpClientModule,
     ReduxModule,
     StoreModule.forRoot(REDUCER_TOKEN,
       {
@@ -54,8 +61,10 @@ export const metaReducers = environment.production ? [] : [logger];
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
     AppRoutingModule,
+    LoginSectionModule,
+    EffectsModule.forRoot([AuthenticationEffects])
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
