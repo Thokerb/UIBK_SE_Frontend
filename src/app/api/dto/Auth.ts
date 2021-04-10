@@ -10,7 +10,7 @@ export interface RegisterValues {
 }
 
 export interface RegisterResponse {
-  responseType: REGISTER_STATUS;
+  responseType: string;
 }
 
 export enum REGISTER_STATUS {

@@ -8,7 +8,9 @@ import {RippleModule} from 'primeng/ripple';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
-import {SharedModule} from 'primeng/api';
+import {MessageService, SharedModule} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
+import {MessagesModule} from 'primeng/messages';
 
 
 
@@ -23,7 +25,9 @@ import {SharedModule} from 'primeng/api';
     PasswordModule,
     DividerModule,
     SharedModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    ToastModule
+  ],
+  providers: [MessageService]
 })
 export class RegisterSectionModule { }

@@ -33,7 +33,8 @@ export class AuthenticationEffects {
       switchMap(({credentials}) => this.authService.register(credentials)),
       switchMap(response => {
 
-        switch (response.responseType){
+        const respType = REGISTER_STATUS[response.responseType];
+        switch (respType){
           case REGISTER_STATUS.EMAILEXISTS: {
             return [this.authActions.setRegisterStatus({isRegistered: false}),
               this.authActions.setRegisterError({error: REGISTER_ERROR.EMAILTAKEN})];

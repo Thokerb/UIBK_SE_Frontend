@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AuthenticationAction} from '../../redux/authentication/authentication.action';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {REGISTER_ERROR} from '../../redux/authentication/authentication.reducer';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-register-form',
@@ -23,14 +24,22 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(private store: Store,
               private selector: AuthenticationSelector,
-              private router: Router, private authAction: AuthenticationAction) {
-    this.store.select(this.selector.selectRegisterStatus).subscribe(next => {
-      if (next){
-        this.router.navigateByUrl('login');
-      }
-    });
+              private router: Router, private authAction: AuthenticationAction,
+              private messageService: MessageService) {
+
     this.store.select(this.selector.selectRegisterError).subscribe(next => {
       this.registerError = next;
+      switch (next) {
+        case REGISTER_ERROR.NONE:
+          break;
+        case REGISTER_ERROR.USERNAME_TAKEN:
+          this.messageService.add({severity: 'error', summary: 'Benutzername', detail: 'Benutzername bereits vergeben'});
+          break;
+        case REGISTER_ERROR.EMAILTAKEN:
+          this.messageService.add({severity: 'error', summary: 'Email', detail: 'Email bereits vergeben'});
+          break;
+      }
+
     });
   }
 
