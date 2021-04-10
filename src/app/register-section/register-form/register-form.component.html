@@ -1,0 +1,33 @@
+<form (submit)="register()" [formGroup]="registerFormGroup" >
+  <div class="p-fluid">
+    <div class="p-field p-grid">
+      <label for="firstname" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Username:</label>
+      <div class="p-col-12 p-md-10">
+        <input id="firstname" type="text" formControlName="usernameControl"  name="username" [(ngModel)]="username" pInputText>
+        <small *ngIf="!registerFormGroup.get('usernameControl').valid && registerFormGroup.get('usernameControl').touched" id="username-help" class="p-error">Username benötigt mindestens 3 Stellen</small>
+      </div>
+    </div>
+    <div class="p-field p-grid">
+      <label for="email" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Email: </label>
+      <div class="p-col-12 p-md-10">
+        <input id="email" type="text" formControlName="emailControl"  name="email" [(ngModel)]="email" pInputText>
+        <small *ngIf="registerFormGroup.get('emailControl').hasError('email')" id="email-help" class="p-error">Keine korrekte Email</small>
+      </div>
+    </div>
+    <div class="p-field p-grid">
+      <label for="password" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Password:</label>
+      <div class="p-col-12 p-md-10">
+        <p-password [(ngModel)]="password" promptLabel="Wähle ein Passwort" formControlName="passwordControl" name="password" id="password" [toggleMask]="true"  [feedback]="true">
+          <ng-template pTemplate="footer">
+            <p-divider></p-divider>
+            <p class="p-mt-2">Anforderungen</p>
+            <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+              <li>Mindestens 6 Stellen !</li>
+            </ul>
+          </ng-template>
+        </p-password>
+      </div>
+    </div>
+    <button pButton pRipple type="submit" label="Registrieren" [disabled]="!registerFormGroup.valid"></button>
+  </div>
+</form>

@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {User, USER_ROLE} from './authentication.reducer';
-import {Credentials} from '../../api/dto/Auth';
+import {Credentials, RegisterValues} from '../../api/dto/Auth';
 
 @Injectable()
 export class AuthenticationAction {
@@ -23,6 +23,11 @@ export class AuthenticationAction {
   login = createAction(
     '[Auth] Login',
     props<{ credentials: Credentials; }>()
+  );
+
+  register = createAction(
+    '[Auth] Register',
+    props<{ credentials: RegisterValues; }>()
   );
 
 }

@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import {FormsModule} from '@angular/forms';
 import {RippleModule} from 'primeng/ripple';
+import {PasswordModule} from 'primeng/password';
 
 
 
@@ -18,7 +19,8 @@ import {RippleModule} from 'primeng/ripple';
     ButtonModule,
     CardModule,
     FormsModule,
-    RippleModule
+    RippleModule,
+    PasswordModule
   ]
 })
 export class LoginSectionModule { }

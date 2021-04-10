@@ -16,6 +16,8 @@ import {LoginSectionModule} from './login-section/login-section.module';
 import { EffectsModule } from '@ngrx/effects';
 import {AuthenticationEffects} from './redux/authentication/authentication.effect';
 import {HttpClientModule} from '@angular/common/http';
+import {RegisterSectionModule} from './register-section/register-section.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -62,6 +64,8 @@ export const metaReducers = environment.production ? [] : [logger];
     }),
     AppRoutingModule,
     LoginSectionModule,
+    RegisterSectionModule,
+    BrowserAnimationsModule,
     EffectsModule.forRoot([AuthenticationEffects])
   ],
   providers: [authInterceptorProviders],
