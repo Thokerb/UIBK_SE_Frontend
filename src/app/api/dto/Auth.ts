@@ -8,3 +8,13 @@ export interface RegisterValues {
   email: string;
   password: string;
 }
+
+export interface RegisterResponse {
+  responseType: REGISTER_STATUS;
+}
+
+export enum REGISTER_STATUS {
+  'USERCREATED',
+  'USEREXISTS',
+  'EMAILEXISTS'
+}

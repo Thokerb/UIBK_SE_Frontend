@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
-import {User, USER_ROLE} from './authentication.reducer';
+import {REGISTER_ERROR, User, USER_ROLE} from './authentication.reducer';
 import {Credentials, RegisterValues} from '../../api/dto/Auth';
 
 @Injectable()
@@ -30,5 +30,14 @@ export class AuthenticationAction {
     props<{ credentials: RegisterValues; }>()
   );
 
+  setRegisterStatus = createAction(
+    '[Auth] Set Registration Status',
+    props<{ isRegistered: boolean; }>()
+  );
+
+  setRegisterError = createAction(
+    '[Auth] Set Registration Error',
+    props<{ error: REGISTER_ERROR; }>()
+  );
 }
 

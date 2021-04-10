@@ -18,6 +18,20 @@ export class AuthenticationSelector {
     }
   );
 
+  selectRegisterStatus = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.registered;
+    }
+  );
+
+  selectRegisterError = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.registerError;
+    }
+  );
+
   selectRole = createSelector(
     this.selectAuth,
     (state) => {

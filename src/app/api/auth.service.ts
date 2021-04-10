@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Credentials} from './dto/Auth';
+import {Credentials, RegisterResponse, RegisterValues} from './dto/Auth';
 import * as config from '../../config/appConfig.json';
 
 
@@ -19,8 +19,8 @@ export class AuthService {
     });
   }
 
-  register(user): Observable<any> {
-    return this.http.post(config.baseURI + config.register, {
+  register(user: RegisterValues): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(config.baseURI + config.register, {
       username: user.username,
       email: user.email,
       password: user.password

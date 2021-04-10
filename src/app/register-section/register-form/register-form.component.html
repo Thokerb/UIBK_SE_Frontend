@@ -5,6 +5,8 @@
       <div class="p-col-12 p-md-10">
         <input id="firstname" type="text" formControlName="usernameControl"  name="username" [(ngModel)]="username" pInputText>
         <small *ngIf="!registerFormGroup.get('usernameControl').valid && registerFormGroup.get('usernameControl').touched" id="username-help" class="p-error">Username benötigt mindestens 3 Stellen</small>
+        <small *ngIf="registerError === 1" id="username-taken-help" class="p-error">Username bereits vergeben</small>
+
       </div>
     </div>
     <div class="p-field p-grid">
@@ -12,6 +14,8 @@
       <div class="p-col-12 p-md-10">
         <input id="email" type="text" formControlName="emailControl"  name="email" [(ngModel)]="email" pInputText>
         <small *ngIf="registerFormGroup.get('emailControl').hasError('email')" id="email-help" class="p-error">Keine korrekte Email</small>
+        <small *ngIf="registerError === 2" id="email-taken-help" class="p-error">Email bereits vergeben</small>
+
       </div>
     </div>
     <div class="p-field p-grid">

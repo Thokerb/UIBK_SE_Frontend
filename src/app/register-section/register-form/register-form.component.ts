@@ -4,6 +4,7 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
 import {Router} from '@angular/router';
 import {AuthenticationAction} from '../../redux/authentication/authentication.action';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {REGISTER_ERROR} from '../../redux/authentication/authentication.reducer';
 
 @Component({
   selector: 'app-register-form',
@@ -15,12 +16,22 @@ export class RegisterFormComponent implements OnInit {
   password: string;
   email: string;
   registerFormGroup: FormGroup;
+  registerError: REGISTER_ERROR;
+  usernameTaken = false;
 
 
 
   constructor(private store: Store,
               private selector: AuthenticationSelector,
               private router: Router, private authAction: AuthenticationAction) {
+    this.store.select(this.selector.selectRegisterStatus).subscribe(next => {
+      if (next){
+        this.router.navigateByUrl('login');
+      }
+    });
+    this.store.select(this.selector.selectRegisterError).subscribe(next => {
+      this.registerError = next;
+    });
   }
 
   ngOnInit(): void {
@@ -33,7 +44,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.registerFormGroup);
     this.store.dispatch(this.authAction.register({credentials: {password: this.password, username: this.username, email: this.email}}));
   }
 }
