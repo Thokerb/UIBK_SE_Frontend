@@ -1,11 +1,3 @@
-export interface GetUserResponse {
-  user: User;
-}
-
-export interface GetAllUserResponse {
-  user: User[];
-}
-
 export interface User {
   username: string;
   email: string;
@@ -19,3 +11,5 @@ export enum USER_ROLES {
   ORGANIZER,
   ADMIN,
 }
+
+export interface DeleteUserResponse { }

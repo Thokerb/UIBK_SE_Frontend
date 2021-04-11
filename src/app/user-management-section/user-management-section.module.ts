@@ -4,6 +4,9 @@ import { UserManagementPageComponent } from './user-management-page/user-managem
 import { UserManagementTableComponent } from './user-management-table/user-management-table.component';
 import {SharedModule} from 'primeng/api';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
 
 
 
@@ -12,7 +15,10 @@ import {TableModule} from 'primeng/table';
   imports: [
     CommonModule,
     SharedModule,
-    TableModule
+    TableModule,
+    ToastModule,
+    DialogModule,
+    ButtonModule
   ]
 })
 export class UserManagementSectionModule { }

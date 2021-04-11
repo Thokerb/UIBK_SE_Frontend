@@ -4,5 +4,6 @@
   "login": "/api/auth/signin",
   "register": "/api/auth/signup",
   "Team": "/api/test/admin",
-  "GetAllUser" : "/api/management/users"
+  "GetAllUser" : "/api/management/users",
+  "DeleteUser": "/api/management/users"
 }
