@@ -3,7 +3,7 @@ import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GameDTO} from './dto/Game';
-import {DeleteUserResponse, User} from './dto/UserManagement';
+import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,10 @@ export class RestServiceService {
   deleteUser(userId: string): Observable<DeleteUserResponse> {
     return this.http.delete(config.baseURI + config.DeleteUser + '/' + userId);
 
+  }
+
+  updateUser(request: UpdateUserRequest, userId: string): Observable<any> {
+    return this.http.patch(config.baseURI + config.UpdateUser + '/' + userId, request);
   }
 
 }

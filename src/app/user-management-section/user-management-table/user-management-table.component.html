@@ -26,15 +26,24 @@
 <p>{{error}}</p>
 <p-toast position="bottom-center"></p-toast>
 
-
-<p-dialog *ngIf="this.editUser" header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog *ngIf="this.editUser" header="User bearbeiten" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false" [maximizable]="true">
-  <p>Currently there is nothing to edit</p>
-  {{this.editUser.username}}
-  {{this.editUser.email}}
-  {{this.editUser.roles}}
+    <div class="content">
+  <h2>User: {{this.editUser.username}}</h2>
+  <div>
+  <label for="enabled" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Enabled: </label>
+
+  <p-inputSwitch id="enabled" (onChange)="changeEnabled($event)" [(ngModel)]="enabledEdit"></p-inputSwitch>
+  </div>
+  <div>
+    <label for="roles" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Roles: </label>
+
+    <p-multiSelect id="roles" [options]="allRoles" [filter]="false"  [(ngModel)]="selectedRoles" display="chip" optionLabel="name"></p-multiSelect>
+
+  </div>
+    </div>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="displayModal=false" label="Save" class="p-button-text"></p-button>
+    <p-button icon="pi pi-check" (click)="savePatch()" label="Save" class="p-button-text"></p-button>
     <p-button icon="pi pi-times" (click)="displayModal=false" label="Don't Save"></p-button>
   </ng-template>
 </p-dialog>

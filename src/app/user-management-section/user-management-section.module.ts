@@ -7,6 +7,9 @@ import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {FormsModule} from '@angular/forms';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 
@@ -18,7 +21,10 @@ import {ButtonModule} from 'primeng/button';
     TableModule,
     ToastModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    InputSwitchModule,
+    FormsModule,
+    MultiSelectModule
   ]
 })
 export class UserManagementSectionModule { }

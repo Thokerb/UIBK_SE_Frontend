@@ -13,3 +13,8 @@ export enum USER_ROLES {
 }
 
 export interface DeleteUserResponse { }
+
+export interface UpdateUserRequest{
+  enabled: boolean;
+  roles: USER_ROLES[];
+}
