@@ -7,9 +7,9 @@ export interface User {
 }
 
 export enum USER_ROLES {
-  PLAYER,
-  ORGANIZER,
   ADMIN,
+  ORGANIZER,
+  PLAYER,
 }
 
 export interface DeleteUserResponse { }

@@ -93,7 +93,7 @@ export class UserManagementTableComponent implements OnInit {
 
   savePatch(): void {
     this.displayModal = false;
-    this.restService.updateUser({enabled: this.editUser.enabled, roles: this.selectedRoles.map(x => x.code)}, this.editUser.id).subscribe(next => {
+    this.restService.updateUser({enabled: this.enabledEdit, roles: this.selectedRoles.map(x => x.code)}, this.editUser.id).subscribe(next => {
         this.getUser();
         this.messageService.add({severity: 'success', summary: 'Benutzer', detail: `Benutzer ${this.editUser.username} erfolgreich geupdatet.`});
 
