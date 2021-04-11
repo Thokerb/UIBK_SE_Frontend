@@ -1,13 +1,19 @@
 <p>dashboard works!</p>
 <h1>Dashboard</h1>
-<main>
-  <button (click)="console.warn('not yet implemented')">Spielelobby</button>
-  <button (click)="console.warn('not yet implemented')">Spiel erstellen</button>
-  <button (click)="console.warn('not yet implemented')">Spielerprofil</button>
+<main class="main">
+  <button (click)="console.warn('not yet implemented')" class="main-button">
+    Spielelobby
+  </button>
+  <button (click)="console.warn('not yet implemented')" class="main-button">
+    Spiel erstellen
+  </button>
+  <button (click)="console.warn('not yet implemented')" class="main-button">
+    Spielerprofil
+  </button>
 </main>
 
 <div *ngIf="(todo | async) as todoObject">
-<p *ngFor="let value of todoObject">{{value}}</p>
+  <p *ngFor="let value of todoObject">{{value}}</p>
 </div>
 
 <button (click)="addItem('study hard')">Add 'study hard'</button>
