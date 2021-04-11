@@ -33,3 +33,7 @@ app-register-page{
 app-login-page{
   flex-grow: 1;
 }
+
+app-user-management-page{
+  flex-grow: 1;
+}

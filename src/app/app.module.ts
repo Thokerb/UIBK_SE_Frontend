@@ -20,6 +20,8 @@ import {RegisterSectionModule} from './register-section/register-section.module'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
+import {SharedModule} from 'primeng/api';
+import {UserManagementSectionModule} from './user-management-section/user-management-section.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -70,7 +72,9 @@ export const metaReducers = environment.production ? [] : [logger];
     BrowserAnimationsModule,
     EffectsModule.forRoot([AuthenticationEffects]),
     ButtonModule,
-    MenubarModule
+    MenubarModule,
+    UserManagementSectionModule,
+    SharedModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

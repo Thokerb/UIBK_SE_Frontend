@@ -3,5 +3,6 @@
   "Game": "/Game",
   "login": "/api/auth/signin",
   "register": "/api/auth/signup",
-  "Team": "/api/test/admin"
+  "Team": "/api/test/admin",
+  "GetAllUser" : "/api/management/users"
 }
