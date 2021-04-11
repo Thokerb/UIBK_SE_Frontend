@@ -24,6 +24,10 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(this.todoActions.addItem({item: value}));
   }
 
+  notYetImplemented(): void {
+    console.warn('Not yet implemented');
+  }
+
   callResource(): void {
     this.restService.getTeam().subscribe(next=>{
       console.log(next);

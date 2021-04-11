@@ -1,7 +1,13 @@
 <p>dashboard works!</p>
-<div *ngIf="(todo | async) as todoObject">
-<p *ngFor="let value of todoObject">{{value}}</p>
-</div>
-
-<button (click)="addItem('study hard')">Add 'study hard'</button>
-<button (click)="callResource()">CALL</button>
+<h1>Dashboard</h1>
+<main class="main">
+  <button (click)="notYetImplemented()" class="main-button">
+    Spielelobby
+  </button>
+  <button (click)="notYetImplemented()" class="main-button">
+    Spiel erstellen
+  </button>
+  <button (click)="notYetImplemented()" class="main-button">
+    Spielerprofil
+  </button>
+</main>
