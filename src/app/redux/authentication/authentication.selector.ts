@@ -42,5 +42,15 @@ export class AuthenticationSelector {
     }
   );
 
+  selectCurrentUser = createSelector(
+    this.selectAuth,
+    (state) => {
+      if (state.authenticated){
+        return state.user;
+      }
+      return undefined;
+    }
+  );
+
 
 }
