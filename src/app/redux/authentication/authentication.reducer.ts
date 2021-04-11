@@ -8,7 +8,7 @@ export interface AuthenticationState {
   authenticated: boolean;
   registered: boolean;
   registerError: REGISTER_ERROR;
-  role: USER_ROLE;
+  roles: USER_ROLE[];
   user: User;
 }
 
@@ -25,18 +25,27 @@ export enum USER_ROLE {
 }
 
 export interface User {
-  name: string;
-  role: USER_ROLE;
+  id: string;
+  username: string;
+  email: string;
+  roles: USER_ROLE[];
+  accessToken: string;
+  tokenType: string;
 }
+
 
 export const initialState: AuthenticationState = {
   authenticated: false,
   registered: false,
+  roles: [USER_ROLE.NONE],
   registerError: REGISTER_ERROR.NONE,
-  role: USER_ROLE.NONE,
   user: {
-    name: null,
-    role: USER_ROLE.NONE
+    username: null,
+    roles: [USER_ROLE.NONE],
+    accessToken: null,
+    email: null,
+    id: null,
+    tokenType: null
   }
 };
 
@@ -49,7 +58,7 @@ export class AuthenticationReducer {
   reducer = createReducer(
     initialState,
     on(this.authActions.setAuthentication, (state, {isAuthenticated}) => ({ ...state, authenticated: isAuthenticated})),
-    on(this.authActions.setRole, (state, {role}) => ({...state, role: role }) ),
+    on(this.authActions.setRoles, (state, {roles}) => ({...state, roles: roles }) ),
     on(this.authActions.saveUser, (state, {user}) => ({...state, user: user }) ),
     on(this.authActions.setRegisterError, (state, {error}) => ({ ...state, registerError: error})),
     on(this.authActions.setRegisterStatus, (state, {isRegistered}) => ({ ...state, registered: isRegistered})),

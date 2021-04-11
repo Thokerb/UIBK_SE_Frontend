@@ -10,9 +10,9 @@ export class AuthenticationAction {
     props<{ isAuthenticated: boolean; }>()
   );
 
-  setRole = createAction(
+  setRoles = createAction(
     '[Auth] Set Role',
-    props<{ role: USER_ROLE; }>()
+    props<{ roles: USER_ROLE[]; }>()
   );
 
   saveUser = createAction(

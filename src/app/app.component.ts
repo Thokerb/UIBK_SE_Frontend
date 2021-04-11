@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {AuthenticationSelector} from './redux/authentication/authentication.selector';
+import {TokenStorageService} from './security/token-storage.service';
+import {AuthenticationAction} from './redux/authentication/authentication.action';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  loggedIn = false;
+
+  constructor(private store: Store, private selector: AuthenticationSelector, private tokenStorageService: TokenStorageService, private authAction: AuthenticationAction) {
+    this.store.select(this.selector.selectAuthStatus).subscribe(next => this.loggedIn = next);
+    // so on reload we still have our user
+    if (this.tokenStorageService.getUser()){
+      this.store.dispatch(this.authAction.setAuthentication({isAuthenticated: true}));
+      this.store.dispatch(this.authAction.saveUser({user: this.tokenStorageService.getUser() }));
+      this.store.dispatch(this.authAction.setRoles({roles: this.tokenStorageService.getUser().roles}));
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
+  }
 }

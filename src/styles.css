@@ -25,3 +25,11 @@ html, body {
   color: green;
 
 }
+
+app-register-page{
+  flex-grow: 1;
+}
+
+app-login-page{
+  flex-grow: 1;
+}

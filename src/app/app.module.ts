@@ -18,6 +18,8 @@ import {AuthenticationEffects} from './redux/authentication/authentication.effec
 import {HttpClientModule} from '@angular/common/http';
 import {RegisterSectionModule} from './register-section/register-section.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {MenubarModule} from 'primeng/menubar';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -48,15 +50,15 @@ export const metaReducers = environment.production ? [] : [logger];
     ReduxModule,
     StoreModule.forRoot(REDUCER_TOKEN,
       {
-      metaReducers,
-      runtimeChecks: {
-        strictActionImmutability: true,
-        strictActionSerializability: false, // TODO: personally don't like this pattern, but we can discuss it
-        strictActionTypeUniqueness: true,
-        strictActionWithinNgZone: true,
-        strictStateImmutability: true,
-        strictStateSerializability: true
-      }
+        metaReducers,
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictActionSerializability: false, // TODO: personally don't like this pattern, but we can discuss it
+          strictActionTypeUniqueness: true,
+          strictActionWithinNgZone: true,
+          strictStateImmutability: true,
+          strictStateSerializability: true
+        }
       }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -66,7 +68,9 @@ export const metaReducers = environment.production ? [] : [logger];
     LoginSectionModule,
     RegisterSectionModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthenticationEffects])
+    EffectsModule.forRoot([AuthenticationEffects]),
+    ButtonModule,
+    MenubarModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

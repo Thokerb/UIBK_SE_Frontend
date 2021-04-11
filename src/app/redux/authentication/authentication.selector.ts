@@ -32,11 +32,11 @@ export class AuthenticationSelector {
     }
   );
 
-  selectRole = createSelector(
+  selectRoles = createSelector(
     this.selectAuth,
     (state) => {
       if (state.authenticated){
-        return state.role;
+        return state.roles;
       }
       return USER_ROLE.NONE;
     }

@@ -1,1 +1,6 @@
+<div class="content">
+<p-menubar >
+  <button *ngIf="loggedIn" pButton label="Logout" (click)="logout()" icon="pi pi-power-off"></button>
+</p-menubar>
 <router-outlet></router-outlet>
+</div>
