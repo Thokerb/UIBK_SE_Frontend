@@ -22,6 +22,7 @@ import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import {SharedModule} from 'primeng/api';
 import {UserManagementSectionModule} from './user-management-section/user-management-section.module';
+import {GameTopicSectionModule} from './game-topic-section/game-topic-section.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -74,6 +75,7 @@ export const metaReducers = environment.production ? [] : [logger];
     ButtonModule,
     MenubarModule,
     UserManagementSectionModule,
+    GameTopicSectionModule,
     SharedModule
   ],
   providers: [authInterceptorProviders],

@@ -1,0 +1,21 @@
+<input type="file" (change)="onFileUpload($event)">
+<p-button [disabled]="!uploadTopic" (click)="upload(uploadTopic)">Upload</p-button>
+
+<div class="p-grid">
+  <div class="p-col"></div>
+  <div class="p-col-10">
+
+    <div *ngIf="uploadTopic">
+      <h3>{{uploadTopic.topic}}</h3>
+      <h4>{{uploadTopic.description}}</h4>
+      <p-scrollPanel [style]="{width: '100%', height: '30vh', backgroundColor: 'lightgray'}" class="custom">
+        <ul>
+          <li *ngFor="let word of uploadTopic.words">{{word}}</li>
+        </ul>
+      </p-scrollPanel>
+    </div>
+  </div>
+  <div class="p-col"></div>
+
+</div>
+<p-toast position="bottom-center"></p-toast>

@@ -6,5 +6,6 @@
   "Team": "/api/test/admin",
   "GetAllUser" : "/api/management/users",
   "DeleteUser": "/api/management/users",
-  "UpdateUser": "/api/management/users"
+  "UpdateUser": "/api/management/users",
+  "GameTopic": "/api/gametopic"
 }
