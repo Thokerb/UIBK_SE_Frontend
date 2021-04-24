@@ -6,6 +6,7 @@ import {RegisterPageComponent} from './register-section/register-page/register-p
 import {UserManagementPageComponent} from './user-management-section/user-management-page/user-management-page.component';
 import {GameTopicPageComponent} from './game-topic-section/game-topic-page/game-topic-page.component';
 import {GameLobbyPageComponent} from './game-lobby-section/game-lobby-page/game-lobby-page.component';
+import {GamePageComponent} from './game-section/game-page/game-page.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path: 'register', component: RegisterPageComponent},
   {path: 'admin/usermanagement', component: UserManagementPageComponent},
   {path: 'gametopic', component: GameTopicPageComponent },
-  {path: 'gamelobby', component: GameLobbyPageComponent }
+  {path: 'gamelobby', component: GameLobbyPageComponent },
+  {path: 'game/:id', component: GamePageComponent }
+
 ];
 
 @NgModule({

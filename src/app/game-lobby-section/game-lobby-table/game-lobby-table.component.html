@@ -2,8 +2,8 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Spiel</th>
-      <th>Themengebiete</th>
-      <th>Spieler</th>
+      <th><i class="pi pi-book"></i>Themengebiete</th>
+      <th><i class="pi pi-users"></i>Spieler</th>
       <th>Beitreten</th>
     </tr>
   </ng-template>
@@ -12,7 +12,7 @@
       <td>{{game.gameName}}</td>
       <td>{{game.gameTopics}}</td>
       <td>{{game.gamePlayers.length}}/{{game.gameNumberTeams}}</td>
-      <td><i class="pi pi-download" (click)="join(game)"></i> </td>
+      <td><i class="pi pi-caret-right" (click)="join(game)"></i> </td>
     </tr>
   </ng-template>
 </p-table>
