@@ -1,0 +1,18 @@
+<p-table [value]="games">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Spiel</th>
+      <th>Themengebiete</th>
+      <th>Spieler</th>
+      <th>Beitreten</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-game>
+    <tr>
+      <td>{{game.gameName}}</td>
+      <td>{{game.gameTopics}}</td>
+      <td>{{game.gamePlayers.length}}/{{game.gameNumberTeams}}</td>
+      <td><i class="pi pi-download" (click)="join(game)"></i> </td>
+    </tr>
+  </ng-template>
+</p-table>

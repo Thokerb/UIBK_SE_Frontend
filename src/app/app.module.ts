@@ -23,6 +23,8 @@ import {MenubarModule} from 'primeng/menubar';
 import {SharedModule} from 'primeng/api';
 import {UserManagementSectionModule} from './user-management-section/user-management-section.module';
 import {GameTopicSectionModule} from './game-topic-section/game-topic-section.module';
+import {GameLobbySectionModule} from './game-lobby-section/game-lobby-section.module';
+import {GameEffect} from './redux/game/game.effect';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -31,7 +33,8 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppSta
     return{
       TodoState: serv.todoReducer,
       AuthenticationState: serv.authReducer,
-      GameTopicState: serv.gameTopicReducer
+      GameTopicState: serv.gameTopicReducer,
+      GameState: serv.gameReducer
     };
   }
 });
@@ -72,11 +75,12 @@ export const metaReducers = environment.production ? [] : [logger];
     LoginSectionModule,
     RegisterSectionModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthenticationEffects]),
+    EffectsModule.forRoot([AuthenticationEffects, GameEffect]),
     ButtonModule,
     MenubarModule,
     UserManagementSectionModule,
     GameTopicSectionModule,
+    GameLobbySectionModule,
     SharedModule
   ],
   providers: [authInterceptorProviders],

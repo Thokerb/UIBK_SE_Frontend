@@ -1,6 +1,6 @@
 {
   "baseURI": "http://localhost:8080",
-  "Game": "/Game",
+  "Game": "/api/game",
   "login": "/api/auth/signin",
   "register": "/api/auth/signup",
   "Team": "/api/test/admin",
