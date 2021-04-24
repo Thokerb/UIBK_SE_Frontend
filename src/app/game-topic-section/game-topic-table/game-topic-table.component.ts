@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
+import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
+import {Store} from '@ngrx/store';
 
 export interface Option {
   name: string;
@@ -21,29 +23,34 @@ export class GameTopicTableComponent implements OnInit {
   wordSelected: Option;
   wordToAdd: string;
 
-  constructor(private restService: RestServiceService, private messageService: MessageService) {
+  constructor(private restService: RestServiceService, private messageService: MessageService,
+              private gameTopicSelector: GametopicSelector, private store: Store) {
     this.getTopics();
   }
 
   ngOnInit(): void {
-    const topic: GameTopic = {
-      topic: 'WELTRAUM',
-      topicId: 4,
-      words: ['max', 'morta'],
-      description: 'adwuihawuidh auiwdh uiawdh awuihd uiawhdui awhd '
-    };
-    this.edit(topic);
+    this.store.select(this.gameTopicSelector.selectAllTopics).subscribe(next => this.getTopics());
+
   }
 
   private getTopics(): void {
-    this.restService.getAllGameTopics().subscribe(next => this.topics = next, error => {
+    this.restService.getAllGameTopics().subscribe(next => {
+      this.topics = [];
+      for (const key in next){
+        this.topics.push(next[key]);
+      }
+    }, error => {
       this.messageService.add({severity: 'error', summary: 'Themengebiete', detail: 'Verbindung mit dem Server nicht möglich!'});
     });
   }
 
   edit(topic: GameTopic): void {
     this.editTopic = topic;
-    this.words = topic.words.map(x => ({name: x, code: x}));
+    this.words = [];
+    for (const w in topic.words){
+      this.words.push({name: topic.words[w], code: topic.words[w]});
+    }
+    // this.words = topic.words.map(x => ({name: x, code: x}));
 
 
   }
@@ -82,5 +89,16 @@ export class GameTopicTableComponent implements OnInit {
         this.messageService.add({severity: 'error', summary: 'Themengebiete', detail: `Wort ${word} konnte nicht hinzugefügt werden`});
       }
     );
+  }
+
+  download(topic: GameTopic): void {
+    const sJson = JSON.stringify(topic);
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/json;charset=UTF-8,' + encodeURIComponent(sJson));
+    element.setAttribute('download', `GameTopic_${topic.topic}.json`);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click(); // simulate click
+    document.body.removeChild(element);
   }
 }

@@ -11,6 +11,8 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {ListboxModule} from 'primeng/listbox';
 import {FormsModule} from '@angular/forms';
+import {ChipsModule} from 'primeng/chips';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -25,7 +27,9 @@ import {FormsModule} from '@angular/forms';
     DialogModule,
     InputTextModule,
     ListboxModule,
-    FormsModule
+    FormsModule,
+    ChipsModule,
+    InputTextareaModule
   ]
 })
 export class GameTopicSectionModule { }

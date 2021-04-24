@@ -3,6 +3,8 @@ import {Event} from '@angular/router';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
+import {Store} from '@ngrx/store';
+import {GameTopicAction} from '../../redux/gameTopic/gametopic.action';
 
 @Component({
   selector: 'app-game-topic-upload',
@@ -13,7 +15,7 @@ export class GameTopicUploadComponent implements OnInit {
 
   selectedFile: File;
   uploadTopic: GameTopic;
-  constructor(private restService: RestServiceService, private messageService: MessageService) { }
+  constructor(private restService: RestServiceService, private messageService: MessageService, private store: Store, private gameTopicAction: GameTopicAction) { }
 
   ngOnInit(): void {
   }
@@ -41,7 +43,8 @@ export class GameTopicUploadComponent implements OnInit {
   upload(uploadTopic: GameTopic): void {
     this.restService.uploadGameTopic(uploadTopic).subscribe(next => {
         this.messageService.add({severity: 'success', summary: next.topic, detail: `Themengebiet ${next.topic} wurde erfolgreich hinzugefügt.`});
-    },
+        this.store.dispatch(this.gameTopicAction.addTopic({item: uploadTopic}));
+        },
       error => {
         this.messageService.add({severity: 'error', summary: 'Fehler', detail: `Themengebiet ${uploadTopic.topic} konnte nicht hinzugefügt werden`});
         console.error(error);

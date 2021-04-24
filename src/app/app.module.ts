@@ -30,7 +30,8 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppSta
     // return reducers synchronously
     return{
       TodoState: serv.todoReducer,
-      AuthenticationState: serv.authReducer
+      AuthenticationState: serv.authReducer,
+      GameTopicState: serv.gameTopicReducer
     };
   }
 });

@@ -7,6 +7,7 @@
       <th>Anzahl Wörter</th>
       <th>Bearbeiten</th>
       <th>Löschen</th>
+      <th>Download</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-topic>
@@ -17,7 +18,7 @@
       <td>{{topic.words.length}}</td>
       <td><i class="pi pi-user-edit" (click)="edit(topic)"></i> </td>
       <td><i class="pi pi-trash" (click)="delete(topic)"></i> </td>
-
+      <td><i class="pi pi-download" (click)="download(topic)"></i> </td>
     </tr>
   </ng-template>
 </p-table>

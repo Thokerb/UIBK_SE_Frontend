@@ -7,5 +7,7 @@
   "GetAllUser" : "/api/management/users",
   "DeleteUser": "/api/management/users",
   "UpdateUser": "/api/management/users",
-  "GameTopic": "/api/gametopic"
+  "GameTopic": "/api/gametopic",
+  "deleteWord": "/api/gametopic/deleteword",
+  "addWord": "/api/gametopic/addword"
 }
