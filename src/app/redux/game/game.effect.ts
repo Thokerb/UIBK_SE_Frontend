@@ -14,7 +14,7 @@ export class GameEffect {
   fetchGames: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(this.gameActions.getGames.type),
-      switchMap(() => this.restService.getAllGames()),
+      switchMap(() => this.restService.getAllGamesForLobby()),
       switchMap(data => {
         return [
           this.gameActions.addGames({games: data}),

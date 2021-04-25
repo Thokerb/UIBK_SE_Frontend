@@ -13,3 +13,11 @@ export interface Game {
   gameTopics: string[];
   gamePlayers: User[];
 }
+
+export interface GameLobbyElement{
+  gameID: number;
+  gameName: string;
+  gameTopics: string[];
+  gameCurrentPlayers: number;
+  gameMaxPlayers: number;
+}
