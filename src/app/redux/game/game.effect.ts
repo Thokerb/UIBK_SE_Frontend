@@ -17,7 +17,7 @@ export class GameEffect {
       switchMap(() => this.restService.getAllGamesForLobby()),
       switchMap(data => {
         return [
-          this.gameActions.addGames({games: data}),
+          this.gameActions.setGames({games: data}),
         ];
       })
     )

@@ -24,7 +24,7 @@ export class GameReducer {
   reducer = createReducer(
     initialState,
     on(this.gameAction.addGame, (state, {item}) => ({ ...state, games: [...state.games, item] })),
-    on(this.gameAction.addGames, (state, {games}) => ({ ...state, lobbyGames: [...state.lobbyGames, ...games.filter(x => x.gameID !== 0)] })),
+    on(this.gameAction.setGames, (state, {games}) => ({ ...state, lobbyGames: [...games.filter(x => x.gameID !== 0)] })),
 
   );
 }

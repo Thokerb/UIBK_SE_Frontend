@@ -10,8 +10,8 @@ export class GameAction {
     props<{ item: Game; }>()
   );
 
-  addGames = createAction(
-    '[Game] Add multiple Games',
+  setGames = createAction(
+    '[Game] Set Games',
     props<{ games: GameLobbyElement[]; }>()
   );
 
