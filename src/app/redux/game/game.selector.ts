@@ -12,7 +12,7 @@ export class GameSelector {
 
   selectAllGames = createSelector(
     this.selectGameState,
-    (state) => state.games
+    (state) => state.lobbyGames
   );
 
 

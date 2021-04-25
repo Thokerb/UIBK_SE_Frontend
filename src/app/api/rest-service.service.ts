@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Game, GameDTO} from './dto/Game';
+import {Game, GameDTO, GameLobbyElement} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopic, GameTopicDTO, GameTopicResponse} from './dto/GameTopic';
 
@@ -63,7 +63,7 @@ export class RestServiceService {
     return this.http.post<GameTopic>(config.baseURI + config.GameTopic, topicDTO);
   }
 
-  getAllGames(): Observable<Game[]> {
-    return this.http.get<Game[]>(config.baseURI + config.Game);
+  getAllGamesForLobby(): Observable<GameLobbyElement[]> {
+    return this.http.get<GameLobbyElement[]>(config.baseURI + config.Game);
   }
 }
