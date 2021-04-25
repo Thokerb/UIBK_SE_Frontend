@@ -16,6 +16,15 @@ import {LoginSectionModule} from './login-section/login-section.module';
 import { EffectsModule } from '@ngrx/effects';
 import {AuthenticationEffects} from './redux/authentication/authentication.effect';
 import {HttpClientModule} from '@angular/common/http';
+import {RegisterSectionModule} from './register-section/register-section.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {MenubarModule} from 'primeng/menubar';
+import {SharedModule} from 'primeng/api';
+import {UserManagementSectionModule} from './user-management-section/user-management-section.module';
+import {GameTopicSectionModule} from './game-topic-section/game-topic-section.module';
+import {GameLobbySectionModule} from './game-lobby-section/game-lobby-section.module';
+import {GameEffect} from './redux/game/game.effect';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -23,7 +32,9 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppSta
     // return reducers synchronously
     return{
       TodoState: serv.todoReducer,
-      AuthenticationState: serv.authReducer
+      AuthenticationState: serv.authReducer,
+      GameTopicState: serv.gameTopicReducer,
+      GameState: serv.gameReducer
     };
   }
 });
@@ -46,15 +57,15 @@ export const metaReducers = environment.production ? [] : [logger];
     ReduxModule,
     StoreModule.forRoot(REDUCER_TOKEN,
       {
-      metaReducers,
-      runtimeChecks: {
-        strictActionImmutability: true,
-        strictActionSerializability: false, // TODO: personally don't like this pattern, but we can discuss it
-        strictActionTypeUniqueness: true,
-        strictActionWithinNgZone: true,
-        strictStateImmutability: true,
-        strictStateSerializability: true
-      }
+        metaReducers,
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictActionSerializability: false, // TODO: personally don't like this pattern, but we can discuss it
+          strictActionTypeUniqueness: true,
+          strictActionWithinNgZone: true,
+          strictStateImmutability: true,
+          strictStateSerializability: true
+        }
       }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -62,7 +73,15 @@ export const metaReducers = environment.production ? [] : [logger];
     }),
     AppRoutingModule,
     LoginSectionModule,
-    EffectsModule.forRoot([AuthenticationEffects])
+    RegisterSectionModule,
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([AuthenticationEffects, GameEffect]),
+    ButtonModule,
+    MenubarModule,
+    UserManagementSectionModule,
+    GameTopicSectionModule,
+    GameLobbySectionModule,
+    SharedModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

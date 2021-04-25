@@ -1,0 +1,32 @@
+<app-game-topic-upload></app-game-topic-upload>
+<app-game-topic-table></app-game-topic-table>
+<button pButton type="button" (click)="add = true" class="p-button-lg p-button-raised p-button-rounded" icon="pi pi-plus"> </button>
+
+<p-dialog *ngIf="this.add" header="Topic bearbeiten" [(visible)]="add" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+  <div class="content">
+    <form (submit)="addTopic()">
+      <div class="p-fluid">
+        <div class="p-field p-grid">
+          <label for="firstname" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Topic:</label>
+          <div class="p-col-12 p-md-10">
+            <input id="firstname" type="text" name="username" [(ngModel)]="topic.topic" pInputText>
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label for="firstname" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Description:</label>
+          <div class="p-col-12 p-md-10">
+            <textarea id="description" type="text" name="description" [(ngModel)]="topic.description" pInputText pInputTextarea></textarea>
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Words:</label>
+          <div class="p-col-12 p-md-10">
+            <p-chips [(ngModel)]="words" name="words" [allowDuplicate]="false" ></p-chips>
+          </div>
+        </div>
+        <button pButton pRipple [disabled]="topic.topic === null || topic.description === null || words.length == 0" type="submit" label="Topic hinzufügen"></button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
