@@ -5,6 +5,7 @@ import {TodoSelector} from '../../redux/todo/todo.selector';
 import {TodoReducer} from '../../redux/todo/todo.reducer';
 import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
+import {SocketService} from '../../api/socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +15,14 @@ import {RestServiceService} from '../../api/rest-service.service';
 export class DashboardComponent implements OnInit {
 
   todo: Observable<string[]>;
-  constructor(private store: Store, private todoSelector: TodoSelector, private todoActions: TodoAction, private restService: RestServiceService) { }
+  constructor(private store: Store,
+              private todoSelector: TodoSelector,
+              private todoActions: TodoAction,
+              private restService: RestServiceService,
+              private webSocket: SocketService) { }
 
   ngOnInit(): void {
+    this.webSocket.connect();
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
@@ -29,9 +35,12 @@ export class DashboardComponent implements OnInit {
   }
 
   callResource(): void {
-    this.restService.getTeam().subscribe(next=>{
+    this.restService.getTeam().subscribe(next => {
       console.log(next);
     });
   }
 
+  sendToSocket(): void {
+    this.webSocket.send();
+  }
 }
