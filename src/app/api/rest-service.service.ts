@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Game, GameDTO} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
-import {GameTopic, GameTopicDTO} from './dto/GameTopic';
+import {GameTopic, GameTopicDTO, GameTopicResponse} from './dto/GameTopic';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +37,8 @@ export class RestServiceService {
     return this.http.post<GameTopic>(config.baseURI + config.GameTopic, uploadTopic);
   }
 
-  getAllGameTopics(): Observable<Map<number, GameTopic>> {
-    return this.http.get<Map<number, GameTopic>>(config.baseURI + config.GameTopic);
+  getAllGameTopics(): Observable<GameTopicResponse> {
+    return this.http.get<GameTopicResponse>(config.baseURI + config.GameTopic);
   }
 
   deleteTopic(topicId: number): Observable<any> {
@@ -46,11 +46,11 @@ export class RestServiceService {
   }
 
   deleteTopicWord(topicId: number, word: string): Observable<any> {
-    return this.http.patch(config.baseURI + config.deleteWord + '/' + topicId, {word: word});
+    return this.http.patch(config.baseURI + config.deleteWord + '/' + topicId, word);
   }
 
   addWord(topicId: number, word: string): Observable<any> {
-    return this.http.patch(config.baseURI + config.addWord + '/' + topicId, {word: word});
+    return this.http.patch(config.baseURI + config.addWord + '/' + topicId, word);
   }
 
   addTopic(topic: GameTopic): Observable<GameTopic> {
