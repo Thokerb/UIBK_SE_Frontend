@@ -1,4 +1,5 @@
 {
+  "socketURI": "http://localhost:8080/gkz-stomp-endpoint",
   "baseURI": "http://localhost:8080",
   "Game": "/api/game",
   "login": "/api/auth/signin",
