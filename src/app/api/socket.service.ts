@@ -13,31 +13,23 @@ import {CompatClient, Stomp} from '@stomp/stompjs';
 })
 export class SocketService implements OnDestroy{
   private stompClient: CompatClient = null;
-  private disabled: boolean;
   constructor(private tokenService: TokenStorageService) {
   }
 
-  setConnected(connected: boolean): void {
-    this.disabled = !connected;
-  }
 
   connect(): void {
     const socket = new SockJS('http://localhost:8080/gkz-stomp-endpoint');
     this.stompClient = Stomp.over(socket);
-    this.stompClient.
-    const header = {
-      Authorization : 'my-jwt-token'
-    };
+    const stompClient = this.stompClient;
 
-
-    this.stompClient.connect({}, function(frame): any {
-      this.setConnected(true);
+    this.stompClient.connect({"X-Authorization": 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
       console.log('Connected: ' + frame);
-
-      this.stompClient.subscribe('/topic/hi', (hello) => {
-        console.log(hello);
+      stompClient.subscribe('/topic/hi', (hello) => {
+        console.log(hello.body);
       });
+
     });
+
   }
 
   send(): void {
