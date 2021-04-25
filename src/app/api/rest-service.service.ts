@@ -46,11 +46,11 @@ export class RestServiceService {
   }
 
   deleteTopicWord(topicId: number, word: string): Observable<any> {
-    return this.http.patch(config.baseURI + config.deleteWord + '/' + topicId, {word: word});
+    return this.http.patch(config.baseURI + config.deleteWord + '/' + topicId, word);
   }
 
   addWord(topicId: number, word: string): Observable<any> {
-    return this.http.patch(config.baseURI + config.addWord + '/' + topicId, {word: word});
+    return this.http.patch(config.baseURI + config.addWord + '/' + topicId, word);
   }
 
   addTopic(topic: GameTopic): Observable<GameTopic> {
