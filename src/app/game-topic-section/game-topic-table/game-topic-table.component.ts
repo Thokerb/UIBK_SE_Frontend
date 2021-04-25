@@ -36,8 +36,8 @@ export class GameTopicTableComponent implements OnInit {
   private getTopics(): void {
     this.restService.getAllGameTopics().subscribe(next => {
       this.topics = [];
-      for (const key in next){
-        this.topics.push(next[key]);
+      for (const key in next.object){
+        this.topics.push(next.object[key]);
       }
     }, error => {
       this.messageService.add({severity: 'error', summary: 'Themengebiete', detail: 'Verbindung mit dem Server nicht möglich!'});
