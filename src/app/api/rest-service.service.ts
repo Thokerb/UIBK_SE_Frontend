@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Game, GameDTO, GameLobbyElement} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
-import {GameTopic, GameTopicDTO, GameTopicResponse} from './dto/GameTopic';
+import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class RestServiceService {
     return this.http.patch(config.baseURI + config.UpdateUser + '/' + userId, request);
   }
 
-  uploadGameTopic(uploadTopic: GameTopic): Observable<GameTopic> {
-    return this.http.post<GameTopic>(config.baseURI + config.GameTopic, uploadTopic);
+  uploadGameTopic(uploadTopic: GameTopic): Observable<UploadGameTopicResponse> {
+    return this.http.post<UploadGameTopicResponse>(config.baseURI + config.GameTopic, uploadTopic);
   }
 
   getAllGameTopics(): Observable<GameTopicResponse> {

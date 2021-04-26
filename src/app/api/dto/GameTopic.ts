@@ -17,3 +17,9 @@ export interface GameTopicDTO {
   topic: string;
   words: string[];
 }
+
+export interface UploadGameTopicResponse {
+  success: boolean;
+  description: string;
+  object: GameTopic;
+}

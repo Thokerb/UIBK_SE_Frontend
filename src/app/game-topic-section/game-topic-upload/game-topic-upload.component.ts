@@ -42,7 +42,7 @@ export class GameTopicUploadComponent implements OnInit {
 
   upload(uploadTopic: GameTopic): void {
     this.restService.uploadGameTopic(uploadTopic).subscribe(next => {
-        this.messageService.add({severity: 'success', summary: next.topic, detail: `Themengebiet ${next.topic} wurde erfolgreich hinzugefügt.`});
+        this.messageService.add({severity: 'success', summary: next.object.topic, detail: `Themengebiet ${next.object.topic} wurde erfolgreich hinzugefügt.`});
         this.store.dispatch(this.gameTopicAction.addTopic({item: uploadTopic}));
         },
       error => {
