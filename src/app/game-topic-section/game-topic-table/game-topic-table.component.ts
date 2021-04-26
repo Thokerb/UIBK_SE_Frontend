@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
@@ -24,7 +24,7 @@ export class GameTopicTableComponent implements OnInit {
   wordToAdd: string;
 
   constructor(private restService: RestServiceService, private messageService: MessageService,
-              private gameTopicSelector: GametopicSelector, private store: Store) {
+              private gameTopicSelector: GametopicSelector, private store: Store, private changeDetector: ChangeDetectorRef) {
     this.getTopics();
   }
 
@@ -39,6 +39,16 @@ export class GameTopicTableComponent implements OnInit {
       for (const key in next.object){
         this.topics.push(next.object[key]);
       }
+      if(this.editTopic !== null && this.editTopic !== undefined){
+        const newTopic = this.topics.find(x => x.topicId === this.editTopic.topicId);
+        this.editTopic = newTopic;
+        this.words = [];
+        for (const w in newTopic.words){
+          this.words.push({name: newTopic.words[w], code: newTopic.words[w]});
+        }
+        this.changeDetector.detectChanges();
+      }
+
     }, error => {
       this.messageService.add({severity: 'error', summary: 'Themengebiete', detail: 'Verbindung mit dem Server nicht möglich!'});
     });
@@ -50,8 +60,6 @@ export class GameTopicTableComponent implements OnInit {
     for (const w in topic.words){
       this.words.push({name: topic.words[w], code: topic.words[w]});
     }
-    // this.words = topic.words.map(x => ({name: x, code: x}));
-
 
   }
 
