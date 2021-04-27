@@ -52,5 +52,12 @@ export class AuthenticationSelector {
     }
   );
 
+  selectLoginErrorStatus = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.loginError;
+    }
+  );
+
 
 }

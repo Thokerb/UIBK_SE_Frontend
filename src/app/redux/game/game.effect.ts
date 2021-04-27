@@ -23,6 +23,25 @@ export class GameEffect {
     )
   );
 
+  getGame: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.getGames.type),
+      switchMap(({gameId}) => this.restService.getGame(gameId)),
+      switchMap(data => {
+        if (data.success){
+          return [
+            this.gameActions.setCurrentGame({game: data.object}),
+          ];
+        }
+        else{
+          return [
+            this.gameActions.setCurrentGame({game: null}),
+          ];
+        }
+
+      })
+    )
+  );
 
   constructor(
     private actions$: Actions,

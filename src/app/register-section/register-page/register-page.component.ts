@@ -20,7 +20,10 @@ export class RegisterPageComponent implements OnInit {
     this.store.select(this.selector.selectRegisterStatus).subscribe(next => {
       if (next){
         this.messageService.add({severity: 'success', summary: 'Registration erfolgreich', detail: 'Weiterleitung auf Login'});
-        setTimeout( () => { this.router.navigateByUrl('login'); }, 2000 );
+        setTimeout( () => {
+          this.router.navigateByUrl('login');
+          this.store.dispatch(this.authAction.setRegisterStatus({isRegistered: false}));
+          }, 2000 );
       }
     });
   }

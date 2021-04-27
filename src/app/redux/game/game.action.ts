@@ -19,5 +19,15 @@ export class GameAction {
     '[Game] Get all Games'
   );
 
+  setCurrentGame = createAction(
+    '[Game] Join Game',
+    props<{ game: Game }>()
+  );
+
+  getCurrentGameFromAPI = createAction(
+    '[Game] get current game from api',
+    props<{ gameId: number }>()
+  );
+
 }
 

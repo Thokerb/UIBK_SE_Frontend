@@ -21,3 +21,15 @@ export interface GameLobbyElement{
   gameCurrentPlayers: number;
   gameMaxPlayers: number;
 }
+
+export interface JoinGameResponse{
+  success: boolean;
+  description: string;
+  object: Game;
+}
+
+export interface GetGameResponse{
+  success: boolean;
+  description: string;
+  object: Game;
+}

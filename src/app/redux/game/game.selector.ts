@@ -15,6 +15,11 @@ export class GameSelector {
     (state) => state.lobbyGames
   );
 
+  selectCurrentGame = createSelector(
+    this.selectGameState,
+    (state) => state.currentGame
+  );
+
 
 
 }

@@ -10,5 +10,6 @@
   "UpdateUser": "/api/management/users",
   "GameTopic": "/api/gametopic",
   "deleteWord": "/api/gametopic/deleteword",
-  "addWord": "/api/gametopic/addword"
+  "addWord": "/api/gametopic/addword",
+  "joinGame": "/api/game/add"
 }

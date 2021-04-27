@@ -8,19 +8,21 @@ import {CardModule} from 'primeng/card';
 import {FormsModule} from '@angular/forms';
 import {RippleModule} from 'primeng/ripple';
 import {PasswordModule} from 'primeng/password';
+import {ToastModule} from 'primeng/toast';
 
 
 
 @NgModule({
   declarations: [LoginFormComponent, LoginPageComponent],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    CardModule,
-    FormsModule,
-    RippleModule,
-    PasswordModule
-  ]
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ButtonModule,
+        CardModule,
+        FormsModule,
+        RippleModule,
+        PasswordModule,
+        ToastModule
+    ]
 })
 export class LoginSectionModule { }

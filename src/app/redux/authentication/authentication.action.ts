@@ -39,5 +39,10 @@ export class AuthenticationAction {
     '[Auth] Set Registration Error',
     props<{ error: REGISTER_ERROR; }>()
   );
+
+  setLoginError = createAction(
+    '[Auth] Set Login Error',
+    props<{ status: boolean; }>()
+  );
 }
 
