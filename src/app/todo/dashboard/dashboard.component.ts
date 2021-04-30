@@ -28,6 +28,18 @@ export class DashboardComponent implements OnInit {
     console.warn('Not yet implemented');
   }
 
+  onLobbyBtn(): void {
+    console.warn('Not yet implemented');
+  }
+
+  onCreateGameBtn(): void {
+    console.warn('Not yet implemented');
+  }
+
+  onPlayerProfileBtn(): void {
+    console.warn('Not yet implemented');
+  }
+
   callResource(): void {
     this.restService.getTeam().subscribe(next=>{
       console.log(next);
