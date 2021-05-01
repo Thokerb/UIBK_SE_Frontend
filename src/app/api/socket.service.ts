@@ -33,7 +33,7 @@ export class SocketService implements OnDestroy{
 
   send(): void {
     this.stompClient.send(
-      '/gkz/hello',
+      '/gkz/gameLobby',
       {},
       'hello world'
     );
@@ -41,7 +41,7 @@ export class SocketService implements OnDestroy{
 
 
   private subscribeRoom(): void{
-    this.stompClient.subscribe('/user/topic/hi', (hello) => {
+    this.stompClient.subscribe('/topic/join', (hello) => {
       console.log(hello.body);
     });
   }
