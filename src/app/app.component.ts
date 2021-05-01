@@ -36,4 +36,13 @@ export class AppComponent {
     this.tokenStorageService.signOut();
     this.router.navigateByUrl('/login');
   }
+
+  goDashboard(): void {
+    if (this.loggedIn){
+      this.router.navigateByUrl('/dashboard');
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }
+  }
 }
