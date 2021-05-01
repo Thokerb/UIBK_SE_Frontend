@@ -2,13 +2,13 @@ import {createReducer, on} from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {GameAction} from './game.action';
-import {Game, GameLobbyElement} from '../../api/dto/Game';
+import {CompleteGameDTO, Game, GameLobbyElement} from '../../api/dto/Game';
 
 
 export interface GameState {
   games: Game[];
   lobbyGames: GameLobbyElement[];
-  currentGame: Game;
+  currentGame: CompleteGameDTO;
 }
 
 export const initialState: GameState = {

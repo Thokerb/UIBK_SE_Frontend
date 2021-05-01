@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
-import {Game, GameLobbyElement} from '../../api/dto/Game';
+import {CompleteGameDTO, Game, GameLobbyElement} from '../../api/dto/Game';
 
 @Injectable()
 export class GameAction {
@@ -21,7 +21,7 @@ export class GameAction {
 
   setCurrentGame = createAction(
     '[Game] Join Game',
-    props<{ game: Game }>()
+    props<{ game: CompleteGameDTO }>()
   );
 
   getCurrentGameFromAPI = createAction(

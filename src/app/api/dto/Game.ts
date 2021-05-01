@@ -1,4 +1,5 @@
 import {User} from './UserManagement';
+import {GameTopicDTO} from './GameTopic';
 
 export interface GameDTO {
   id: string;
@@ -28,8 +29,16 @@ export interface JoinGameResponse{
   object: Game;
 }
 
-export interface GetGameResponse{
-  success: boolean;
-  description: string;
-  object: Game;
+export interface CompleteGameDTO{
+  gameId: number;
+  gameName: string;
+  gameNumberTeams: number;
+  gameMaxPoints: number;
+  gameTopics: GameTopicDTO[];
+  gamePlayers: GamePlayerDTO[];
+}
+
+export interface GamePlayerDTO{
+  userName: string;
+  teamName: string;
 }

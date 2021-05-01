@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Game, GameDTO, GameLobbyElement, GetGameResponse, JoinGameResponse} from './dto/Game';
+import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, JoinGameResponse} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 
@@ -72,7 +72,7 @@ export class RestServiceService {
     return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
   }
 
-  getGame(id: number): Observable<GetGameResponse> {
-    return this.http.get<GetGameResponse>(config.baseURI + config.Game);
+  getGame(id: number): Observable<CompleteGameDTO> {
+    return this.http.get<CompleteGameDTO>(config.baseURI + config.Game + '/' + id);
   }
 }

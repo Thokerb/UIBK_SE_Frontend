@@ -28,9 +28,9 @@ export class GameEffect {
       ofType(this.gameActions.getCurrentGameFromAPI),
       switchMap(({gameId}) => this.restService.getGame(gameId)),
       switchMap(data => {
-        if (data.success){
+        if (data){
           return [
-            this.gameActions.setCurrentGame({game: data.object}),
+            this.gameActions.setCurrentGame({game: data}),
           ];
         }
         else{
