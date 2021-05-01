@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameLobbyPageComponent } from './game-lobby-page/game-lobby-page.component';
 import { GameLobbyTableComponent } from './game-lobby-table/game-lobby-table.component';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
 
 
 
@@ -10,7 +11,8 @@ import {TableModule} from 'primeng/table';
   declarations: [GameLobbyPageComponent, GameLobbyTableComponent],
     imports: [
         CommonModule,
-        TableModule
+        TableModule,
+        ToastModule
     ]
 })
 export class GameLobbySectionModule { }

@@ -37,3 +37,7 @@ app-login-page{
 app-user-management-page{
   flex-grow: 1;
 }
+
+.headerMiddle{
+  text-align: center;
+}
