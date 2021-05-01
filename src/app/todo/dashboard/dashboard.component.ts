@@ -35,18 +35,7 @@ export class DashboardComponent implements OnInit {
   notYetImplemented(): void {
     console.warn('Not yet implemented');
   }
-
-  callResource(): void {
-    this.restService.getTeam().subscribe(next => {
-      console.log(next);
-    });
-  }
-
   sendToSocket(): void {
     this.webSocket.send();
-  }
-
-  enterRoom(): void {
-    this.webSocket.enterRoom();
   }
 }

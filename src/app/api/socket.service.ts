@@ -21,12 +21,11 @@ export class SocketService implements OnDestroy{
     const socket = new SockJS('http://localhost:8080/gkz-stomp-endpoint');
     this.stompClient = Stomp.over(socket);
     const stompClient = this.stompClient;
-
+    // tslint:disable-next-line:variable-name
+    const _this = this;
     this.stompClient.connect({'X-Authorization': 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
       console.log('Connected: ' + frame);
-      stompClient.subscribe('/user/topic/join', (hello) => {
-        console.log(hello.body);
-      });
+      _this.subscribeRoom();
 
     });
 
@@ -41,7 +40,7 @@ export class SocketService implements OnDestroy{
   }
 
 
-  enterRoom(): void{
+  private subscribeRoom(): void{
     this.stompClient.subscribe('/user/topic/hi', (hello) => {
       console.log(hello.body);
     });
