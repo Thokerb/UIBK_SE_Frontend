@@ -35,12 +35,13 @@ export class GameLobbyTableComponent implements OnInit {
 
   join(game: GameLobbyElement): void {
     this.restService.joinGame(this.user.username, game.gameID).subscribe(next => {
-      if (next.success){
+      if (next){ // TODO: change boolean
         this.router.navigateByUrl('/game/' + game.gameID);
       }
       else{
         console.log(next);
-        this.messageService.add({severity: 'error', summary: 'Spielbeitritt', detail: `Spielbeitritt nicht möglich. ${next.description}`});
+        // TODO: next.description
+        this.messageService.add({severity: 'error', summary: 'Spielbeitritt', detail: `Spielbeitritt nicht möglich. ${next}`});
 
       }
     },

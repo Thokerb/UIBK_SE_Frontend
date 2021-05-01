@@ -67,8 +67,9 @@ export class RestServiceService {
     return this.http.get<GameLobbyElement[]>(config.baseURI + config.Game);
   }
 
-  joinGame(playerName: string, gameId: number): Observable<JoinGameResponse> {
-    return this.http.patch<JoinGameResponse>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
+  // TODO: JoinGameResponse
+  joinGame(playerName: string, gameId: number): Observable<boolean> {
+    return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
   }
 
   getGame(id: number): Observable<GetGameResponse> {

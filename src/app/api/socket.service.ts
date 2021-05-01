@@ -22,7 +22,7 @@ export class SocketService implements OnDestroy{
     this.stompClient = Stomp.over(socket);
     const stompClient = this.stompClient;
 
-    this.stompClient.connect({"X-Authorization": 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
+    this.stompClient.connect({'X-Authorization': 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
       console.log('Connected: ' + frame);
       stompClient.subscribe('/topic/hi', (hello) => {
         console.log(hello.body);
