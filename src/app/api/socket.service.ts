@@ -24,7 +24,7 @@ export class SocketService implements OnDestroy{
 
     this.stompClient.connect({'X-Authorization': 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
       console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/hi', (hello) => {
+      stompClient.subscribe('/user/topic/join', (hello) => {
         console.log(hello.body);
       });
 
@@ -38,6 +38,13 @@ export class SocketService implements OnDestroy{
       {},
       'hello world'
     );
+  }
+
+
+  enterRoom(): void{
+    this.stompClient.subscribe('/user/topic/hi', (hello) => {
+      console.log(hello.body);
+    });
   }
 
   closeConnection(): void {
