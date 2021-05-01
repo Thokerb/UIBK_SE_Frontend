@@ -3,10 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
-import {CompleteGameDTO} from '../../api/dto/Game';
+import {CompleteGameDTO, GamePlayerDTO} from '../../api/dto/Game';
 import * as _ from 'lodash';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
@@ -15,8 +16,9 @@ import { BrowserModule } from '@angular/platform-browser';
 export class GamePageComponent implements OnInit {
   id: any;
   game: CompleteGameDTO;
-  nimbusPlayer;
+  nimbusPlayer: string[];
   playerGroups;
+  gameDisabled = true;
 
   constructor(private route: ActivatedRoute, private store: Store, private gameActions: GameAction, private gameSelector: GameSelector) { }
 
@@ -27,8 +29,12 @@ export class GamePageComponent implements OnInit {
       if (next){
         this.nimbusPlayer = next.gamePlayers.filter(x => !x.teamName).map(x => x.userName);
         this.playerGroups = _.groupBy(next.gamePlayers.filter(x => x.teamName), 'teamName');
-        console.log(this.nimbusPlayer);
-        console.log(this.playerGroups);
+        if (this.nimbusPlayer.length === 0 && next.gamePlayers.length >= next.gameNumberTeams * 2 ){
+           this.gameDisabled = false;
+        }
+        else{
+          this.gameDisabled = true;
+        }
       }
     });
     this.store.dispatch(this.gameActions.getCurrentGameFromAPI({gameId: this.id}));
