@@ -15,6 +15,8 @@ import {SocketService} from '../../api/socket.service';
 export class DashboardComponent implements OnInit {
 
   todo: Observable<string[]>;
+  username: string;
+  roomID: string;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -42,5 +44,9 @@ export class DashboardComponent implements OnInit {
 
   sendToSocket(): void {
     this.webSocket.send();
+  }
+
+  enterRoom(): void {
+    this.webSocket.enterRoom();
   }
 }
