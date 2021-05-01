@@ -21,10 +21,10 @@ export class DashboardComponent implements OnInit {
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
               private restService: RestServiceService,
-              private webSocket: SocketService) { }
+              private webSocket: SocketService
+              ) { }
 
   ngOnInit(): void {
-    this.webSocket.connect();
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
