@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Game, GameDTO, GameLobbyElement} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
+import {Cube} from './dto/Cube';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,9 @@ export class RestServiceService {
 
   getAllGamesForLobby(): Observable<GameLobbyElement[]> {
     return this.http.get<GameLobbyElement[]>(config.baseURI + config.Game);
+  }
+
+  getAllCubes(): Observable<Cube[]> {
+    return this.http.get<Cube[]>(config.baseURI + config.Cube);
   }
 }

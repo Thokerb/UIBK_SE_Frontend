@@ -15,6 +15,11 @@ export class GameSelector {
     (state) => state.lobbyGames
   );
 
+  selectAllCubes = createSelector(
+    this.selectGameState,
+    (state) => state.cubes
+  );
+
 
 
 }
