@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {GameAction} from './game.action';
 import {CompleteGameDTO, Game, GameLobbyElement} from '../../api/dto/Game';
-import {Game, GameLobbyElement} from '../../api/dto/Game';
 import {Cube} from '../../api/dto/Cube';
 
 

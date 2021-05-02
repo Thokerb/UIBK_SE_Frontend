@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {GameTopic} from '../../api/dto/GameTopic';
 import {CompleteGameDTO, Game, GameLobbyElement} from '../../api/dto/Game';
-import {Game, GameLobbyElement} from '../../api/dto/Game';
 import {Cube} from '../../api/dto/Cube';
 
 @Injectable()
