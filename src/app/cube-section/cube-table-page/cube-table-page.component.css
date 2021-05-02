@@ -2,3 +2,7 @@
   color: blue;
   cursor: pointer;
 }
+
+.content{
+  min-height: 50vh;
+}

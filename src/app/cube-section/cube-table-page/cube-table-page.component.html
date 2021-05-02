@@ -1,4 +1,3 @@
-<p>cube-table-page works!</p>
 <p-table [value]="cubes">
   <ng-template pTemplate="header">
     <tr>
@@ -44,9 +43,10 @@
 
     <div>
       <h4>Task für aktuelle Seite auswählen: </h4>
-      
+      <p-dropdown [options]="options" [(ngModel)]="selectedOption" optionLabel="name"></p-dropdown>
 
-      <p-button>Seite kalibrieren</p-button>
+
+      <p-button icon="pi pi-circle-off" iconPos="left" label="Update"></p-button>
     </div>
 
 

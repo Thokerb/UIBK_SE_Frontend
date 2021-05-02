@@ -7,6 +7,8 @@ import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -18,7 +20,9 @@ import {ButtonModule} from 'primeng/button';
     DialogModule,
     DividerModule,
     ProgressBarModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule,
+    FormsModule
   ]
 })
 export class CubeSectionModule { }

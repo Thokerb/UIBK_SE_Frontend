@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
-import {Cube} from '../../api/dto/Cube';
+import {Cube, TaskFacet} from '../../api/dto/Cube';
+
+export interface Options {
+  name: string;
+  code: TaskFacet;
+}
 
 @Component({
   selector: 'app-cube-table-page',
@@ -13,7 +18,15 @@ export class CubeTablePageComponent implements OnInit {
   cubes: Cube[];
   editCube: Cube;
   currentSideCalibrated;
+  options: Options[];
+  selectedOption: Options;
   constructor(private store: Store, private gameActions: GameAction, private gameSelector: GameSelector) {
+    this.options = [
+      {name: TaskFacet[TaskFacet.PANTOMIME], code: TaskFacet.PANTOMIME},
+      {name: TaskFacet[TaskFacet.REIM], code: TaskFacet.REIM},
+      {name: TaskFacet[TaskFacet.SPRECHEN], code: TaskFacet.SPRECHEN},
+      {name: TaskFacet[TaskFacet.ZEICHNEN], code: TaskFacet.ZEICHNEN}
+    ];
     this.store.dispatch(gameActions.getCubes());
     this.store.select(gameSelector.selectAllCubes).subscribe(next => {
       this.cubes = next;
