@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, JoinGameResponse} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
-import {Cube} from './dto/Cube';
+import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
 
 @Injectable({
   providedIn: 'root'
@@ -79,5 +79,9 @@ export class RestServiceService {
 
   getGame(id: number): Observable<CompleteGameDTO> {
     return this.http.get<CompleteGameDTO>(config.baseURI + config.Game + '/' + id);
+  }
+
+  updateCubeSite(side: CubeSide): Observable<UpdateCubeResponse> {
+    return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
   }
 }

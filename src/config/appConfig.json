@@ -12,5 +12,6 @@
   "deleteWord": "/api/gametopic/deleteword",
   "addWord": "/api/gametopic/addword",
   "Cube": "/api/cube",
-  "joinGame": "/api/game/add"
+  "joinGame": "/api/game/add",
+  "CubeConfig": "/api/cube/config"
 }

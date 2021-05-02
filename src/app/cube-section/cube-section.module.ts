@@ -9,20 +9,22 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule} from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
 
 
 
 @NgModule({
   declarations: [CubeTablePageComponent, CubePageComponent],
-  imports: [
-    CommonModule,
-    TableModule,
-    DialogModule,
-    DividerModule,
-    ProgressBarModule,
-    ButtonModule,
-    DropdownModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        TableModule,
+        DialogModule,
+        DividerModule,
+        ProgressBarModule,
+        ButtonModule,
+        DropdownModule,
+        FormsModule,
+        ToastModule
+    ]
 })
 export class CubeSectionModule { }

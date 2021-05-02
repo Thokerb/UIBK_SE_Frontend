@@ -1,3 +1,5 @@
+import {Game} from './Game';
+
 export interface Cube {
   cubeId: string;
   batteryLevel: number;
@@ -21,4 +23,10 @@ export enum TaskFacet {
   'REIM',
   'SPRECHEN',
   'ZEICHNEN'
+}
+
+export interface UpdateCubeResponse{
+  success: boolean;
+  description: string;
+  object: Cube;
 }
