@@ -10,8 +10,7 @@ import {Cube} from '../../api/dto/Cube';
   styleUrls: ['./cube-table-page.component.css']
 })
 export class CubeTablePageComponent implements OnInit {
-  private cubes: Cube[];
-
+  cubes: Cube[];
   constructor(private store: Store, private gameActions: GameAction, private gameSelector: GameSelector) {
     this.store.dispatch(gameActions.getCubes());
     this.store.select(gameSelector.selectAllCubes).subscribe(next => this.cubes = next);
@@ -20,4 +19,8 @@ export class CubeTablePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  edit(cube: Cube): void {
+
+  }
 }
