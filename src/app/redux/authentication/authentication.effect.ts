@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {EMPTY, Observable, of} from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {AuthService} from '../../api/auth.service';
 import {AuthenticationAction} from './authentication.action';
 import {Action} from '@ngrx/store';
@@ -24,6 +24,16 @@ export class AuthenticationEffects {
           this.authActions.saveUser(data.user)
         ];
       })
+    )
+  );
+
+  login2: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.authActions.login.type),
+      switchMap(({credentials}) => this.authService.login(credentials).pipe(
+        map((pizza) => this.authActions.setLoginError({status: false})),
+        catchError(() => of(this.authActions.setLoginError({status: true})))
+      ))
     )
   );
 

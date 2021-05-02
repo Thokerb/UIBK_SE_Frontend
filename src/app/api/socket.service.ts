@@ -2,18 +2,23 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {delay, filter, map, retryWhen, switchMap} from 'rxjs/operators';
 import * as config from '../../config/appConfig.json';
 import {Observable, of} from 'rxjs';
-import {select} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AuthService} from './auth.service';
 import {TokenStorageService} from '../security/token-storage.service';
 import * as SockJS from 'sockjs-client';
 import {CompatClient, Stomp} from '@stomp/stompjs';
+import {GameAction} from '../redux/game/game.action';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService implements OnDestroy{
   private stompClient: CompatClient = null;
-  constructor(private tokenService: TokenStorageService) {
+  constructor(
+    private tokenService: TokenStorageService,
+    private store: Store,
+    private gameActions: GameAction
+    ) {
   }
 
 
@@ -21,12 +26,11 @@ export class SocketService implements OnDestroy{
     const socket = new SockJS('http://localhost:8080/gkz-stomp-endpoint');
     this.stompClient = Stomp.over(socket);
     const stompClient = this.stompClient;
-
-    this.stompClient.connect({"X-Authorization": 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
+    // tslint:disable-next-line:variable-name
+    const _this = this;
+    this.stompClient.connect({'X-Authorization': 'Bearer ' + this.tokenService.getToken()}, function(frame): any {
       console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/hi', (hello) => {
-        console.log(hello.body);
-      });
+      _this.subscribeRoom();
 
     });
 
@@ -34,10 +38,19 @@ export class SocketService implements OnDestroy{
 
   send(): void {
     this.stompClient.send(
-      '/gkz/hello',
+      '/gkz/gameLobby',
       {},
       'hello world'
     );
+  }
+
+
+  private subscribeRoom(): void{
+    this.stompClient.subscribe('/topic/join', (hello) => {
+      const response = JSON.parse(hello.body);
+      this.store.dispatch(this.gameActions.setGames({games: response}));
+      console.log(hello.body);
+    });
   }
 
   closeConnection(): void {

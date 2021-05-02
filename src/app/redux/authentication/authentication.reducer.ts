@@ -10,6 +10,7 @@ export interface AuthenticationState {
   registerError: REGISTER_ERROR;
   roles: USER_ROLE[];
   user: User;
+  loginError: boolean;
 }
 
 export enum REGISTER_ERROR {
@@ -46,7 +47,8 @@ export const initialState: AuthenticationState = {
     email: null,
     id: null,
     tokenType: null
-  }
+  },
+  loginError: false
 };
 
 @Injectable()
@@ -62,6 +64,7 @@ export class AuthenticationReducer {
     on(this.authActions.saveUser, (state, {user}) => ({...state, user: user }) ),
     on(this.authActions.setRegisterError, (state, {error}) => ({ ...state, registerError: error})),
     on(this.authActions.setRegisterStatus, (state, {isRegistered}) => ({ ...state, registered: isRegistered})),
+    on(this.authActions.setLoginError, (state, {status}) => ({...state, loginError: status }) ),
 
 
   );

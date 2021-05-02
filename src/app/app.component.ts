@@ -4,6 +4,7 @@ import {AuthenticationSelector} from './redux/authentication/authentication.sele
 import {TokenStorageService} from './security/token-storage.service';
 import {AuthenticationAction} from './redux/authentication/authentication.action';
 import {Router} from '@angular/router';
+import {SocketService} from './api/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,10 @@ export class AppComponent {
               private selector: AuthenticationSelector,
               private tokenStorageService: TokenStorageService,
               private authAction: AuthenticationAction,
-              private router: Router
+              private router: Router,
+              private webSocket: SocketService
               ) {
+    this.webSocket.connect();
     this.store.select(this.selector.selectAuthStatus).subscribe(next => this.loggedIn = next);
     // so on reload we still have our user
     if (this.tokenStorageService.getUser()){
@@ -32,5 +35,14 @@ export class AppComponent {
   logout(): void {
     this.tokenStorageService.signOut();
     this.router.navigateByUrl('/login');
+  }
+
+  goDashboard(): void {
+    if (this.loggedIn){
+      this.router.navigateByUrl('/dashboard');
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }
   }
 }

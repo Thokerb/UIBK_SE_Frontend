@@ -15,14 +15,16 @@ import {SocketService} from '../../api/socket.service';
 export class DashboardComponent implements OnInit {
 
   todo: Observable<string[]>;
+  username: string;
+  roomID: string;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
               private restService: RestServiceService,
-              private webSocket: SocketService) { }
+              private webSocket: SocketService
+              ) { }
 
   ngOnInit(): void {
-    this.webSocket.connect();
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
@@ -33,13 +35,6 @@ export class DashboardComponent implements OnInit {
   notYetImplemented(): void {
     console.warn('Not yet implemented');
   }
-
-  callResource(): void {
-    this.restService.getTeam().subscribe(next => {
-      console.log(next);
-    });
-  }
-
   sendToSocket(): void {
     this.webSocket.send();
   }

@@ -20,6 +20,11 @@ export class GameSelector {
     (state) => state.cubes
   );
 
+  selectCurrentGame = createSelector(
+    this.selectGameState,
+    (state) => state.currentGame
+  );
+
 
 
 }

@@ -13,7 +13,7 @@ export class GameEffect {
 
   fetchGames: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(this.gameActions.getGames.type),
+      ofType(this.gameActions.getGames),
       switchMap(() => this.restService.getAllGamesForLobby()),
       switchMap(data => {
         return [
@@ -35,6 +35,25 @@ export class GameEffect {
     )
   );
 
+  getGame: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.getCurrentGameFromAPI),
+      switchMap(({gameId}) => this.restService.getGame(gameId)),
+      switchMap(data => {
+        if (data){
+          return [
+            this.gameActions.setCurrentGame({game: data}),
+          ];
+        }
+        else{
+          return [
+            this.gameActions.setCurrentGame({game: null}),
+          ];
+        }
+
+      })
+    )
+  );
 
   constructor(
     private actions$: Actions,

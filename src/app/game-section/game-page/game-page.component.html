@@ -1,2 +1,46 @@
-<p>game-page works!</p>
-{{id}}
+
+
+<div class="p-grid full">
+  <div class="p-col"></div>
+  <div class="p-col-11">
+
+    <div *ngIf="game">
+      <div class="headerMiddle">
+        <h1>{{game.gameName}}</h1>
+      </div>
+
+      <p-card class="section nimbusSection" header="Ohne Team">
+        <ng-template pTemplate="header">
+          <div class="nimbusTop">
+
+          </div>
+        </ng-template>
+          <div *ngFor="let player of nimbusPlayer">
+            {{player}}
+          </div>
+      </p-card>
+
+      <p-card class="section" *ngFor="let groups of playerGroups | keyvalue; index as i;" [header]="groups.key">
+        <ng-template pTemplate="header">
+          <div class="top-{{i}}">
+
+          </div>
+        </ng-template>
+        <div *ngFor="let player of groups.value">
+          {{player.userName}}
+        </div>
+      </p-card>
+
+      <div>
+        <div class="middleContainer">
+
+      <p-button label="Spiel starten" [disabled]="gameDisabled" icon="pi pi-star">
+
+      </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-col"></div>
+</div>
+
