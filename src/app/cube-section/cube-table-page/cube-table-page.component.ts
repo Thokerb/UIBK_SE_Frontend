@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
@@ -17,7 +17,7 @@ export interface Options {
   templateUrl: './cube-table-page.component.html',
   styleUrls: ['./cube-table-page.component.css']
 })
-export class CubeTablePageComponent implements OnInit {
+export class CubeTablePageComponent implements OnInit, OnDestroy {
   cubes: Cube[];
   editCube: Cube;
   currentSideCalibrated;
@@ -47,6 +47,10 @@ export class CubeTablePageComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy(): void {
+       this.socketService.unsubscribeCubes();
+    }
 
   ngOnInit(): void {
     this.socketService.subscribeCubes();
