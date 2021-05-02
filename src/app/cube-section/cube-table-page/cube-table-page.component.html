@@ -35,6 +35,9 @@
     <h4>Batterie-Level:</h4>
     <p-progressBar [value]="editCube.batteryLevel" unit="%"></p-progressBar>
 
+    <div style="margin-top: 4vw;">
+      <h3>{{editCube.sides.length}} / 12 Seiten kalibriert</h3>
+    </div>
     <div>
       <h3 style="display: inline-block; margin-right: 2vw; margin-top: 4vw;">Aktuelle Seite kalibriert: </h3>
       <i *ngIf="currentSideCalibrated" class="pi pi-check-circle" style="font-size: 2rem; color: green"></i>
