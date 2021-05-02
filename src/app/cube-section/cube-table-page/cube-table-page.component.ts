@@ -11,9 +11,19 @@ import {Cube} from '../../api/dto/Cube';
 })
 export class CubeTablePageComponent implements OnInit {
   cubes: Cube[];
+  editCube: Cube;
+  currentSideCalibrated;
   constructor(private store: Store, private gameActions: GameAction, private gameSelector: GameSelector) {
     this.store.dispatch(gameActions.getCubes());
-    this.store.select(gameSelector.selectAllCubes).subscribe(next => this.cubes = next);
+    this.store.select(gameSelector.selectAllCubes).subscribe(next => {
+      this.cubes = next;
+      this.editCube = next[0];
+      if (this.editCube){
+        this.editCube = next.find(x => x.cubeId === this.editCube.cubeId);
+        this.currentSideCalibrated = this.editCube.sides.some(x => x.facetId === this.editCube.currentFacet);
+      }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -21,6 +31,7 @@ export class CubeTablePageComponent implements OnInit {
 
 
   edit(cube: Cube): void {
+    this.editCube = cube;
 
   }
 }

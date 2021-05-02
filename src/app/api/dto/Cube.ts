@@ -3,7 +3,22 @@ export interface Cube {
   batteryLevel: number;
   currentFacet: number;
   inGame: boolean;
-  isCalibrated: boolean;
+  calibrated: boolean;
   observers: any[];
   task: string;
+  sides: CubeSide[];
+}
+
+export interface CubeSide {
+  cubeId: string;
+  facetId: number;
+  task: TaskFacet;
+}
+
+
+export enum TaskFacet {
+  'PANTOMIME',
+  'REIM',
+  'SPRECHEN',
+  'ZEICHNEN'
 }
