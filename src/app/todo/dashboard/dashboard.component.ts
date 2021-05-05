@@ -20,10 +20,6 @@ export class DashboardComponent implements OnInit {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
-  addItem(value: string): void {
-    this.store.dispatch(this.todoActions.addItem({item: value}));
-  }
-
   notYetImplemented(): void {
     console.warn('Not yet implemented');
   }
