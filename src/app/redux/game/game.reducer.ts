@@ -12,8 +12,8 @@ export interface GameState {
 }
 
 export const initialState: GameState = {
-  games: [{gameId: 100, gameName: 'Admins Game', gameTopics: ['essen'], gameMaxPoints: 20, gameNumberTeams: 8 , gamePlayers: []}],
-  lobbyGames: [{gameID: 100, gameName: 'Admins Game', gameMaxPlayers: 8, gameCurrentPlayers: 0, gameTopics: []}],
+  games: [],
+  lobbyGames: [],
   currentGame: null
 };
 

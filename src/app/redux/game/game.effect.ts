@@ -17,7 +17,7 @@ export class GameEffect {
       switchMap(() => this.restService.getAllGamesForLobby()),
       switchMap(data => {
         return [
-          this.gameActions.setGames({games: data}),
+          this.gameActions.setGames({games: data.object}),
         ];
       })
     )
@@ -28,9 +28,10 @@ export class GameEffect {
       ofType(this.gameActions.getCurrentGameFromAPI),
       switchMap(({gameId}) => this.restService.getGame(gameId)),
       switchMap(data => {
+        console.log(data);
         if (data){
           return [
-            this.gameActions.setCurrentGame({game: data}),
+            this.gameActions.setCurrentGame({game: data.object}),
           ];
         }
         else{
