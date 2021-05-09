@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, GameLobbyResponse, GetGameResponse, JoinGameResponse} from './dto/Game';
+import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, GameLobbyResponse, GetGameResponse, JoinGameResponse, Word} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
-import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
+import {GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class RestServiceService {
     return this.http.patch(config.baseURI + config.UpdateUser + '/' + userId, request);
   }
 
-  uploadGameTopic(uploadTopic: GameTopic): Observable<UploadGameTopicResponse> {
+  uploadGameTopic(uploadTopic: GameTopicDTO): Observable<UploadGameTopicResponse> {
     return this.http.post<UploadGameTopicResponse>(config.baseURI + config.GameTopic, uploadTopic);
   }
 
@@ -54,14 +54,8 @@ export class RestServiceService {
     return this.http.patch(config.baseURI + config.addWord + '/' + topicId, word);
   }
 
-  addTopic(topic: GameTopic): Observable<GameTopic> {
-    const topicDTO: GameTopicDTO = {
-      topic: topic.topic,
-      topicId: topic.topicId,
-      words: Array.from(topic.words),
-      description: topic.description
-    };
-    return this.http.post<GameTopic>(config.baseURI + config.GameTopic, topicDTO);
+  addTopic(topic: GameTopicDTO): Observable<GameTopicDTO> {
+    return this.http.post<GameTopicDTO>(config.baseURI + config.GameTopic, topic);
   }
 
   getAllGamesForLobby(): Observable<GameLobbyResponse> {

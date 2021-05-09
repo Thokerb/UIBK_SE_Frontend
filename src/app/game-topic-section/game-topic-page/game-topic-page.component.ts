@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {GameTopic} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
 import {Store} from '@ngrx/store';
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
 import {GameTopicAction} from '../../redux/gameTopic/gametopic.action';
+import {GameTopicDTO} from '../../api/dto/GameTopic';
+import {Word} from '../../api/dto/Game';
 
 @Component({
   selector: 'app-game-topic-page',
@@ -13,7 +14,7 @@ import {GameTopicAction} from '../../redux/gameTopic/gametopic.action';
 })
 export class GameTopicPageComponent implements OnInit {
 
-  topic: GameTopic;
+  topic: GameTopicDTO;
   words: string[];
   add: boolean;
   constructor(private restService: RestServiceService,
@@ -22,7 +23,7 @@ export class GameTopicPageComponent implements OnInit {
     this.words = [];
     this.topic = {
       topic: null,
-      words: new Set<string>(),
+      words: [],
       topicId: 0,
       description: null
 
@@ -34,14 +35,20 @@ export class GameTopicPageComponent implements OnInit {
   }
 
   addTopic(): void {
-    this.topic.words = new Set<string>(this.words);
+    this.topic.words = this.words.map(x => {
+      const y: Word = {
+        word: x,
+        wordId: 0
+      };
+      return y;
+    });
     console.log(this.topic);
     this.restService.addTopic(this.topic).subscribe(next => {
         this.store.dispatch(this.gameTopicAction.addTopic({item: this.topic}));
         this.messageService.add({severity: 'success', summary: 'Themengebiete', detail: `Themengebiet ${this.topic.topic} erfolgreich hinzugefügt`});
         this.topic = {
           topic: null,
-          words: new Set<string>(),
+          words: [],
           topicId: 0,
           description: null
 

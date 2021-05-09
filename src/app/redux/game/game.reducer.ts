@@ -1,6 +1,5 @@
 import {createReducer, on} from '@ngrx/store';
 import {Injectable} from '@angular/core';
-import {GameTopic} from '../../api/dto/GameTopic';
 import {GameAction} from './game.action';
 import {CompleteGameDTO, Game, GameLobbyElement, GameSection} from '../../api/dto/Game';
 import {Cube} from '../../api/dto/Cube';

@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import {Event} from '@angular/router';
-import {GameTopic} from '../../api/dto/GameTopic';
+import {GameTopicDTO} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
 import {Store} from '@ngrx/store';
@@ -14,7 +13,7 @@ import {GameTopicAction} from '../../redux/gameTopic/gametopic.action';
 export class GameTopicUploadComponent implements OnInit {
 
   selectedFile: File;
-  uploadTopic: GameTopic;
+  uploadTopic: GameTopicDTO;
   constructor(private restService: RestServiceService, private messageService: MessageService, private store: Store, private gameTopicAction: GameTopicAction) { }
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class GameTopicUploadComponent implements OnInit {
     };
   }
 
-  upload(uploadTopic: GameTopic): void {
+  upload(uploadTopic: GameTopicDTO): void {
     this.restService.uploadGameTopic(uploadTopic).subscribe(next => {
         this.messageService.add({severity: 'success', summary: next.object.topic, detail: `Themengebiet ${next.object.topic} wurde erfolgreich hinzugefügt.`});
         this.store.dispatch(this.gameTopicAction.addTopic({item: uploadTopic}));

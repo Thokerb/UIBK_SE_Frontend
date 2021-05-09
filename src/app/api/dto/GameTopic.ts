@@ -1,25 +1,20 @@
-export interface GameTopic{
-  topicId: number;
-  description: string;
-  topic: string;
-  words: Set<string>;
-}
+import {Word} from './Game';
 
 export interface GameTopicResponse {
   success: boolean;
   description: string;
-  object: Map<number, GameTopic>;
+  object: Map<number, GameTopicDTO>;
 }
 
 export interface GameTopicDTO {
   topicId: number;
   description: string;
   topic: string;
-  words: string[];
+  words: Word[];
 }
 
 export interface UploadGameTopicResponse {
   success: boolean;
   description: string;
-  object: GameTopic;
+  object: GameTopicDTO;
 }
