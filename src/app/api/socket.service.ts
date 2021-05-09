@@ -79,8 +79,9 @@ export class SocketService implements OnDestroy {
   private subscribeRoom(): void{
     this.stompClient.subscribe('/topic/join', (hello) => {
       const response = JSON.parse(hello.body);
-      this.store.dispatch(this.gameActions.setGames({games: response}));
-      console.log(hello.body);
+      console.log(response.object);
+      this.store.dispatch(this.gameActions.setGames({games: response.object}));
+      console.log(response);
     });
   }
 

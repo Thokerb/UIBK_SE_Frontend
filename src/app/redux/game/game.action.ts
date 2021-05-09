@@ -39,6 +39,5 @@ export class GameAction {
     '[Game] get current game from api',
     props<{ gameId: number }>()
   );
-
 }
 

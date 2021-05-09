@@ -11,24 +11,44 @@
 
       <p-card class="section nimbusSection" header="Ohne Team">
         <ng-template pTemplate="header">
-          <div class="nimbusTop">
+          <div class="nimbusTop header">
 
           </div>
         </ng-template>
-          <div *ngFor="let player of nimbusPlayer">
-            {{player}}
+
+
+        <div class="p-grid">
+          <div class="p-col-10">
+            <div *ngFor="let player of nimbusPlayer">
+              {{player}}
+            </div>
           </div>
+          <div class="p-col-2">
+            <p-button label="Team beitreten" (click)="removeTeam()"></p-button>
+
+          </div>
+        </div>
+
       </p-card>
 
-      <p-card class="section" *ngFor="let groups of playerGroups | keyvalue; index as i;" [header]="groups.key">
+      <p-card class="section" *ngFor="let team of teams; index as i;" [header]="team.teamName">
         <ng-template pTemplate="header">
-          <div class="top-{{i}}">
+          <div class="top-{{i}} header">
 
           </div>
         </ng-template>
-        <div *ngFor="let player of groups.value">
-          {{player.userName}}
+        <div class="p-grid">
+          <div class="p-col-10">
+            <div *ngFor="let player of team.players">
+              {{player.username}}
+            </div>
+          </div>
+          <div class="p-col-2">
+            <p-button label="Team beitreten" (click)="joinTeam(team.teamId)"></p-button>
+          </div>
         </div>
+
+
       </p-card>
 
       <div>

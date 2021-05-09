@@ -1,4 +1,4 @@
-import {User} from './UserManagement';
+import {User, USER_ROLES} from './UserManagement';
 import {GameTopicDTO} from './GameTopic';
 
 export interface GameDTO {
@@ -29,16 +29,52 @@ export interface JoinGameResponse{
   object: Game;
 }
 
+export interface GetGameResponse{
+  success: boolean;
+  description: string;
+  object: CompleteGameDTO;
+}
+
+export interface Teams {
+  teamId: number;
+  teamName: string;
+  players: PlayerDTO[];
+  score: number;
+}
+
 export interface CompleteGameDTO{
+  active: boolean;
   gameId: number;
   gameName: string;
   gameNumberTeams: number;
   gameMaxPoints: number;
   gameTopics: GameTopicDTO[];
-  gamePlayers: GamePlayerDTO[];
+  gamePlayers: PlayerDTO[];
+  gameTeams: Teams[];
 }
 
-export interface GamePlayerDTO{
-  userName: string;
-  teamName: string;
+
+export interface GameLobbyResponse{
+  success: boolean;
+  description: string;
+  object: GameLobbyElement[];
+}
+
+export interface PlayerDTO {
+  email: string;
+  enabled: boolean;
+  firstName: string;
+  gender: Gender;
+  id: string;
+  lastName: string;
+  new: boolean;
+  phone: string;
+  roles: USER_ROLES[];
+  username: string;
+}
+
+export enum Gender {
+  "MALE",
+  "FEMALE",
+  "OTHER"
 }
