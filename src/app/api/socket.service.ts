@@ -14,6 +14,7 @@ import {GameAction} from '../redux/game/game.action';
 })
 export class SocketService implements OnDestroy {
   private cubeSubscription: StompSubscription;
+  private sectionSubscription: StompSubscription;
   private stompClient: CompatClient = null;
   private established = false;
   constructor(
@@ -66,12 +67,41 @@ export class SocketService implements OnDestroy {
     });
   }
 
+  subscribeSections(): void{
+    console.log(this.established);
+    if (!this.stompClient || !this.established){
+      console.warn('websockets not yet initialized');
+      setTimeout( () => {
+        this.subscribeCubes();
+      }, 2000 );
+      return;
+    }
+    if (this.sectionSubscription){
+      return;
+    }
+    this.sectionSubscription = this.stompClient.subscribe('/topic/sections', (hello) => {
+      const response = JSON.parse(hello.body);
+      console.log(response);
+      this.store.dispatch(this.gameActions.setCurrentSection({section: response}));
+      console.log(hello.body);
+    });
+  }
+
   unsubscribeCubes(): void{
-    if(!this.cubeSubscription){
+    if (!this.cubeSubscription){
       console.warn('already unsubscribed from cubes');
       return;
     }
     this.cubeSubscription.unsubscribe();
+    this.cubeSubscription = null;
+  }
+
+  unsubscribeSection(): void{
+    if (!this.sectionSubscription){
+      console.warn('already unsubscribed from cubes');
+      return;
+    }
+    this.sectionSubscription.unsubscribe();
     this.cubeSubscription = null;
   }
 

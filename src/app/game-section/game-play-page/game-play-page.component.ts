@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
@@ -6,13 +6,14 @@ import {RestServiceService} from '../../api/rest-service.service';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
 import {CompleteGameDTO, GameSection, SectionStatus, Teams} from '../../api/dto/Game';
 import {User} from '../../redux/authentication/authentication.reducer';
+import {SocketService} from '../../api/socket.service';
 
 @Component({
   selector: 'app-game-play-page',
   templateUrl: './game-play-page.component.html',
   styleUrls: ['./game-play-page.component.css']
 })
-export class GamePlayPageComponent implements OnInit {
+export class GamePlayPageComponent implements OnInit, OnDestroy {
   game: CompleteGameDTO;
   currentUser: User;
   gameSection: GameSection;
@@ -27,9 +28,11 @@ export class GamePlayPageComponent implements OnInit {
               private gameActions: GameAction,
               private gameSelector: GameSelector,
               private restService: RestServiceService,
+              private socketService: SocketService,
               private authSelector: AuthenticationSelector) { }
 
   ngOnInit(): void {
+    this.socketService.subscribeSections();
     setInterval(() => {
       this.gameTime = this.gameTime - 1;
     }, 1000);
@@ -57,6 +60,9 @@ export class GamePlayPageComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.socketService.unsubscribeSection();
+  }
 
   wortErraten(): void {
     this.restService.guessedWord(this.game.gameId).subscribe(next => console.log(next));
