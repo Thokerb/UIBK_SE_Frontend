@@ -79,7 +79,7 @@ export class SocketService implements OnDestroy {
     if (this.sectionSubscription){
       return;
     }
-    this.sectionSubscription = this.stompClient.subscribe('/topic/sections', (hello) => {
+    this.sectionSubscription = this.stompClient.subscribe('/topic/updateSection', (hello) => {
       const response = JSON.parse(hello.body);
       console.log(response);
       this.store.dispatch(this.gameActions.setCurrentSection({section: response}));
