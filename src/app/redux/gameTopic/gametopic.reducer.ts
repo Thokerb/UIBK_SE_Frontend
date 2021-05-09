@@ -1,11 +1,11 @@
 import {createReducer, on} from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {GameTopicAction} from './gametopic.action';
-import {GameTopic} from '../../api/dto/GameTopic';
+import {GameTopicDTO} from '../../api/dto/GameTopic';
 
 
 export interface GameTopicState {
-  topics: GameTopic[];
+  topics: GameTopicDTO[];
 }
 
 export const initialState: GameTopicState = {

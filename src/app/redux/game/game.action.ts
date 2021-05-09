@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
-import {GameTopic} from '../../api/dto/GameTopic';
 import {Cube} from '../../api/dto/Cube';
 import {CompleteGameDTO, Game, GameLobbyElement, GameSection} from '../../api/dto/Game';
 

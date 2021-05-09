@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {GameTopic} from '../../api/dto/GameTopic';
+import {GameTopicDTO} from '../../api/dto/GameTopic';
 import {RestServiceService} from '../../api/rest-service.service';
 import {MessageService} from 'primeng/api';
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
@@ -17,8 +17,8 @@ export interface Option {
 })
 export class GameTopicTableComponent implements OnInit {
 
-  topics: GameTopic[];
-  editTopic: GameTopic;
+  topics: GameTopicDTO[];
+  editTopic: GameTopicDTO;
   words: Option[];
   wordSelected: Option;
   wordToAdd: string;
@@ -44,7 +44,7 @@ export class GameTopicTableComponent implements OnInit {
         this.editTopic = newTopic;
         this.words = [];
         for (const w in newTopic.words){
-          this.words.push({name: newTopic.words[w], code: newTopic.words[w]});
+          this.words.push({name: newTopic.words[w].word, code: newTopic.words[w].word});
         }
         this.changeDetector.detectChanges();
       }
@@ -54,16 +54,16 @@ export class GameTopicTableComponent implements OnInit {
     });
   }
 
-  edit(topic: GameTopic): void {
+  edit(topic: GameTopicDTO): void {
     this.editTopic = topic;
     this.words = [];
     for (const w in topic.words){
-      this.words.push({name: topic.words[w], code: topic.words[w]});
+      this.words.push({name: topic.words[w].word, code: topic.words[w].word});
     }
 
   }
 
-  delete(topic: GameTopic): void {
+  delete(topic: GameTopicDTO): void {
     this.restService.deleteTopic(topic.topicId).subscribe(next => {
         this.getTopics();
         this.messageService.add({severity: 'success', summary: 'Themengebiete', detail: `Themengebiet ${topic.topic} erfolgreich gelöscht.`});
@@ -75,7 +75,7 @@ export class GameTopicTableComponent implements OnInit {
     );
   }
 
-  deleteWord(wordSelected: Option, editTopic: GameTopic): void {
+  deleteWord(wordSelected: Option, editTopic: GameTopicDTO): void {
     this.restService.deleteTopicWord(editTopic.topicId, wordSelected.name).subscribe(next => {
         this.getTopics();
         this.messageService.add({severity: 'success', summary: 'Themengebiete', detail: `Wort ${wordSelected.name} erfolgreich gelöscht.`});
@@ -87,7 +87,7 @@ export class GameTopicTableComponent implements OnInit {
     );
   }
 
-  addWord(word: string, editTopic: GameTopic): void{
+  addWord(word: string, editTopic: GameTopicDTO): void{
     this.restService.addWord(editTopic.topicId, word).subscribe(next => {
         this.getTopics();
         this.messageService.add({severity: 'success', summary: 'Themengebiete', detail: `Wort ${word} erfolgreich hinzugefügt.`});
@@ -99,7 +99,7 @@ export class GameTopicTableComponent implements OnInit {
     );
   }
 
-  download(topic: GameTopic): void {
+  download(topic: GameTopicDTO): void {
     const sJson = JSON.stringify(topic);
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/json;charset=UTF-8,' + encodeURIComponent(sJson));
