@@ -1,0 +1,65 @@
+<p>game-play-page works!</p>
+<div *ngIf="game && gameSection">
+<h1>{{game.gameName}}</h1>
+  <div>
+    <div *ngFor="let team of game.gameTeams">
+      <h5>{{team.teamName}}</h5>
+      <h6>Punkte: {{team.score}}</h6>
+      <p *ngFor="let player of team.players">{{player.username}}</p>
+    </div>
+  </div>
+  <p-divider></p-divider>
+
+  <div *ngIf="gameSection.activeSection">
+
+    <h3>Verbleibende Zeit: {{gameTime}}</h3>
+
+    <div *ngIf="isActivePlayer">
+      <h1>Beschreibe das Wort: {{gameSection.word.word}}</h1>
+      <p-divider></p-divider>
+      <h2>Kategorie: {{gameSection.category}}</h2>
+    </div>
+
+    <div *ngIf="!isActiveTeam">
+
+      <h1>Wort: {{gameSection.word.word}}</h1>
+      <h2>Kategorie: {{gameSection.category}}</h2>
+
+      <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
+
+      <p-button label="Regelverstoß" (click)="strike()"></p-button>
+    </div>
+
+  </div>
+
+  <div *ngIf="!gameSection.activeSection">
+
+    <h3>Zeit: {{gameSection.reachedTime}}</h3>
+    <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
+    <h1>Wort: {{gameSection.word.word}}</h1>
+    <h2>Kategorie: {{gameSection.category}}</h2>
+
+
+    <div *ngIf="!isActiveTeam">
+
+      <h1>Wort: {{gameSection.word.word}}</h1>
+      <h2>Kategorie: {{gameSection.category}}</h2>
+
+      <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
+
+      <p-button label="Regelverstoß" (click)="strike()"></p-button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="gameSection.finished">
+    <h2>Gratuliere Team {{gameSection.activeTeam.teamName}} hat gewonnen!</h2>
+  </div>
+
+
+
+
+
+
+</div>

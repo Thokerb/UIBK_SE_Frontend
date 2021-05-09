@@ -13,5 +13,10 @@
   "addWord": "/api/gametopic/addword",
   "joinGame": "/api/game/add",
   "JoinTeam": "/api/team/addplayer",
-  "RemovePlayerTeam": "/api/team/removeplayer"
+  "RemovePlayerTeam": "/api/team/removeplayer",
+  "startGame": "",
+  "startSection": "",
+  "stopSection": "",
+  "guessedWord": "",
+  "strikeGameSection": ""
 }

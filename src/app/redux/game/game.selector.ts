@@ -20,6 +20,11 @@ export class GameSelector {
     (state) => state.currentGame
   );
 
+  selectCurrentSection = createSelector(
+    this.selectGameState,
+    (state) => state.currentSection
+  );
+
 
 
 }

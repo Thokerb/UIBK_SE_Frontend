@@ -53,6 +53,40 @@ export interface CompleteGameDTO{
   gameTeams: Teams[];
 }
 
+export enum SectionStatus {
+  INITIALIZED,
+  RUNNING,
+  FINISHED
+}
+
+export enum Category {
+  'CAT1',
+  'CAT2',
+  'CAT3',
+  'CAT4'
+}
+
+export interface GameSection {
+  sectionId;
+  Game: CompleteGameDTO;
+  activeTeam: Teams;  // finished winner team
+  activePlayer: PlayerDTO;
+  gameTopic: GameTopicDTO;
+  word: Word;
+  category: Category;
+  maxPoints: number;
+  reachedPoints: number;
+  strikes: number;
+  maxTime: number; // seconds
+  reachedTime: number; // seconds
+  activeSection: boolean; // TODO: adjust
+  finished: boolean;
+}
+
+export interface Word {
+  wordId: number;
+  word: string;
+}
 
 export interface GameLobbyResponse{
   success: boolean;
@@ -74,7 +108,7 @@ export interface PlayerDTO {
 }
 
 export enum Gender {
-  "MALE",
-  "FEMALE",
-  "OTHER"
+  'MALE',
+  'FEMALE',
+  'OTHER'
 }

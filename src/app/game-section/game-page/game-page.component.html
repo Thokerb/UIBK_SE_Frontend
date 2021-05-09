@@ -1,5 +1,3 @@
-
-
 <div class="p-grid full">
   <div class="p-col"></div>
   <div class="p-col-11">
@@ -40,6 +38,7 @@
         <div class="p-grid">
           <div class="p-col-10">
             <div *ngFor="let player of team.players">
+              <i class="pi pi-check" *ngIf="currentUser.id === player.id"></i>
               {{player.username}}
             </div>
           </div>
@@ -54,7 +53,7 @@
       <div>
         <div class="middleContainer">
 
-      <p-button label="Spiel starten" [disabled]="gameDisabled" icon="pi pi-star">
+      <p-button label="Spiel starten" [disabled]="gameDisabled" (click)="startGame()" icon="pi pi-star">
 
       </p-button>
         </div>

@@ -62,4 +62,8 @@ export class GamePageComponent implements OnInit {
   removeTeam(): void {
     this.restService.removePlayerFromTeam(this.game.gameId, this.currentUser.id).subscribe(next => console.log(next));
   }
+
+  startGame(): void {
+    // TODO: start the Game
+  }
 }

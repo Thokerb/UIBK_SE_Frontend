@@ -93,6 +93,29 @@ export class RestServiceService {
     };
     return this.http.patch<GenericResponse>(config.baseURI + config.RemovePlayerTeam, object);
   }
+
+  // TODO: adjust
+  startGame(gameId: number): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.startGame, gameId);
+  }
+
+  // TODO: adjust
+  startSection(gameId: number): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.startSection, gameId);
+  }
+
+  // TODO: adjust
+  stopSection(gameId: number): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.stopSection, gameId);
+  }
+
+  guessedWord(gameId: number): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.guessedWord, gameId);
+  }
+
+  strikeGameSection(gameId: number): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.strikeGameSection, gameId);
+  }
 }
 
 export interface GenericResponse {
