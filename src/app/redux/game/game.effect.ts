@@ -23,6 +23,18 @@ export class GameEffect {
     )
   );
 
+  fetchCubes: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.getCubes.type),
+      switchMap(() => this.restService.getAllCubes()),
+      switchMap(data => {
+        return [
+          this.gameActions.setCubes({cubes: data}),
+        ];
+      })
+    )
+  );
+
   getGame: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(this.gameActions.getCurrentGameFromAPI),

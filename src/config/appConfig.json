@@ -18,5 +18,7 @@
   "startSection": "",
   "stopSection": "",
   "guessedWord": "",
-  "strikeGameSection": ""
+  "strikeGameSection": "",
+  "Cube": "/api/cube",
+  "CubeConfig": "/api/cube/config"
 }

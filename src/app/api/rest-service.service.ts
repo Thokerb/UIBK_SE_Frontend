@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, GameLobbyResponse, GetGameResponse, JoinGameResponse} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopic, GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
+import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,10 @@ export class RestServiceService {
     return this.http.get<GameLobbyResponse>(config.baseURI + config.Game);
   }
 
+  getAllCubes(): Observable<Cube[]> {
+    return this.http.get<Cube[]>(config.baseURI + config.Cube);
+  }
+
   // TODO: JoinGameResponse
   joinGame(playerName: string, gameId: number): Observable<boolean> {
     return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
@@ -83,6 +88,10 @@ export class RestServiceService {
       teamId: teamId
     };
     return this.http.patch<GenericResponse>(config.baseURI + config.JoinTeam, object);
+  }
+
+  updateCubeSite(side: CubeSide): Observable<UpdateCubeResponse> {
+    return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
   }
 
   removePlayerFromTeam(gameId: number, id: string): Observable<GenericResponse> {

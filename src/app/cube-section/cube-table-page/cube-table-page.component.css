@@ -1,0 +1,12 @@
+.pi-pencil:hover{
+  color: blue;
+  cursor: pointer;
+}
+
+.content{
+  min-height: 70vh;
+}
+
+.buttonUpdate{
+  margin-top: 1vh;
+}

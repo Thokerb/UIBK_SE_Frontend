@@ -27,6 +27,7 @@ import {GameLobbySectionModule} from './game-lobby-section/game-lobby-section.mo
 import {GameEffect} from './redux/game/game.effect';
 import {CommonModule} from '@angular/common';
 import {GameSectionModule} from './game-section/game-section.module';
+import {CubeSectionModule} from './cube-section/cube-section.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -84,7 +85,8 @@ export const metaReducers = environment.production ? [] : [logger];
     GameTopicSectionModule,
     GameLobbySectionModule,
     SharedModule,
-    GameSectionModule
+    GameSectionModule,
+    CubeSectionModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
