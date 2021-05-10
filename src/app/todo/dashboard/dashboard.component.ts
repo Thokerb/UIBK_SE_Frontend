@@ -6,6 +6,7 @@ import {TodoReducer} from '../../redux/todo/todo.reducer';
 import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {Router} from "@angular/router";
+// import {SocketService} from '../../api/socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,14 +16,23 @@ import {Router} from "@angular/router";
 export class DashboardComponent implements OnInit {
 
   todo: Observable<string[]>;
-  constructor(private store: Store, private todoSelector: TodoSelector, private router: Router, private restService: RestServiceService) { }
+  username: string;
+  roomID: string;
+  constructor(private store: Store,
+              private todoSelector: TodoSelector,
+              private todoActions: TodoAction,
+              private restService: RestServiceService,
+              // private webSocket: SocketService,
+              private router: Router
+  ) { }
+
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
   onLobbyBtn(): void {
-    this.router.navigateByUrl('/lobby');
+    this.router.navigateByUrl('/gamelobby');
   }
 
   onCreateGameBtn(): void {
@@ -31,6 +41,10 @@ export class DashboardComponent implements OnInit {
 
   onPlayerProfileBtn(): void {
     this.router.navigateByUrl('/profile');
+  }
+
+  openCubeSite(): void {
+    this.router.navigateByUrl('/cube');
   }
 
   callResource(): void {
