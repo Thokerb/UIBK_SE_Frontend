@@ -48,9 +48,4 @@ export class DashboardComponent implements OnInit {
   sendToSocket(): void {
     this.webSocket.send();
   }
-
-  openCubeSite(): void {
-    // sooo much work
-    this.router.navigateByUrl('/cube');
-  }
 }
