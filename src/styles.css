@@ -5,3 +5,39 @@ html, body {
   height: auto;
   margin: 0;
 }
+
+.bottomText{
+  margin-top: 2vh;
+}
+
+.unmarked{
+  color: #999;
+  cursor: default;
+}
+
+.marked{
+  margin-left: 0.3vw;
+  color: #444;
+  cursor: pointer;
+}
+
+.marked:hover {
+  color: green;
+
+}
+
+app-register-page{
+  flex-grow: 1;
+}
+
+app-login-page{
+  flex-grow: 1;
+}
+
+app-user-management-page{
+  flex-grow: 1;
+}
+
+.headerMiddle{
+  text-align: center;
+}

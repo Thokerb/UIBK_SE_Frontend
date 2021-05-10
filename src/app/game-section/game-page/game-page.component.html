@@ -1,0 +1,65 @@
+<div class="p-grid full">
+  <div class="p-col"></div>
+  <div class="p-col-11">
+
+    <div *ngIf="game">
+      <div class="headerMiddle">
+        <h1>{{game.gameName}}</h1>
+      </div>
+
+      <p-card class="section nimbusSection" header="Ohne Team">
+        <ng-template pTemplate="header">
+          <div class="nimbusTop header">
+
+          </div>
+        </ng-template>
+
+
+        <div class="p-grid">
+          <div class="p-col-10">
+            <div *ngFor="let player of nimbusPlayer">
+              {{player}}
+            </div>
+          </div>
+          <div class="p-col-2">
+            <p-button label="Team beitreten" (click)="removeTeam()"></p-button>
+
+          </div>
+        </div>
+
+      </p-card>
+
+      <p-card class="section" *ngFor="let team of teams; index as i;" [header]="team.teamName">
+        <ng-template pTemplate="header">
+          <div class="top-{{i}} header">
+
+          </div>
+        </ng-template>
+        <div class="p-grid">
+          <div class="p-col-10">
+            <div *ngFor="let player of team.players">
+              <i class="pi pi-check" *ngIf="currentUser.id === player.id"></i>
+              {{player.username}}
+            </div>
+          </div>
+          <div class="p-col-2">
+            <p-button label="Team beitreten" (click)="joinTeam(team.teamId)"></p-button>
+          </div>
+        </div>
+
+
+      </p-card>
+
+      <div>
+        <div class="middleContainer">
+
+      <p-button label="Spiel starten" [disabled]="gameDisabled" (click)="startGame()" icon="pi pi-star">
+
+      </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-col"></div>
+</div>
+

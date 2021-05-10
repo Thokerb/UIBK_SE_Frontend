@@ -5,8 +5,8 @@ import {TodoSelector} from '../../redux/todo/todo.selector';
 import {TodoReducer} from '../../redux/todo/todo.reducer';
 import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
-import {Router} from "@angular/router";
-// import {SocketService} from '../../api/socket.service';
+import {SocketService} from '../../api/socket.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,10 +22,9 @@ export class DashboardComponent implements OnInit {
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
               private restService: RestServiceService,
-              // private webSocket: SocketService,
+              private webSocket: SocketService,
               private router: Router
-  ) { }
-
+              ) { }
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
@@ -46,11 +45,12 @@ export class DashboardComponent implements OnInit {
   openCubeSite(): void {
     this.router.navigateByUrl('/cube');
   }
-
-  callResource(): void {
-    this.restService.getTeam().subscribe(next=>{
-      console.log(next);
-    });
+  sendToSocket(): void {
+    this.webSocket.send();
   }
 
+  openCubeSite(): void {
+    // sooo much work
+    this.router.navigateByUrl('/cube');
+  }
 }

@@ -1,12 +1,22 @@
 import {createReducer, on} from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {AuthenticationAction} from './authentication.action';
+import {REGISTER_STATUS} from '../../api/dto/Auth';
 
 
 export interface AuthenticationState {
   authenticated: boolean;
-  role: USER_ROLE;
+  registered: boolean;
+  registerError: REGISTER_ERROR;
+  roles: USER_ROLE[];
   user: User;
+  loginError: boolean;
+}
+
+export enum REGISTER_ERROR {
+  NONE,
+  USERNAME_TAKEN,
+  EMAILTAKEN
 }
 
 export enum USER_ROLE {
@@ -16,17 +26,29 @@ export enum USER_ROLE {
 }
 
 export interface User {
-  name: string;
-  role: USER_ROLE;
+  id: string;
+  username: string;
+  email: string;
+  roles: USER_ROLE[];
+  accessToken: string;
+  tokenType: string;
 }
+
 
 export const initialState: AuthenticationState = {
   authenticated: false,
-  role: USER_ROLE.NONE,
+  registered: false,
+  roles: [USER_ROLE.NONE],
+  registerError: REGISTER_ERROR.NONE,
   user: {
-    name: null,
-    role: USER_ROLE.NONE
-  }
+    username: null,
+    roles: [USER_ROLE.NONE],
+    accessToken: null,
+    email: null,
+    id: null,
+    tokenType: null
+  },
+  loginError: false
 };
 
 @Injectable()
@@ -38,8 +60,13 @@ export class AuthenticationReducer {
   reducer = createReducer(
     initialState,
     on(this.authActions.setAuthentication, (state, {isAuthenticated}) => ({ ...state, authenticated: isAuthenticated})),
-    on(this.authActions.setRole, (state, {role}) => ({...state, role: role }) ),
-    on(this.authActions.saveUser, (state, {user}) => ({...state, user: user }) )
+    on(this.authActions.setRoles, (state, {roles}) => ({...state, roles: roles }) ),
+    on(this.authActions.saveUser, (state, {user}) => ({...state, user: user }) ),
+    on(this.authActions.setRegisterError, (state, {error}) => ({ ...state, registerError: error})),
+    on(this.authActions.setRegisterStatus, (state, {isRegistered}) => ({ ...state, registered: isRegistered})),
+    on(this.authActions.setLoginError, (state, {status}) => ({...state, loginError: status }) ),
+
+
   );
 }
 

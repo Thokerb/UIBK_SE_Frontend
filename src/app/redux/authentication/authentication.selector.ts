@@ -18,13 +18,44 @@ export class AuthenticationSelector {
     }
   );
 
-  selectRole = createSelector(
+  selectRegisterStatus = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.registered;
+    }
+  );
+
+  selectRegisterError = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.registerError;
+    }
+  );
+
+  selectRoles = createSelector(
     this.selectAuth,
     (state) => {
       if (state.authenticated){
-        return state.role;
+        return state.roles;
       }
       return USER_ROLE.NONE;
+    }
+  );
+
+  selectCurrentUser = createSelector(
+    this.selectAuth,
+    (state) => {
+      if (state.authenticated){
+        return state.user;
+      }
+      return undefined;
+    }
+  );
+
+  selectLoginErrorStatus = createSelector(
+    this.selectAuth,
+    (State) => {
+      return State.loginError;
     }
   );
 

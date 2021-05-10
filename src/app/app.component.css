@@ -1,0 +1,9 @@
+.content{
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+.pointerClick{
+  cursor: pointer;
+}

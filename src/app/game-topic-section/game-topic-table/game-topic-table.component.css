@@ -1,0 +1,28 @@
+.pi-user-edit:hover{
+  color: green;
+  cursor: pointer;
+}
+
+.pi-user-edit{
+  font-size: 1.2em;
+
+}
+
+.pi-trash:hover{
+  color: red;
+  cursor: pointer;
+}
+
+.pi-trash{
+  font-size: 1.2em;
+}
+
+.pi-download:hover{
+  color: blue;
+  cursor: pointer;
+}
+
+.pi-download{
+  font-size: 1.2em;
+}
+

@@ -1,17 +1,18 @@
 <form (submit)="login()">
   <div class="p-fluid">
     <div class="p-field p-grid">
-      <label for="firstname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Username</label>
+      <label for="firstname" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Username:</label>
       <div class="p-col-12 p-md-10">
         <input id="firstname" type="text" name="username" [(ngModel)]="username" pInputText>
       </div>
     </div>
     <div class="p-field p-grid">
-      <label for="lastname" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Password</label>
+      <label for="password" class="p-col-12 pl-0 p-mb-2 p-md-2 p-mb-md-0">Password:</label>
       <div class="p-col-12 p-md-10">
-        <input id="lastname" type="password" name="password" [(ngModel)]="password" pInputText>
+        <p-password [(ngModel)]="password" name="password" id="password" [toggleMask]="true"  [feedback]="false"></p-password>
       </div>
     </div>
-    <button pButton pRipple type="submit" label="Submit"></button>
+    <button pButton pRipple type="submit" label="Login"></button>
   </div>
 </form>
+<p-toast position="bottom-center"></p-toast>

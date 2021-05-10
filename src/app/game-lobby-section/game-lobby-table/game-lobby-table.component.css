@@ -1,0 +1,7 @@
+.pi-caret-right{
+  font-size: 1.2em;
+}
+.pi-caret-right:hover{
+  color: blue;
+  cursor: pointer;
+}

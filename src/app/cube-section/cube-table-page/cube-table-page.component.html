@@ -1,0 +1,59 @@
+<p-table [value]="cubes">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Batterie</th>
+      <th>Im Spiel</th>
+      <th>Kalibriert</th>
+      <th>Bearbeiten</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-cube>
+    <tr>
+      <td>{{cube.cubeId}}</td>
+      <td>{{cube.batteryLevel}} %</td>
+      <td>
+        <i *ngIf="cube.inGame" class="pi pi-lock" style="font-size: 2rem"></i>
+        <i *ngIf="!cube.inGame" class="pi pi-lock-open" style="font-size: 2rem"></i>
+      </td>
+      <td>
+        <i *ngIf="cube.calibrated" class="pi pi-check-circle" style="font-size: 2rem; color: green"></i>
+        <i *ngIf="!cube.calibrated" class="pi pi-times-circle" style="font-size: 2rem; color: red"></i>
+      </td>
+
+      <td><i class="pi pi-pencil" style="font-size: 2rem" (click)="edit(cube)"></i></td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-dialog *ngIf="editCube" header="Würfel kalibrieren" [(visible)]="editCube" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+  <div class="content">
+
+    <h2>Würfel-ID: {{editCube.cubeId}}</h2>
+    <p-divider></p-divider>
+    <h4>Batterie-Level:</h4>
+    <p-progressBar [value]="editCube.batteryLevel" unit="%"></p-progressBar>
+
+    <div style="margin-top: 2vh;">
+      <h3>{{editCube.sides.length}} / 12 Seiten kalibriert</h3>
+    </div>
+    <div>
+      <h3 style="display: inline-block; margin-right: 2vw; margin-top: 4vw;">Aktuelle Seite kalibriert: </h3>
+      <i *ngIf="currentSideCalibrated" class="pi pi-check-circle" style="font-size: 2rem; color: green"></i>
+      <i *ngIf="!currentSideCalibrated" class="pi pi-times-circle" style="font-size: 2rem; color: red"></i>
+    </div>
+
+    <div>
+      <h4>Task für aktuelle Seite auswählen: </h4>
+      <p-dropdown [options]="options" [(ngModel)]="selectedOption" placeholder="Aktivität" autoDisplayFirst="false" optionLabel="name"></p-dropdown>
+      <br>
+
+    </div>
+    <div class="buttonUpdate">
+    <p-button icon="pi pi-circle-off" iconPos="left" [disabled]="!selectedOption" (click)="updateCube(editCube)" label="Update"></p-button>
+    </div>
+
+  </div>
+</p-dialog>
+<p-toast position="bottom-center"></p-toast>

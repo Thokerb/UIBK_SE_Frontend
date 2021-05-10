@@ -1,1 +1,9 @@
+<div class="content">
+<p-menubar >
+  <ng-template pTemplate="start">
+    <img src="assets/icons/cube-outline-svgrepo-com.svg" height="40" class="p-mr-2" (click)="goDashboard()" class="pointerClick">
+  </ng-template>
+  <button *ngIf="loggedIn" pButton label="Logout" (click)="logout()" icon="pi pi-power-off"></button>
+</p-menubar>
 <router-outlet></router-outlet>
+</div>
