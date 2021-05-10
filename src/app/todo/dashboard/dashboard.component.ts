@@ -21,10 +21,6 @@ export class DashboardComponent implements OnInit {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
-  notYetImplemented(): void {
-    console.warn('Not yet implemented');
-  }
-
   onLobbyBtn(): void {
     this.router.navigateByUrl('/lobby');
   }
