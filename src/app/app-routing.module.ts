@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from './todo/dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard/dashboard.component';
 import {LoginPageComponent} from './login-section/login-page/login-page.component';
 import {RegisterPageComponent} from './register-section/register-page/register-page.component';
 import {UserManagementPageComponent} from './user-management-section/user-management-page/user-management-page.component';
