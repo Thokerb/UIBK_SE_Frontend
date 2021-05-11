@@ -16,4 +16,4 @@ import {FormsModule} from '@angular/forms';
         FormsModule
     ]
 })
-export class TodoModule { }
+export class DashboardModule { }
