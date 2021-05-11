@@ -8,17 +8,19 @@ import {GameTopicPageComponent} from './game-topic-section/game-topic-page/game-
 import {GameLobbyPageComponent} from './game-lobby-section/game-lobby-page/game-lobby-page.component';
 import {GamePageComponent} from './game-section/game-page/game-page.component';
 import {CubePageComponent} from './cube-section/cube-page/cube-page.component';
+import {UserProfilePageComponent} from './profile/user-profile-page/user-profile-page.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  {path: 'dashboard', component: DashboardComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
   {path: 'admin/usermanagement', component: UserManagementPageComponent},
   {path: 'gametopic', component: GameTopicPageComponent },
   {path: 'gamelobby', component: GameLobbyPageComponent },
   {path: 'game/:id', component: GamePageComponent },
-  {path: 'cube', component: CubePageComponent }
+  {path: 'cube', component: CubePageComponent },
+  {path: 'profile', component: UserProfilePageComponent }
 
 ];
 
