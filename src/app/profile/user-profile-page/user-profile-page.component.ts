@@ -26,6 +26,8 @@ export class UserProfilePageComponent implements OnInit {
               private router: Router
               ) { }
 
+  // TODO page only accessible after auth / login
+  // TODO get and display user profile info (id, username, email, roles, etc.)
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
