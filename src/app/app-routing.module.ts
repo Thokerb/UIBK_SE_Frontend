@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'gamelobby', component: GameLobbyPageComponent },
   {path: 'game/:id', component: GamePageComponent },
   {path: 'cube', component: CubePageComponent },
-  {path: 'gameplay', component: GamePlayPageComponent }
+  {path: 'gameplay/:id', component: GamePlayPageComponent }
 
 ];
 

@@ -1,15 +1,35 @@
-<p>game-play-page works!</p>
+<div *ngIf="!game && !gameSection">
+  <h1>Game not initialized</h1>
+</div>
+
+<div *ngIf="game && !gameSection">
+  <h1>Rolle den Würfel um die erste Aktivität zu starten !</h1>
+</div>
+
 <div *ngIf="game && gameSection">
 <h1>{{game.gameName}}</h1>
   <div>
     <div *ngFor="let team of game.gameTeams">
-      <h5>{{team.teamName}}</h5>
-      <h6>Punkte: {{team.score}}</h6>
-      <p *ngFor="let player of team.players">{{player.username}}</p>
+      <p-card *ngIf="myTeamId === team.teamId">
+        <h5>Mein Team</h5>
+        <h5>{{team.teamName}}</h5>
+        <h6>Punkte: {{team.score}}</h6>
+        <p *ngFor="let player of team.players">{{player.username}}</p>
+      </p-card>
+
+      <p-card *ngIf="myTeamId !== team.teamId">
+        <h5>{{team.teamName}}</h5>
+        <h6>Punkte: {{team.score}}</h6>
+        <p *ngFor="let player of team.players">{{player.username}}</p>
+      </p-card>
+
     </div>
   </div>
   <p-divider></p-divider>
-
+  <div>
+    <h2>Aktives Team: {{gameSection.activeTeam.teamName}}</h2>
+    <h2>Aktiver Spieler: {{gameSection.activePlayer.username}}</h2>
+  </div>
   <div *ngIf="gameSection.activeSection">
 
     <h3>Verbleibende Zeit: {{gameTime}}</h3>

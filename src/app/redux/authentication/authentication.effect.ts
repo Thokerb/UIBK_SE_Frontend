@@ -20,10 +20,13 @@ export class AuthenticationEffects {
       switchMap(data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-        this.socketService.connect()
+        this.socketService.connect();
+
         return [
           this.authActions.setAuthentication({isAuthenticated: true}),
-          this.authActions.saveUser(data.user)
+          this.authActions.saveUser(data.user),
+          this.authActions.saveUser({user: data}),
+          this.authActions.setRoles({roles: data.roles})
         ];
       })
     )

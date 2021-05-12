@@ -56,6 +56,46 @@ export class GameEffect {
     )
   );
 
+  initGame: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.init),
+      switchMap(({gameId}) => this.restService.getGame(gameId)),
+      switchMap(data => {
+        console.log(data);
+        if (data){
+          return [
+            this.gameActions.setCurrentGame({game: data.object}),
+          ];
+        }
+        else{
+          return [
+            this.gameActions.setCurrentGame({game: null}),
+          ];
+        }
+      })
+    )
+  );
+  initGameSection: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.init),
+      switchMap(({gameId}) => this.restService.getGameSections(gameId)),
+      switchMap(data => {
+        console.log(data);
+        if (data && data.success){
+          const section = data.object[data.object.length - 1];
+          return [
+            this.gameActions.setCurrentSection({section: section}),
+          ];
+        }
+        else{
+          return [
+            this.gameActions.setCurrentGame({game: null}),
+          ];
+        }
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

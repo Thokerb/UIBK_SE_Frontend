@@ -122,7 +122,7 @@ export class RestServiceService {
     return this.http.post<GenericResponse>(config.baseURI + config.stopSection, gameId);
   }
 
-  guessedWord(gameId: number, wordId: number): Observable<GenericResponse>{
+  guessedWord(gameId: number, wordId: string): Observable<GenericResponse>{
     return this.http.patch<GenericResponse>(config.baseURI + config.guessedWord + '/' + gameId + '/' + wordId, null);
   }
 
@@ -132,6 +132,10 @@ export class RestServiceService {
 
   getGameSections(gameId: number): Observable<GameSectionResponse>{
     return this.http.get<GameSectionResponse>(config.baseURI + config.getSections + '/' + gameId);
+  }
+
+  sectionTimeout(gameId: number): Observable<GenericResponse>{
+    return this.http.patch<GenericResponse>(config.baseURI + config.timeoutSection + '/' + gameId, null);
   }
 }
 

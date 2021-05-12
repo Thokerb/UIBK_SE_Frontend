@@ -7,6 +7,7 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
 import {CompleteGameDTO, GameSection, SectionStatus, Teams} from '../../api/dto/Game';
 import {User} from '../../redux/authentication/authentication.reducer';
 import {SocketService} from '../../api/socket.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-game-play-page',
@@ -22,6 +23,8 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
   myTeamId: number;
   SectionStatus = SectionStatus;
   gameTime: number;
+  private id: number;
+  timer;
 
 
   constructor(private store: Store,
@@ -29,12 +32,12 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
               private gameSelector: GameSelector,
               private restService: RestServiceService,
               private socketService: SocketService,
+              private route: ActivatedRoute,
               private authSelector: AuthenticationSelector) { }
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(this.gameActions.init({gameId: this.id}));
     this.socketService.subscribeSections();
-    setInterval(() => {
-      this.gameTime = this.gameTime - 1;
-    }, 1000);
     this.store.select(this.authSelector.selectCurrentUser).subscribe(next => {
       this.currentUser = next;
       if (this.game){
@@ -44,7 +47,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     this.store.select(this.gameSelector.selectCurrentGame).subscribe(next =>
       {
         this.game = next;
-        if (this.currentUser){
+        if (this.currentUser && this.game){
           this.myTeamId = this.game.gameTeams.find(x => x.players.map(y => y.id).includes(this.currentUser.id)).teamId;
         }
 
@@ -54,6 +57,10 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
       if(!next)return;
       this.gameSection = next;
       this.gameTime = next.maxTime;
+      if(!this.gameSection.finished && this.gameSection.activeSection){
+        this.startTimer();
+      }
+
       if (this.currentUser){
         this.isActivePlayer = this.gameSection.activePlayer.id === this.currentUser.id;
         this.isActiveTeam = this.gameSection.activeTeam.players.map(x => x.id).includes(this.currentUser.id);
@@ -61,12 +68,27 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  startTimer(){
+    clearInterval(this.timer);
+    this.timer = setInterval(() => {
+      if(this.gameTime <= 0){
+        alert('timeout');
+        clearInterval(this.timer);
+        this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
+      }else{
+        this.gameTime = this.gameTime - 1;
+      }
+    }, 1000);
+  }
+
   ngOnDestroy(): void {
     this.socketService.unsubscribeSection();
   }
 
   wortErraten(): void {
-    this.restService.guessedWord(this.game.gameId, this.gameSection.word.wordId).subscribe(next => console.log(next));
+    console.log(this.gameSection.word);
+    clearInterval(this.timer);
+    this.restService.guessedWord(this.game.gameId, this.gameSection.word.word).subscribe(next => console.log(next));
     // TODO: inform backend about gameSection End
   }
 
