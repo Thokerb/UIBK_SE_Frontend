@@ -30,7 +30,6 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
               private restService: RestServiceService,
               private socketService: SocketService,
               private authSelector: AuthenticationSelector) { }
-
   ngOnInit(): void {
     this.socketService.subscribeSections();
     setInterval(() => {
@@ -51,6 +50,8 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
 
     });
     this.store.select(this.gameSelector.selectCurrentSection).subscribe(next => {
+      console.log(next);
+      if(!next)return;
       this.gameSection = next;
       this.gameTime = next.maxTime;
       if (this.currentUser){
@@ -65,7 +66,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
   }
 
   wortErraten(): void {
-    this.restService.guessedWord(this.game.gameId).subscribe(next => console.log(next));
+    this.restService.guessedWord(this.game.gameId, this.gameSection.word.wordId).subscribe(next => console.log(next));
     // TODO: inform backend about gameSection End
   }
 

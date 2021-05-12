@@ -94,6 +94,12 @@ export interface GameLobbyResponse{
   object: GameLobbyElement[];
 }
 
+export interface GameSectionResponse {
+  success: boolean;
+  description: string;
+  object: GameSection[];
+}
+
 export interface PlayerDTO {
   email: string;
   enabled: boolean;

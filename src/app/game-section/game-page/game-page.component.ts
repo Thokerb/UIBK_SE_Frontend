@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
@@ -15,18 +15,20 @@ import {SocketService} from '../../api/socket.service';
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.css']
 })
-export class GamePageComponent implements OnInit,OnDestroy {
+export class GamePageComponent implements OnInit, OnDestroy {
   id: any;
   game: CompleteGameDTO;
   nimbusPlayer: string[];
   gameDisabled = true;
   currentUser: User;
   teams: Teams[];
+  gameplay = false;
 
   constructor(private route: ActivatedRoute,
               private store: Store,
               private gameActions: GameAction,
               private gameSelector: GameSelector,
+              private router: Router,
               private socketService: SocketService,
               private restService: RestServiceService,
               private authSelector: AuthenticationSelector) { }
@@ -37,8 +39,19 @@ export class GamePageComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.socketService.subscribeGame();
+    this.socketService.subscribeSections();
+    this.store.select(this.gameSelector.selectCurrentSection).subscribe(next => {
+      if (next){
+        this.router.navigateByUrl('/gameplay');
+      }
+    });
     this.store.select(this.authSelector.selectCurrentUser).subscribe(next => this.currentUser = next);
     this.id = this.route.snapshot.paramMap.get('id');
+    this.restService.getGameSections(this.id).subscribe(next => {
+      if(next.success){
+        this.gameActions.setCurrentSection({section: next.object[next.object.length - 1]});
+      }
+    });
     this.store.select(this.gameSelector.selectCurrentGame).subscribe(next => {
       this.game = next;
       if (next){
@@ -68,11 +81,17 @@ export class GamePageComponent implements OnInit,OnDestroy {
   }
 
   removeTeam(): void {
-
     this.restService.removePlayerFromTeam(this.game.gameId, this.currentUser.id, this.game.gameTeams.find(x => x.players.map(y => y.id).includes(this.currentUser.id)).teamId).subscribe(next => console.log(next));
   }
 
   startGame(): void {
-    // TODO: start the Game
+    this.restService.startGame(this.game.gameId).subscribe(next => {
+      if (next.success){
+        this.router.navigateByUrl('/gameplay');
+      }
+      else{
+        console.error(next.description);
+      }
+    });
   }
 }

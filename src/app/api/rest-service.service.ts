@@ -2,7 +2,17 @@ import { Injectable } from '@angular/core';
 import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, GameLobbyResponse, GetGameResponse, JoinGameResponse, Word} from './dto/Game';
+import {
+  CompleteGameDTO,
+  Game,
+  GameDTO,
+  GameLobbyElement,
+  GameLobbyResponse,
+  GameSectionResponse,
+  GetGameResponse,
+  JoinGameResponse,
+  Word
+} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
@@ -99,7 +109,7 @@ export class RestServiceService {
 
   // TODO: adjust
   startGame(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.startGame, gameId);
+    return this.http.patch<GenericResponse>(config.baseURI + config.startGame + '/' + gameId, null);
   }
 
   // TODO: adjust
@@ -112,12 +122,16 @@ export class RestServiceService {
     return this.http.post<GenericResponse>(config.baseURI + config.stopSection, gameId);
   }
 
-  guessedWord(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.guessedWord, gameId);
+  guessedWord(gameId: number, wordId: number): Observable<GenericResponse>{
+    return this.http.patch<GenericResponse>(config.baseURI + config.guessedWord + '/' + gameId + '/' + wordId, null);
   }
 
   strikeGameSection(gameId: number): Observable<GenericResponse>{
     return this.http.post<GenericResponse>(config.baseURI + config.strikeGameSection, gameId);
+  }
+
+  getGameSections(gameId: number): Observable<GameSectionResponse>{
+    return this.http.get<GameSectionResponse>(config.baseURI + config.getSections + '/' + gameId);
   }
 }
 
