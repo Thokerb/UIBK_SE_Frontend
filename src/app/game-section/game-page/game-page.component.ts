@@ -35,6 +35,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
         this.socketService.unsubscribeGame();
+        this.socketService.unsubscribeSection();
     }
 
   ngOnInit(): void {

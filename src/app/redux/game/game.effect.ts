@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {AuthService} from '../../api/auth.service';
 import {Action} from '@ngrx/store';
@@ -68,9 +68,7 @@ export class GameEffect {
           ];
         }
         else{
-          return [
-            this.gameActions.setCurrentGame({game: null}),
-          ];
+          return EMPTY;
         }
       })
     )
@@ -88,9 +86,7 @@ export class GameEffect {
           ];
         }
         else{
-          return [
-            this.gameActions.setCurrentGame({game: null}),
-          ];
+          return EMPTY;
         }
       })
     )

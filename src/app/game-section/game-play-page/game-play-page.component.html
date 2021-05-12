@@ -26,12 +26,12 @@
     </div>
   </div>
   <p-divider></p-divider>
-  <div>
-    <h2>Aktives Team: {{gameSection.activeTeam.teamName}}</h2>
-    <h2>Aktiver Spieler: {{gameSection.activePlayer.username}}</h2>
-  </div>
-  <div *ngIf="gameSection.activeSection">
 
+  <div *ngIf="gameSection.activeSection">
+    <div>
+      <h2>Aktives Team: {{gameSection.activeTeam.teamName}}</h2>
+      <h2>Aktiver Spieler: {{gameSection.activePlayer.username}}</h2>
+    </div>
     <h3>Verbleibende Zeit: {{gameTime}}</h3>
 
     <div *ngIf="isActivePlayer">
@@ -52,25 +52,18 @@
 
   </div>
 
-  <div *ngIf="!gameSection.activeSection">
+  <p-card *ngIf="!gameSection.activeSection">
 
-    <h3>Zeit: {{gameSection.reachedTime}}</h3>
+    <h1>Aktive Runde vorbei</h1>
+    <h2>Rolle den Würfel um die nächste Runde zu starten</h2>
+    <h3>Team: {{gameSection.activeTeam.teamName}}</h3>
+    <h3>Spieler: {{gameSection.activePlayer.username}}</h3>
+    <h3>Zeit: {{gameSection.reachedTime / 1000}} s</h3>
     <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
     <h1>Wort: {{gameSection.word.word}}</h1>
     <h2>Kategorie: {{gameSection.category}}</h2>
 
-
-    <div *ngIf="!isActiveTeam">
-
-      <h1>Wort: {{gameSection.word.word}}</h1>
-      <h2>Kategorie: {{gameSection.category}}</h2>
-
-      <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
-
-      <p-button label="Regelverstoß" (click)="strike()"></p-button>
-    </div>
-
-  </div>
+  </p-card>
 
 
   <div *ngIf="gameSection.finished">

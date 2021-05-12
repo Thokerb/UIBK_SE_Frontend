@@ -38,6 +38,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.store.dispatch(this.gameActions.init({gameId: this.id}));
     this.socketService.subscribeSections();
+    this.socketService.subscribeGame();
     this.store.select(this.authSelector.selectCurrentUser).subscribe(next => {
       this.currentUser = next;
       if (this.game){
@@ -83,6 +84,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.socketService.unsubscribeSection();
+    this.socketService.unsubscribeGame();
   }
 
   wortErraten(): void {
