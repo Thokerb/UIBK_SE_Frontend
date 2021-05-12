@@ -68,7 +68,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  startTimer(){
+  startTimer(): void{
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if(this.gameTime <= 0){
