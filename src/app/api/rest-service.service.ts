@@ -88,11 +88,11 @@ export class RestServiceService {
     return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
   }
 
-  removePlayerFromTeam(gameId: number, id: string): Observable<GenericResponse> {
+  removePlayerFromTeam(gameId: number, id: string, teamId: number): Observable<GenericResponse> {
     const object = {
       gameId: gameId,
       username: id,
-      teamId: 0
+      teamId: teamId
     };
     return this.http.patch<GenericResponse>(config.baseURI + config.RemovePlayerTeam, object);
   }

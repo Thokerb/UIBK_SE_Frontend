@@ -8,6 +8,7 @@ import {Action} from '@ngrx/store';
 import {TokenStorageService} from '../../security/token-storage.service';
 import {REGISTER_STATUS} from '../../api/dto/Auth';
 import {REGISTER_ERROR} from './authentication.reducer';
+import {SocketService} from '../../api/socket.service';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -19,6 +20,7 @@ export class AuthenticationEffects {
       switchMap(data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
+        this.socketService.connect()
         return [
           this.authActions.setAuthentication({isAuthenticated: true}),
           this.authActions.saveUser(data.user)
@@ -71,6 +73,7 @@ export class AuthenticationEffects {
     private actions$: Actions,
     private authService: AuthService,
     private authActions: AuthenticationAction,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private socketService: SocketService
   ) {}
 }

@@ -22,7 +22,7 @@ export class AppComponent {
               private router: Router,
               private webSocket: SocketService
               ) {
-    this.webSocket.connect();
+    this.webSocket.connect(); // TODO: bad entry point
     this.store.select(this.selector.selectAuthStatus).subscribe(next => this.loggedIn = next);
     // so on reload we still have our user
     if (this.tokenStorageService.getUser()){
