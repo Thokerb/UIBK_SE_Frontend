@@ -21,6 +21,11 @@
   "guessedWord": "/api/game/guessRound",
   "strikeGameSection": "/api/game/strike",
   "timeoutSection": "/api/game/timeout",
+  "createGame": "/api/game",
+  "addTopicToGame": "/api/game/addTopic",
   "Cube": "/api/cube",
-  "CubeConfig": "/api/cube/config"
+  "CubeConfig": "/api/cube/config",
+  "minNumTeams": 2,
+  "maxNumTeams": 6,
+  "defaultMaxPoints": 10
 }

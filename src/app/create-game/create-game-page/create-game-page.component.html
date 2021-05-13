@@ -1,0 +1,53 @@
+<div class="full p-p-4">
+  <h1 class="p-mb-4">Spiel erstellen</h1>
+  <main class="full">
+    <form class="full p-grid p-dir-col">
+      <div class="p-col-12">
+        <label for="input-game-name">
+          Spielname:
+        </label>
+        <input type="text" placeholder="Spielname" id="input-game-name" name="game-name" [(ngModel)]="gameName"
+               required="" pInputText />
+      </div>
+      <div class="p-col-12">
+        <label for="input-max-points">
+          Punktemaximum:
+        </label>
+        <input type="number" min="0" [defaultValue]="DEFAULT_MAX_POINTS" [(ngModel)]="maxPoints" placeholder="Punktemaximum"
+               id="input-max-points" name="max-points" required="" />
+        <!-- <p-slider [(ngModel)]="maxPoints" [min]="0" [max]="100" orientation="horizontal"></p-slider> -->
+      </div>
+      <div class="p-col-12">
+        <label for="input-number-teams">
+          Anzahl Teams:
+        </label>
+        <input type="number"
+               min="{{MIN_NUM_TEAMS}}" max="{{MAX_NUM_TEAMS}}" [defaultValue]="MIN_NUM_TEAMS" [(ngModel)]="numTeams"
+               placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" required="" />
+        <span class="help-text">({{MIN_NUM_TEAMS}}-{{MAX_NUM_TEAMS}} Teams zu je 2-4 SpielerInnen)</span>
+      </div>
+      <div class="p-col-12">
+        <label for="input-number-teams">
+          Themengebiete:
+          <p-listbox [options]="availableTopics" optionLabel="topic" optionValue="topicId"
+                     [checkbox]="true" [multiple]="true" (onChange)="topicChange($event)"></p-listbox>
+        </label>
+      </div>
+      <div class="p-col-12">
+        <label for="input-cube">
+          Würfel:
+          <p-dropdown [options]="displayCubes" optionLabel="name" optionValue="code" (onChange)="cubeChange($event)"
+                      placeholder="Würfel auswählen" id="input-cube" required>
+          </p-dropdown>
+        </label>
+      </div>
+      <div class="p-col-12 p-grid p-dir-row">
+        <div class="p-col"></div>
+        <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-lg-5 p-py-4"></button>
+        <div class="p-col"></div>
+        <button (click)="onCancelBtn($event)" pButton pRipple label="Abbrechen" class="p-col-12 p-lg-5 p-py-4"></button>
+        <div class="p-col"></div>
+      </div>
+    </form>
+  </main>
+</div>

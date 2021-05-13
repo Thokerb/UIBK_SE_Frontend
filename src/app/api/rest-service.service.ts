@@ -73,6 +73,14 @@ export class RestServiceService {
     return this.http.get<Cube[]>(config.baseURI + config.Cube);
   }
 
+  addCubeToGame(gameId: string, cubeId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
+  }
+
+  addTopicToGame(gameId: string, topicId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.addTopicToGame}/${gameId}/${topicId}`, null);
+  }
+
   // TODO: JoinGameResponse
   joinGame(playerName: string, gameId: number): Observable<GenericResponse> {
     return this.http.patch<GenericResponse>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
@@ -107,6 +115,10 @@ export class RestServiceService {
   // TODO: adjust
   startGame(gameId: number): Observable<GenericResponse>{
     return this.http.patch<GenericResponse>(config.baseURI + config.startGame + '/' + gameId, null);
+  }
+
+  createGame(game: Game | any): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.createGame, game);
   }
 
   // TODO: adjust
