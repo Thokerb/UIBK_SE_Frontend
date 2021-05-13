@@ -28,10 +28,6 @@ interface DisplayCube {
 })
 export class CreateGamePageComponent implements OnInit {
 
-  todo: Observable<string[]>;
-  username: string;
-  roomID: string;
-
   readonly MIN_NUM_TEAMS = config.minNumTeams;
   readonly MAX_NUM_TEAMS = config.maxNumTeams;
 
@@ -58,11 +54,10 @@ export class CreateGamePageComponent implements OnInit {
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
     this.displayCubes = [];
-    this.refreshAvailableCubes();
   }
 
   ngOnInit(): void {
-    this.todo = this.store.select(this.todoSelector.selectAllTodos);
+    this.refreshAvailableCubes();
   }
 
   cubeChange(ev): void {
@@ -99,16 +94,17 @@ export class CreateGamePageComponent implements OnInit {
       gameId: '1', // doesn't matter
       gameName: this.gameName,
       gameMaxPoints: this.maxPoints,
-      gamePlayers: [],
       gameTopics: this.gameTopics,
       gameNumberTeams: this.numTeams,
+      gamePlayers: [],
       gameTeams: []
     };
     // 1. Create game
-    console.log('creating game: ' + JSON.stringify(game));
-    this.restService.createGame(game).subscribe(next => {
-      console.log(next);
-      const newGame = next.object;
+    console.log('creating game: ');
+    console.log(game);
+    this.restService.createGame(game).subscribe(createGameResult => {
+      console.log(createGameResult);
+      const newGame = createGameResult.object;
 
       // TODO 2. Topic?
 
