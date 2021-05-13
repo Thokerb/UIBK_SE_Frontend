@@ -32,12 +32,9 @@
       </div>
       <div class="p-col-12">
         <label for="input-cube">
-          Dropdown:
-          <select name="cube">
-            <option value="1">c1</option>
-          </select>
+          Würfel:
           <p-dropdown [options]="displayCubes" optionLabel="name" optionValue="code" (onChange)="cubeChange($event)"
-                      id="input-cube">
+                      placeholder="Würfel auswählen" id="input-cube">
           </p-dropdown>
           <!-- TODO -->
         </label>

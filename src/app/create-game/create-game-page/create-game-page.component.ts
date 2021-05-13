@@ -53,9 +53,9 @@ export class CreateGamePageComponent implements OnInit {
     this.maxPoints = 100;
     this.gameTopics = [];
     this.availableCubes = [];
-    this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}];
-    // this.selectedCubeId = '1';
-    // this.refreshAvailableCubes();
+    // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
+    this.displayCubes = [];
+    this.refreshAvailableCubes();
   }
 
   ngOnInit(): void {
@@ -70,13 +70,13 @@ export class CreateGamePageComponent implements OnInit {
 
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
-    this.displayCubes = this.availableCubes.map(cube => ({name: 'Cube ' + cube.cubeId, code: cube.cubeId}));
+    this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId}));
   }
 
   refreshAvailableCubes(): void {
     this.restService.getAllCubes().subscribe(cubes => {
-      this.setAvailableCubes(cubes);
-      // this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]);
+      // this.setAvailableCubes(cubes);
+      this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]); // Test
       console.log('New available cubes:');
       console.log(cubes);
     });
