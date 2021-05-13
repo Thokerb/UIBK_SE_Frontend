@@ -85,6 +85,12 @@ export class CreateGamePageComponent implements OnInit {
     this.selectedTopics = ev.value.map(topicId => `${topicId}`);
   }
 
+  onMaxPointsChange(ev): void {
+    // console.log('onMaxPointsChange');
+    // console.log(ev);
+    this.maxPoints = ev.value;
+  }
+
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
     // TODO interface for displayCubes
