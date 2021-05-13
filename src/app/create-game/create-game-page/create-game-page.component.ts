@@ -91,6 +91,12 @@ export class CreateGamePageComponent implements OnInit {
     this.maxPoints = ev.value;
   }
 
+  onNumTeamsChange(ev): void {
+    // console.log('onMaxPointsChange');
+    // console.log(ev);
+    this.numTeams = ev.value;
+  }
+
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
     // TODO interface for displayCubes
