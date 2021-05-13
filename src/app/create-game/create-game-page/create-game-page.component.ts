@@ -12,6 +12,7 @@ import {GameAction} from '../../redux/game/game.action';
 import {Game} from '../../api/dto/Game';
 import * as config from '../../../config/appConfig.json';
 import {SliderModule} from 'primeng/slider';
+import {Cube} from "../../api/dto/Cube";
 
 
 @Component({
@@ -32,6 +33,7 @@ export class CreateGamePageComponent implements OnInit {
   maxPoints: number;
   numTeams: number;
   gameTopics: string[];
+  availableCubes: Cube[];
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -43,10 +45,20 @@ export class CreateGamePageComponent implements OnInit {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
     this.gameTopics = [];
+    this.availableCubes = [];
+    this.refreshAvailableCubes();
   }
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
+  }
+
+  refreshAvailableCubes(): void {
+    this.restService.getAllCubes().subscribe(cubes => {
+      this.availableCubes = cubes;
+      console.log('New available cubes:');
+      console.log(cubes);
+    });
   }
 
   onCreateBtn(ev: MouseEvent): void {
