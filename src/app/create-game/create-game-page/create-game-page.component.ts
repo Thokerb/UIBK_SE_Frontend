@@ -35,8 +35,9 @@ export class CreateGamePageComponent implements OnInit {
               private router: Router,
               private gameAction: GameAction
               ) {
-    // TODO set init values
+    // TODO set init values (from config?)
     this.numTeams = 2;
+    this.maxPoints = 100;
   }
 
   ngOnInit(): void {
@@ -51,7 +52,7 @@ export class CreateGamePageComponent implements OnInit {
   createGame(): void {
     console.warn('Not yet implemented');
     const game: Game = {
-      gameId: 1,
+      gameId: 1, // TODO ?
       gameName: this.gameName,
       gameMaxPoints: this.maxPoints,
       gamePlayers: [],
