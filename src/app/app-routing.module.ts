@@ -11,6 +11,7 @@ import {CubePageComponent} from './cube-section/cube-page/cube-page.component';
 import {UserProfilePageComponent} from './profile/user-profile-page/user-profile-page.component';
 import {GamePlayPageComponent} from './game-section/game-play-page/game-play-page.component';
 import {CreateGamePageComponent} from './create-game/create-game-page/create-game-page.component';
+import {StatsPageComponent} from './stats/stats-page/stats-page.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'profile', component: UserProfilePageComponent },
   {path: 'cube', component: CubePageComponent },
   {path: 'gameplay/:id', component: GamePlayPageComponent },
-  {path: 'createGame', component: CreateGamePageComponent }
+  {path: 'createGame', component: CreateGamePageComponent },
+  {path: 'statistics', component: StatsPageComponent }
 
 ];
 
