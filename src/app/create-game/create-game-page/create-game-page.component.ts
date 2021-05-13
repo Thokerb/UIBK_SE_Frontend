@@ -14,6 +14,7 @@ import * as config from '../../../config/appConfig.json';
 import {SliderModule} from 'primeng/slider';
 import {Cube} from '../../api/dto/Cube';
 import {DropdownModule} from 'primeng/dropdown';
+import {AuthenticationSelector} from "../../redux/authentication/authentication.selector";
 
 interface DisplayCube {
   name: string;
@@ -47,7 +48,8 @@ export class CreateGamePageComponent implements OnInit {
               private restService: RestServiceService,
               private webSocket: SocketService,
               private router: Router,
-              private gameAction: GameAction
+              private gameAction: GameAction,
+              private authSelector: AuthenticationSelector
               ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
@@ -104,15 +106,19 @@ export class CreateGamePageComponent implements OnInit {
       console.log(next);
       const newGame = next.object;
 
-      console.warn('Not yet implemented');
-
       // TODO 2. Topic?
 
-      // TODO 3. Cube
+      // 3. Cube
       console.log('selected cube id: ' + this.selectedCubeId);
-      this.restService.addCubeToGame(newGame.gameId, this.selectedCubeId).subscribe(next2 => console.log(next2));
+      this.restService.addCubeToGame(newGame.gameId, this.selectedCubeId).subscribe(cubeResult => {
+        console.log(cubeResult);
 
-      // TODO 4. Join current player
+        // 4. Join current player
+        this.store.select(this.authSelector.selectCurrentUser).subscribe(authResult => {
+          const currentUser = authResult;
+          this.restService.joinGame(currentUser.username, newGame.gameId).subscribe(next2 => console.log(next2));
+        });
+      });
     });
   }
 
