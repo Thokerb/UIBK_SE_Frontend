@@ -12,8 +12,13 @@ import {GameAction} from '../../redux/game/game.action';
 import {Game} from '../../api/dto/Game';
 import * as config from '../../../config/appConfig.json';
 import {SliderModule} from 'primeng/slider';
-import {Cube} from "../../api/dto/Cube";
+import {Cube} from '../../api/dto/Cube';
+import {DropdownModule} from 'primeng/dropdown';
 
+interface DisplayCube {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-create-game',
@@ -33,7 +38,9 @@ export class CreateGamePageComponent implements OnInit {
   maxPoints: number;
   numTeams: number;
   gameTopics: string[];
-  availableCubes: Cube[];
+  availableCubes: Array<Partial<Cube>>;
+  displayCubes: DisplayCube[];
+  selectedCubeId: string;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -46,16 +53,30 @@ export class CreateGamePageComponent implements OnInit {
     this.maxPoints = 100;
     this.gameTopics = [];
     this.availableCubes = [];
-    this.refreshAvailableCubes();
+    this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}];
+    // this.selectedCubeId = '1';
+    // this.refreshAvailableCubes();
   }
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
+  cubeChange(ev): void {
+    console.log('cube change');
+    console.log(ev);
+    this.selectedCubeId = ev.value;
+  }
+
+  setAvailableCubes(cubes: Array<Partial<Cube>>): void {
+    this.availableCubes = cubes;
+    this.displayCubes = this.availableCubes.map(cube => ({name: 'Cube ' + cube.cubeId, code: cube.cubeId}));
+  }
+
   refreshAvailableCubes(): void {
     this.restService.getAllCubes().subscribe(cubes => {
-      this.availableCubes = cubes;
+      this.setAvailableCubes(cubes);
+      // this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]);
       console.log('New available cubes:');
       console.log(cubes);
     });
@@ -80,10 +101,16 @@ export class CreateGamePageComponent implements OnInit {
     // 1. Create game
     console.log('creating game: ' + JSON.stringify(game));
     this.restService.createGame(game).subscribe(next => console.log(next));
+
     console.warn('Not yet implemented');
+
     // TODO 2. Topic?
+
     // TODO 3. Cube
+    console.log('selected cube id: ' + this.selectedCubeId);
+
     // TODO 4. Join current player
+
   }
 
   onCancelBtn(ev: MouseEvent): void {

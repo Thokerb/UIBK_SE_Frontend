@@ -27,6 +27,19 @@
       <div class="p-col-12">
         <label for="input-number-teams">
           Themengebiete:
+          <!-- TODO -->
+        </label>
+      </div>
+      <div class="p-col-12">
+        <label for="input-cube">
+          Dropdown:
+          <select name="cube">
+            <option value="1">c1</option>
+          </select>
+          <p-dropdown [options]="displayCubes" optionLabel="name" optionValue="code" (onChange)="cubeChange($event)"
+                      id="input-cube">
+          </p-dropdown>
+          <!-- TODO -->
         </label>
       </div>
       <div class="p-col-12 p-grid p-dir-row">
