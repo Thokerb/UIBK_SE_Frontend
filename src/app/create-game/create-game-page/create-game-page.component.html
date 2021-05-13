@@ -1,7 +1,7 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Spiel erstellen</h1>
-  <main class="full p-grid p-dir-row">
-    <form>
+  <main class="full">
+    <form class="full p-grid p-dir-row">
       <div>
         <label for="input-game-name">
           Spielname:
@@ -18,7 +18,9 @@
         <label for="input-number-teams">
           Anzahl Teams:
         </label>
-        <input type="number" min="{{MIN_NUM_TEAMS}}" max="{{MAX_NUM_TEAMS}}" [defaultValue]="MIN_NUM_TEAMS" [(ngModel)]="numTeams" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
+        <input type="number"
+               min="{{MIN_NUM_TEAMS}}" max="{{MAX_NUM_TEAMS}}" [defaultValue]="MIN_NUM_TEAMS" [(ngModel)]="numTeams"
+               placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
         <span>({{MIN_NUM_TEAMS}}-{{MAX_NUM_TEAMS}} Teams zu je 2-4 SpielerInnen)</span>
       </div>
       <div>
@@ -26,9 +28,12 @@
           Themengebiete:
         </label>
       </div>
-      <div>
-        <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-py-4"></button>
-        <button (click)="onCancelBtn($event)" pButton pRipple label="Abbrechen" class="p-col-12 p-py-4"></button>
+      <div class="p-col-12 p-grid p-dir-row">
+        <div class="p-col"></div>
+        <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-lg-5 p-py-4"></button>
+        <div class="p-col"></div>
+        <button (click)="onCancelBtn($event)" pButton pRipple label="Abbrechen" class="p-col-12 p-lg-5 p-py-4"></button>
+        <div class="p-col"></div>
       </div>
     </form>
   </main>

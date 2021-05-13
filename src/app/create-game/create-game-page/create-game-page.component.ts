@@ -38,7 +38,6 @@ export class CreateGamePageComponent implements OnInit {
               private router: Router,
               private gameAction: GameAction
               ) {
-    // TODO set init values (from config?)
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
   }
