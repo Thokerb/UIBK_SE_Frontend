@@ -70,6 +70,10 @@ export class RestServiceService {
     return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
   }
 
+  addTopicToGame(gameId: string, topicId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.addTopicToGame}/${gameId}/${topicId}`, null);
+  }
+
   // TODO: JoinGameResponse
   joinGame(playerName: string, gameId: number): Observable<boolean> {
     return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);

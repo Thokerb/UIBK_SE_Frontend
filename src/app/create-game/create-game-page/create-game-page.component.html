@@ -29,6 +29,7 @@
       <div class="p-col-12">
         <label for="input-number-teams">
           Themengebiete:
+          <p-listbox [options]="availableTopics" [(ngModel)]="selectedTopics" optionLabel="topic"></p-listbox>
           <!-- TODO -->
         </label>
       </div>

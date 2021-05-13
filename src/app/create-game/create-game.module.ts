@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {SliderModule} from "primeng/slider";
 import {DropdownModule} from "primeng/dropdown";
+import {ListboxModule} from "primeng/listbox";
 
 @NgModule({
   declarations: [CreateGamePageComponent],
@@ -17,7 +18,8 @@ import {DropdownModule} from "primeng/dropdown";
     FormsModule,
     InputTextModule,
     SliderModule,
-    DropdownModule
+    DropdownModule,
+    ListboxModule
   ]
 })
 export class CreateGameModule { }

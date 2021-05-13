@@ -14,7 +14,10 @@ import * as config from '../../../config/appConfig.json';
 import {SliderModule} from 'primeng/slider';
 import {Cube} from '../../api/dto/Cube';
 import {DropdownModule} from 'primeng/dropdown';
-import {AuthenticationSelector} from "../../redux/authentication/authentication.selector";
+import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
+import {ListboxModule} from 'primeng/listbox';
+import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
+import {GameTopicDTO} from '../../api/dto/GameTopic';
 
 interface DisplayCube {
   name: string;
@@ -35,10 +38,11 @@ export class CreateGamePageComponent implements OnInit {
   gameName: string;
   maxPoints: number;
   numTeams: number;
-  gameTopics: string[];
   availableCubes: Array<Partial<Cube>>;
   displayCubes: DisplayCube[];
   selectedCubeId: string;
+  availableTopics: GameTopicDTO[];
+  selectedTopics: string[];
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -47,11 +51,12 @@ export class CreateGamePageComponent implements OnInit {
               private router: Router,
               private gameAction: GameAction,
               private authSelector: AuthenticationSelector,
+              private gameTopicSelector: GametopicSelector,
               private zone: NgZone,
               ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = this.DEFAULT_MAX_POINTS;
-    this.gameTopics = [];
+    this.selectedTopics = [];
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
     this.displayCubes = [];
@@ -59,6 +64,16 @@ export class CreateGamePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshAvailableCubes();
+    this.store.select(this.gameTopicSelector.selectAllTopics).subscribe(topics => {
+      console.log('Select topics');
+      console.log(topics);
+      // this.availableTopics = topics;
+      this.availableTopics = [
+        {topic: 'test1', topicId: 1, description: 'Test topic', words: []},
+        {topic: 'test2', topicId: 2, description: 'Test topic', words: []},
+        {topic: 'test3', topicId: 3, description: 'Test topic', words: []}
+      ]; // Test
+    });
   }
 
   cubeChange(ev): void {
@@ -95,7 +110,7 @@ export class CreateGamePageComponent implements OnInit {
       gameId: '1', // doesn't matter
       gameName: this.gameName,
       gameMaxPoints: this.maxPoints,
-      gameTopics: this.gameTopics,
+      gameTopics: this.selectedTopics,
       gameNumberTeams: this.numTeams,
       gamePlayers: [],
       gameTeams: []
@@ -107,9 +122,14 @@ export class CreateGamePageComponent implements OnInit {
       console.log(createGameResult);
       const newGame = createGameResult.object;
 
-      // TODO 2. Topic?
+      // 2. Add topics to game
+      console.log('Selected topics:');
+      console.log(this.selectedTopics);
+      this.selectedTopics.forEach((topicId: string) => {
+        this.restService.addTopicToGame(newGame.gameId, topicId).subscribe(topicResult => console.log(topicResult));
+      });
 
-      // 3. Cube
+      // 3. Add cube to game
       console.log('selected cube id: ' + this.selectedCubeId);
       this.restService.addCubeToGame(newGame.gameId, this.selectedCubeId).subscribe(cubeResult => {
         console.log(cubeResult);
