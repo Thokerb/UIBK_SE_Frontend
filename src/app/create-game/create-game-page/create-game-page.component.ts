@@ -7,9 +7,10 @@ import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
-import {AuthenticationAction} from "../../redux/authentication/authentication.action";
-import {GameAction} from "../../redux/game/game.action";
-import {Game} from "../../api/dto/Game";
+import {AuthenticationAction} from '../../redux/authentication/authentication.action';
+import {GameAction} from '../../redux/game/game.action';
+import {Game} from '../../api/dto/Game';
+import * as config from '../../../config/appConfig.json';
 
 @Component({
   selector: 'app-create-game',
@@ -33,7 +34,10 @@ export class CreateGamePageComponent implements OnInit {
               private webSocket: SocketService,
               private router: Router,
               private gameAction: GameAction
-              ) { }
+              ) {
+    // TODO set init values
+    this.numTeams = 2;
+  }
 
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
@@ -55,6 +59,7 @@ export class CreateGamePageComponent implements OnInit {
       gameNumberTeams: this.numTeams
     };
     this.store.dispatch(this.gameAction.addGame({item: game}));
+    // TODO create game, topic, cube, player
   }
 
   onCancelBtn(ev: MouseEvent): void {
