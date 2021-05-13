@@ -11,6 +11,7 @@
   "GameTopic": "/api/gametopic",
   "deleteWord": "/api/gametopic/deleteword",
   "addWord": "/api/gametopic/addword",
+  "addCube": "/api/game/addCube",
   "joinGame": "/api/game/add",
   "JoinTeam": "/api/team/addplayer",
   "RemovePlayerTeam": "/api/team/removeplayer",

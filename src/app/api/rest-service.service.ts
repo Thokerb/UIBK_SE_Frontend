@@ -76,7 +76,7 @@ export class RestServiceService {
   }
 
   addCubeToGame(gameId: string, cubeId: string): Observable<GenericResponse> {
-    return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.addCube}/${gameId}/${cubeId}`, null);
   }
 
   addTopicToGame(gameId: string, topicId: string): Observable<GenericResponse> {
