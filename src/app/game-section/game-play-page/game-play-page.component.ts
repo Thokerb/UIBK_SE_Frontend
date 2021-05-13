@@ -19,7 +19,7 @@ interface COLOR_CODE {
   templateUrl: './game-play-page.component.html',
   styleUrls: ['./game-play-page.component.css']
 })
-export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class GamePlayPageComponent implements OnInit, OnDestroy {
 
 
   constructor(private store: Store,
@@ -28,7 +28,9 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
               private restService: RestServiceService,
               private socketService: SocketService,
               private route: ActivatedRoute,
-              private authSelector: AuthenticationSelector) { }
+              private authSelector: AuthenticationSelector) {
+
+  }
   game: CompleteGameDTO;
   currentUser: User;
   gameSection: GameSection;
@@ -62,13 +64,12 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
     threshold: 10
   };
 
-  ngAfterViewInit(): void {
-  }
+
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.store.dispatch(this.gameActions.init({gameId: this.id}));
     this.socketService.subscribeSections();
     this.socketService.subscribeGame();
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(this.gameActions.init({gameId: this.id}));
     this.store.select(this.authSelector.selectCurrentUser).subscribe(next => {
       this.currentUser = next;
       if (this.game){

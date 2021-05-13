@@ -34,8 +34,8 @@ export class GamePageComponent implements OnInit, OnDestroy {
               private authSelector: AuthenticationSelector) { }
 
   ngOnDestroy(): void {
-        this.socketService.unsubscribeGame();
-        this.socketService.unsubscribeSection();
+        // this.socketService.unsubscribeGame();
+        // this.socketService.unsubscribeSection();
     }
 
   ngOnInit(): void {
