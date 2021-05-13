@@ -94,7 +94,7 @@ export class CreateGamePageComponent implements OnInit {
   refreshAvailableCubes(): void {
     this.restService.getAllCubes().subscribe(cubes => {
       this.setAvailableCubes(cubes);
-      // this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]); // Test
+      // this.setAvailableCubes([{cubeId: '1', calibrated: true}, {cubeId: '2', calibrated: false}]); // Test
       console.log('New available cubes:');
       console.log(cubes);
     });
