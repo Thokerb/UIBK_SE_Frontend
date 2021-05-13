@@ -102,6 +102,10 @@ export class RestServiceService {
     return this.http.post<GenericResponse>(config.baseURI + config.startGame, gameId);
   }
 
+  createGame(game: Game): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.createGame, JSON.stringify(game));
+  }
+
   // TODO: adjust
   startSection(gameId: number): Observable<GenericResponse>{
     return this.http.post<GenericResponse>(config.baseURI + config.startSection, gameId);
