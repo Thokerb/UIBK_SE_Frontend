@@ -100,17 +100,20 @@ export class CreateGamePageComponent implements OnInit {
     };
     // 1. Create game
     console.log('creating game: ' + JSON.stringify(game));
-    this.restService.createGame(game).subscribe(next => console.log(next));
+    this.restService.createGame(game).subscribe(next => {
+      console.log(next);
+      const newGame = next.object;
 
-    console.warn('Not yet implemented');
+      console.warn('Not yet implemented');
 
-    // TODO 2. Topic?
+      // TODO 2. Topic?
 
-    // TODO 3. Cube
-    console.log('selected cube id: ' + this.selectedCubeId);
+      // TODO 3. Cube
+      console.log('selected cube id: ' + this.selectedCubeId);
+      this.restService.addCubeToGame(newGame.gameId, this.selectedCubeId).subscribe(next2 => console.log(next2));
 
-    // TODO 4. Join current player
-
+      // TODO 4. Join current player
+    });
   }
 
   onCancelBtn(ev: MouseEvent): void {

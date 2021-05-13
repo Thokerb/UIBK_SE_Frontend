@@ -66,6 +66,10 @@ export class RestServiceService {
     return this.http.get<Cube[]>(config.baseURI + config.Cube);
   }
 
+  addCubeToGame(gameId: string, cubeId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
+  }
+
   // TODO: JoinGameResponse
   joinGame(playerName: string, gameId: number): Observable<boolean> {
     return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
