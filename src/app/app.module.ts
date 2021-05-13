@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import * as fromRoot from './redux/AppState';
-import {DashboardModule} from './dashboard/todo.module';
+import {DashboardModule} from './dashboard/dashboard.module';
 import {ReduxModule} from './redux/redux.module';
 import {AppReducer} from './redux/AppReducer';
 import {storeLogger} from 'ngrx-store-logger';
