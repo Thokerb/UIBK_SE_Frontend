@@ -61,7 +61,7 @@ export class SocketService implements OnDestroy {
       return;
     }
     if (this.cubeSubscription){
-      return;
+      this.unsubscribeCubes();
     }
     this.cubeSubscription = this.stompClient.subscribe('/topic/cubes', (hello) => {
       const response = JSON.parse(hello.body);
@@ -80,7 +80,7 @@ export class SocketService implements OnDestroy {
       return;
     }
     if (this.sectionSubscription){
-      return;
+      this.unsubscribeSection();
     }
     this.sectionSubscription = this.stompClient.subscribe('/topic/updateSection', (hello) => {
       const response = JSON.parse(hello.body) as GenericResponse;
@@ -99,7 +99,7 @@ export class SocketService implements OnDestroy {
       return;
     }
     if (this.gameSubscription){
-      return;
+      this.unsubscribeGame();
     }
     this.gameSubscription = this.stompClient.subscribe('/topic/updateGame', (hello) => {
       const response: GenericResponse = JSON.parse(hello.body);

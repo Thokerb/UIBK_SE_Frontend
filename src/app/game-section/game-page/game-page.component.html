@@ -18,6 +18,7 @@
         <div class="p-grid">
           <div class="p-col-6 p-md-9 p-lg-10">
             <div *ngFor="let player of nimbusPlayer">
+              <i class="pi pi-user" *ngIf="currentUser.username === player"></i>
               {{player}}
             </div>
           </div>
@@ -38,7 +39,7 @@
         <div class="p-grid">
           <div class="p-col-6 p-md-9 p-lg-10">
             <div *ngFor="let player of team.players">
-              <i class="pi pi-check" *ngIf="currentUser.id === player.id"></i>
+              <i class="pi pi-user" *ngIf="currentUser.id === player.id"></i>
               {{player.username}}
             </div>
           </div>
