@@ -20,5 +20,7 @@
   "guessedWord": "",
   "strikeGameSection": "",
   "Cube": "/api/cube",
-  "CubeConfig": "/api/cube/config"
+  "CubeConfig": "/api/cube/config",
+  "minNumTeams": 2,
+  "maxNumTeams": 6
 }

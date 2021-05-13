@@ -23,8 +23,8 @@ export class CreateGamePageComponent implements OnInit {
   username: string;
   roomID: string;
 
-  readonly MIN_NUM_TEAMS = 2;
-  readonly MAX_NUM_TEAMS = 6;
+  readonly MIN_NUM_TEAMS = config.minNumTeams;
+  readonly MAX_NUM_TEAMS = config.maxNumTeams;
 
   gameName: string;
   maxPoints: number;
