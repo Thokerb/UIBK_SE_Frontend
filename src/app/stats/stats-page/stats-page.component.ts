@@ -39,6 +39,17 @@ export class StatsPageComponent implements OnInit {
   }
 
   prepareChartData(): void {
+
+    // Pie chart for most played topics
+    this.mostPlayedTopicsData = {
+      labels: this.stats.topics.map(topic => topic.topic),
+      datasets: [
+        {
+          data: this.stats.topics.map(topic => topic.totalGuesses)
+        }
+      ]
+    };
+
     // TODO
   }
 
