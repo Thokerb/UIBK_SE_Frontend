@@ -31,10 +31,12 @@ export class CreateGamePageComponent implements OnInit {
   }
 
   onCreateBtn(ev: MouseEvent): void {
+    ev.preventDefault();
     console.warn('Not yet implemented');
   }
 
   onCancelBtn(ev: MouseEvent): void {
+    ev.preventDefault();
     console.warn('Not yet implemented');
   }
 
