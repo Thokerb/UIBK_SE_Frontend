@@ -8,6 +8,7 @@ import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
+import {User} from '../../api/dto/UserManagement';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,19 +17,21 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
 })
 export class UserProfilePageComponent implements OnInit {
 
+  user: Partial<User>;
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private router: Router,
               private authSelector: AuthenticationSelector
-              ) { }
+              ) {
+    this.user = null;
+  }
 
-  // TODO page only accessible after auth / login
-  // TODO get and display user profile info (id, username, email, roles, etc.)
+  // TODO display data
   ngOnInit(): void {
 
     this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
-
+      this.user = userResult;
     });
   }
 

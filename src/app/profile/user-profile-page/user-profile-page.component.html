@@ -1,5 +1,13 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">User Profile</h1>
   <main class="full p-grid p-dir-row">
+    <div>
+      <p>Benutzer ID: {{user.id}}</p>
+      <p>Benutzername: {{user.username}}</p>
+      <p>E-Mail Adresse: {{user.email}}</p>
+      <p>Benutzer Rollen:
+        <span style="text-transform: capitalize">{{user.roles.join(", ")}}</span>
+      </p>
+    </div>
   </main>
 </div>
