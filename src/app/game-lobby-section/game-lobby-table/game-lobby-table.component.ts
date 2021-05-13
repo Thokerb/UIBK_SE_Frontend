@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Game, GameLobbyElement} from '../../api/dto/Game';
 import {Store} from '@ngrx/store';
 import {GameSelector} from '../../redux/game/game.selector';
@@ -23,6 +23,7 @@ export class GameLobbyTableComponent implements OnInit {
               private gameAction: GameAction,
               private router: Router,
               private authSelector: AuthenticationSelector,
+              private zone: NgZone,
               private messageService: MessageService,
               private restService: RestServiceService) {
     store.select(gameSelector.selectAllGames).subscribe(next => this.games = next);
@@ -35,8 +36,10 @@ export class GameLobbyTableComponent implements OnInit {
 
   join(game: GameLobbyElement): void {
     this.restService.joinGame(this.user.username, game.gameID).subscribe(next => {
-      if (next && next.success){ // TODO: change boolean
-        this.router.navigateByUrl('/game/' + game.gameID);
+      if (next && next.success){
+        this.zone.run(() => {
+          this.router.navigateByUrl('/game/' + game.gameID);
+        });
       }
       else{
         console.log(next);

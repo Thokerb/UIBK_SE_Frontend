@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {GameAction} from '../../redux/game/game.action';
@@ -31,6 +31,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
               private router: Router,
               private socketService: SocketService,
               private restService: RestServiceService,
+              private zone: NgZone,
               private authSelector: AuthenticationSelector) { }
 
   ngOnDestroy(): void {
@@ -47,8 +48,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
       this.game = next;
       console.log(next);
       if (next) {
-        if(next.started){
-          this.router.navigateByUrl('/gameplay/' + this.game.gameId);
+        if (next.started){
+          this.zone.run(() => {
+            this.router.navigateByUrl('/gameplay/' + this.game.gameId);
+          });
         }
         console.log(next);
         this.teams = _.clone(next.gameTeams).sort((x, y) => x.teamName.localeCompare(y.teamName));
@@ -81,8 +84,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
   startGame(): void {
     this.restService.startGame(this.game.gameId).subscribe(next => {
       if (next.success){
-        this.router.navigateByUrl('/gameplay/' + this.game.gameId);
-      }
+        this.zone.run(() => {
+          this.router.navigateByUrl('/gameplay/' + this.game.gameId);
+        });      }
       else{
         console.error(next.description);
       }
