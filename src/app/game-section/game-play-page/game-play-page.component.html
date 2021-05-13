@@ -70,6 +70,7 @@
             <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
             <h1>Wort: {{gameSection.word.word}}</h1>
             <h2>Kategorie: {{gameSection.category}}</h2>
+            <p-button *ngIf="!isActiveTeam" label="Wort erraten" (click)="wortErraten()"></p-button>
             <p-button *ngIf="!isActiveTeam" label="Regelverstoß" (click)="strike()"></p-button>
 
           </div>
