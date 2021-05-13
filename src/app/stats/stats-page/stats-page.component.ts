@@ -55,6 +55,7 @@ export class StatsPageComponent implements OnInit {
       ]
     };
 
+    // TODO sort
     const bestTopics = this.stats.topics
       .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}));
 

@@ -1,6 +1,14 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Statistics</h1>
-  <main class="full p-grid p-dir-col">
+  <main class="full p-grid p-dir-col p-px-6">
+    <h2>General Statistics</h2>
+    <!-- TODO text: general stats -->
+    <div>
+      <p>Total guesses: </p>
+      <p>Total time for all guesses: </p>
+      <p>Number of different topics: </p>
+    </div>
+    <h2>Topics</h2>
     <div>
       <h3>Most played topics</h3>
       <p-chart type="pie" [data]="mostPlayedTopicsData"></p-chart>
@@ -10,7 +18,6 @@
       <p-chart type="bar" [data]="bestTopicsData"></p-chart>
     </div>
 
-    <!-- TODO text: general stats -->
     <!-- TODO -->
   </main>
 </div>
