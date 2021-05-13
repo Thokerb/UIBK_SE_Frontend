@@ -12,6 +12,7 @@ import {Cube} from '../../api/dto/Cube';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
 import {GameTopicDTO} from '../../api/dto/GameTopic';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 interface DisplayCube {
   name: string;

@@ -20,13 +20,15 @@
       </div>
       <div class="p-col-12">
         <label for="input-number-teams">
-          Anzahl Teams: {{numTeams}}
+          Anzahl Teams:
         </label>
         <!--
         <input type="number"
                min="{{MIN_NUM_TEAMS}}" max="{{MAX_NUM_TEAMS}}" [defaultValue]="MIN_NUM_TEAMS" [(ngModel)]="numTeams"
                placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" required="" /> -->
-        <p-slider (onChange)="onNumTeamsChange($event)" [min]="MIN_NUM_TEAMS" [max]="MAX_NUM_TEAMS" orientation="horizontal" id="input-number-teams"></p-slider>
+        <!-- <p-slider (onChange)="onNumTeamsChange($event)" [min]="MIN_NUM_TEAMS" [max]="MAX_NUM_TEAMS" orientation="horizontal" id="input-number-teams"></p-slider> -->
+        <p-inputNumber (onInput)="onNumTeamsChange($event)" [min]="MIN_NUM_TEAMS" [max]="MAX_NUM_TEAMS" mode="decimal"
+                       [step]="1" placeholder="Anzahl Teams" id="input-number-teams"></p-inputNumber>
         <p class="help-text">({{MIN_NUM_TEAMS}}-{{MAX_NUM_TEAMS}} Teams zu je 2-4 SpielerInnen)</p>
       </div>
       <div class="p-col-12">

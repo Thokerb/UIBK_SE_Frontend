@@ -8,18 +8,20 @@ import {InputTextModule} from 'primeng/inputtext';
 import {SliderModule} from "primeng/slider";
 import {DropdownModule} from "primeng/dropdown";
 import {ListboxModule} from "primeng/listbox";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [CreateGamePageComponent],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    RippleModule,
-    FormsModule,
-    InputTextModule,
-    SliderModule,
-    DropdownModule,
-    ListboxModule
-  ]
+    imports: [
+        CommonModule,
+        ButtonModule,
+        RippleModule,
+        FormsModule,
+        InputTextModule,
+        SliderModule,
+        DropdownModule,
+        ListboxModule,
+        InputNumberModule
+    ]
 })
 export class CreateGameModule { }
