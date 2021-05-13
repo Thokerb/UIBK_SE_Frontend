@@ -1,8 +1,15 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Statistics</h1>
   <main class="full p-grid p-dir-row">
-    <p-chart type="pie" [data]="mostPlayedTopicsData"></p-chart>
-    <!-- TODO bar chart: best topics -->
+    <div>
+      <h3>Most played topics</h3>
+      <p-chart type="pie" [data]="mostPlayedTopicsData"></p-chart>
+    </div>
+    <div>
+      <h3>Topics rating per points</h3>
+      <p-chart type="bar" [data]="bestTopicsData"></p-chart>
+    </div>
+
     <!-- TODO text: general stats -->
     <!-- TODO -->
   </main>

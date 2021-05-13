@@ -20,12 +20,14 @@ export class StatsPageComponent implements OnInit {
 
   stats: Stats;
   mostPlayedTopicsData: any;
+  bestTopicsData: any;
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private authSelector: AuthenticationSelector
               ) {
     this.mostPlayedTopicsData = null;
+    this.bestTopicsData = null;
   }
 
   ngOnInit(): void {
@@ -53,7 +55,22 @@ export class StatsPageComponent implements OnInit {
       ]
     };
 
-    // TODO
+    const bestTopics = this.stats.topics
+      .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}));
+
+    // Bar chart for best topics
+    this.bestTopicsData = {
+      labels: bestTopics.map(topic => topic.topic),
+      datasets: [{
+        barPercentage: 0.5,
+        barThickness: 6,
+        maxBarThickness: 8,
+        minBarLength: 2,
+        data: bestTopics.map(topic => topic.rating)
+      }]
+    };
+
+    // TODO more
   }
 
   sendToSocket(): void {
