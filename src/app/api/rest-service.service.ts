@@ -3,6 +3,7 @@ import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
+  Game,
   GameDTO,
   GameLobbyResponse,
   GameSectionResponse,
@@ -13,6 +14,7 @@ import {
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
+import {StatsResponse} from "./dto/Stats";
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +75,14 @@ export class RestServiceService {
     return this.http.get<Cube[]>(config.baseURI + config.Cube);
   }
 
+  addCubeToGame(gameId: string, cubeId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
+  }
+
+  addTopicToGame(gameId: string, topicId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.addTopicToGame}/${gameId}/${topicId}`, null);
+  }
+
   // TODO: JoinGameResponse
   joinGame(playerName: string, gameId: number): Observable<GenericResponse> {
     return this.http.patch<GenericResponse>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
@@ -95,6 +105,10 @@ export class RestServiceService {
     return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
   }
 
+  getStats(userId: string): Observable<StatsResponse> {
+    return this.http.get<StatsResponse>(config.baseURI + config.getStats + '/' + userId);
+  }
+
   removePlayerFromTeam(gameId: number, id: string, teamId: number): Observable<GenericResponse> {
     const object = {
       gameId: gameId,
@@ -107,6 +121,10 @@ export class RestServiceService {
   // TODO: adjust
   startGame(gameId: number): Observable<GenericResponse>{
     return this.http.patch<GenericResponse>(config.baseURI + config.startGame + '/' + gameId, null);
+  }
+
+  createGame(game: Game | any): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.createGame, game);
   }
 
   // TODO: adjust

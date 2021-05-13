@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import * as fromRoot from './redux/AppState';
-import {TodoModule} from './todo/todo.module';
+import {DashboardModule} from './dashboard/dashboard.module';
 import {ReduxModule} from './redux/redux.module';
 import {AppReducer} from './redux/AppReducer';
 import {storeLogger} from 'ngrx-store-logger';
@@ -28,6 +28,8 @@ import {GameEffect} from './redux/game/game.effect';
 import {CommonModule} from '@angular/common';
 import {GameSectionModule} from './game-section/game-section.module';
 import {CubeSectionModule} from './cube-section/cube-section.module';
+import {CreateGameModule} from './create-game/create-game.module';
+import {StatsModule} from './stats/stats.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
   factory: () => {
@@ -55,7 +57,7 @@ export const metaReducers = environment.production ? [] : [logger];
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TodoModule,
+    DashboardModule,
     HttpClientModule,
     ReduxModule,
     StoreModule.forRoot(REDUCER_TOKEN,
@@ -86,7 +88,9 @@ export const metaReducers = environment.production ? [] : [logger];
     GameLobbySectionModule,
     SharedModule,
     GameSectionModule,
-    CubeSectionModule
+    CubeSectionModule,
+    CreateGameModule,
+    StatsModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

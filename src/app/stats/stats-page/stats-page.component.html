@@ -1,0 +1,22 @@
+<div class="full p-p-4">
+  <h1 class="p-mb-4">Statistiken</h1>
+  <main class="full p-grid p-dir-col p-px-6">
+    <h2>Allgemeine Statistiken</h2>
+    <div>
+      <p>Gesamtanzahl der Rateversuche: {{stats.totalGuesses}}</p>
+      <p>Gesamtzeit für alle Rateversuche: {{stats.totalTimeForAllGuesses}}</p>
+      <p>Anzahl der gespielten Themen: {{numDistinctTopics}}</p>
+    </div>
+    <h2>Topics</h2>
+    <div>
+      <h3>Meistgespielte Themen</h3>
+      <p-chart type="pie" [data]="mostPlayedTopicsData"></p-chart>
+    </div>
+    <div>
+      <h3>Beste Themen</h3>
+      <p-chart type="bar" [data]="bestTopicsData"></p-chart>
+    </div>
+
+    <!-- TODO -->
+  </main>
+</div>
