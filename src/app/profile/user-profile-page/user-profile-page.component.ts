@@ -7,29 +7,29 @@ import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
+import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-user-profile',
   templateUrl: './user-profile-page.component.html',
   styleUrls: ['./user-profile-page.component.css']
 })
 export class UserProfilePageComponent implements OnInit {
 
-  todo: Observable<string[]>;
-  username: string;
-  roomID: string;
   constructor(private store: Store,
-              private todoSelector: TodoSelector,
-              private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
-              private router: Router
+              private router: Router,
+              private authSelector: AuthenticationSelector
               ) { }
 
   // TODO page only accessible after auth / login
   // TODO get and display user profile info (id, username, email, roles, etc.)
   ngOnInit(): void {
-    this.todo = this.store.select(this.todoSelector.selectAllTodos);
+
+    this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
+
+    });
   }
 
   sendToSocket(): void {
