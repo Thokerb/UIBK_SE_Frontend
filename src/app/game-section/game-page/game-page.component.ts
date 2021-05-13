@@ -48,7 +48,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       this.game = next;
       console.log(next);
       if (next && next.gameId === this.id) {
-        if (next.started){
+        if (next.started || next.finished){
           this.zone.run(() => {
             this.router.navigateByUrl('/gameplay/' + this.game.gameId);
           });

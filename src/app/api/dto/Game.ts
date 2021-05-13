@@ -45,6 +45,7 @@ export interface Teams {
 export interface CompleteGameDTO{
   active: boolean;
   started: boolean;
+  finished: boolean;
   gameId: number;
   gameName: string;
   gameNumberTeams: number;

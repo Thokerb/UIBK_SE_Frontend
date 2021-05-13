@@ -2,7 +2,7 @@
 import {createSelector} from '@ngrx/store';
 import {AppState} from '../AppState';
 import {Injectable} from '@angular/core';
-import {USER_ROLE} from './authentication.reducer';
+import {USER_ROLES} from '../../api/dto/UserManagement';
 
 
 @Injectable()
@@ -38,7 +38,6 @@ export class AuthenticationSelector {
       if (state.authenticated){
         return state.roles;
       }
-      return USER_ROLE.NONE;
     }
   );
 
