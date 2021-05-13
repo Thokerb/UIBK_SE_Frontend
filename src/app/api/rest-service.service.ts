@@ -74,8 +74,8 @@ export class RestServiceService {
   }
 
   // TODO: JoinGameResponse
-  joinGame(playerName: string, gameId: number): Observable<boolean> {
-    return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
+  joinGame(playerName: string, gameId: number): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
   }
 
   getGame(id: number): Observable<GetGameResponse> {

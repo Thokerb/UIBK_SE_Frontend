@@ -4,15 +4,17 @@ import { GameLobbyPageComponent } from './game-lobby-page/game-lobby-page.compon
 import { GameLobbyTableComponent } from './game-lobby-table/game-lobby-table.component';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
+import {ButtonModule} from 'primeng/button';
 
 
 
 @NgModule({
   declarations: [GameLobbyPageComponent, GameLobbyTableComponent],
-    imports: [
-        CommonModule,
-        TableModule,
-        ToastModule
-    ]
+  imports: [
+    CommonModule,
+    TableModule,
+    ToastModule,
+    ButtonModule
+  ]
 })
 export class GameLobbySectionModule { }
