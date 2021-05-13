@@ -3,6 +3,7 @@ import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
+  Game,
   GameDTO,
   GameLobbyResponse,
   GameSectionResponse,
