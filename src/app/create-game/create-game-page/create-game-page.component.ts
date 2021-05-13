@@ -1,21 +1,15 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
 import {TodoSelector} from '../../redux/todo/todo.selector';
-import {TodoReducer} from '../../redux/todo/todo.reducer';
 import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
-import {AuthenticationAction} from '../../redux/authentication/authentication.action';
 import {GameAction} from '../../redux/game/game.action';
 import {Game} from '../../api/dto/Game';
 import * as config from '../../../config/appConfig.json';
-import {SliderModule} from 'primeng/slider';
 import {Cube} from '../../api/dto/Cube';
-import {DropdownModule} from 'primeng/dropdown';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
-import {ListboxModule} from 'primeng/listbox';
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
 import {GameTopicDTO} from '../../api/dto/GameTopic';
 
@@ -53,7 +47,7 @@ export class CreateGamePageComponent implements OnInit {
               private authSelector: AuthenticationSelector,
               private gameTopicSelector: GametopicSelector,
               private zone: NgZone,
-              ) {
+  ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = this.DEFAULT_MAX_POINTS;
     this.selectedTopics = [];
@@ -64,6 +58,8 @@ export class CreateGamePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshAvailableCubes();
+    this.loadTopics();
+    /*
     this.store.select(this.gameTopicSelector.selectAllTopics).subscribe(topics => {
       console.log('Select topics');
       console.log(topics);
@@ -74,6 +70,7 @@ export class CreateGamePageComponent implements OnInit {
         {topic: 'test3', topicId: 3, description: 'Test topic', words: []}
       ]; // Test
     });
+     */
   }
 
   cubeChange(ev): void {
@@ -99,6 +96,21 @@ export class CreateGamePageComponent implements OnInit {
       this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]); // Test
       console.log('New available cubes:');
       console.log(cubes);
+    });
+  }
+
+  loadTopics(): void {
+    this.restService.getAllGameTopics().subscribe(topicsResult => {
+      const topics = [];
+      console.log('topicsResult');
+      console.log(topicsResult);
+      for (const key of Object.keys(topicsResult.object)){
+        topics.push(topicsResult.object[key]);
+      }
+      console.log('loaded topics');
+      console.log(topics);
+      this.availableTopics = topics;
+      // TODO update state
     });
   }
 
@@ -132,6 +144,7 @@ export class CreateGamePageComponent implements OnInit {
       console.log('Selected topics:');
       console.log(this.selectedTopics);
       this.selectedTopics.forEach((topicId: string) => {
+        // TODO wait for multiple
         this.restService.addTopicToGame(newGame.gameId, topicId).subscribe(topicResult => console.log(topicResult));
       });
 
