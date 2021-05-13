@@ -9,7 +9,7 @@ import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-create-game',
   templateUrl: './create-game-page.component.html',
   styleUrls: ['./create-game-page.component.css']
 })
@@ -37,7 +37,7 @@ export class CreateGamePageComponent implements OnInit {
 
   onCancelBtn(ev: MouseEvent): void {
     ev.preventDefault();
-    console.warn('Not yet implemented');
+    this.router.navigateByUrl('/dashboard');
   }
 
   sendToSocket(): void {
