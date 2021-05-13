@@ -124,7 +124,7 @@ export class RestServiceService {
   }
 
   strikeGameSection(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.strikeGameSection, gameId);
+    return this.http.patch<GenericResponse>(config.baseURI + config.strikeGameSection + '/' + gameId, null);
   }
 
   getGameSections(gameId: number): Observable<GameSectionResponse>{

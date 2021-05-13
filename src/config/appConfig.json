@@ -19,7 +19,7 @@
   "stopSection": "TODO: do we need this",
   "getSections": "/api/game/gamesections",
   "guessedWord": "/api/game/guessRound",
-  "strikeGameSection": "",
+  "strikeGameSection": "/api/game/strike",
   "timeoutSection": "/api/game/timeout",
   "Cube": "/api/cube",
   "CubeConfig": "/api/cube/config"
