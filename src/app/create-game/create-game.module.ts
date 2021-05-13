@@ -4,14 +4,16 @@ import { CreateGamePageComponent } from './create-game-page/create-game-page.com
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [CreateGamePageComponent],
-    imports: [
-        CommonModule,
-        ButtonModule,
-        RippleModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    ButtonModule,
+    RippleModule,
+    FormsModule,
+    InputTextModule
+  ]
 })
 export class CreateGameModule { }

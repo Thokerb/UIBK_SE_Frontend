@@ -21,6 +21,11 @@ export class CreateGamePageComponent implements OnInit {
   todo: Observable<string[]>;
   username: string;
   roomID: string;
+
+  gameName: string;
+  maxPoints: number;
+  numTeams: number;
+  gameTopics: string[];
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -43,11 +48,11 @@ export class CreateGamePageComponent implements OnInit {
     console.warn('Not yet implemented');
     const game: Game = {
       gameId: 1,
-      gameName: '',
-      gameMaxPoints: 100,
+      gameName: this.gameName,
+      gameMaxPoints: this.maxPoints,
       gamePlayers: [],
-      gameTopics: [],
-      gameNumberTeams: 2
+      gameTopics: this.gameTopics,
+      gameNumberTeams: this.numTeams
     };
     this.store.dispatch(this.gameAction.addGame({item: game}));
   }
