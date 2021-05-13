@@ -23,5 +23,6 @@
   "Cube": "/api/cube",
   "CubeConfig": "/api/cube/config",
   "minNumTeams": 2,
-  "maxNumTeams": 6
+  "maxNumTeams": 6,
+  "defaultMaxPoints": 10
 }

@@ -30,6 +30,7 @@ export class CreateGamePageComponent implements OnInit {
 
   readonly MIN_NUM_TEAMS = config.minNumTeams;
   readonly MAX_NUM_TEAMS = config.maxNumTeams;
+  readonly DEFAULT_MAX_POINTS = config.defaultMaxPoints;
 
   gameName: string;
   maxPoints: number;
@@ -49,7 +50,7 @@ export class CreateGamePageComponent implements OnInit {
               private zone: NgZone,
               ) {
     this.numTeams = this.MIN_NUM_TEAMS;
-    this.maxPoints = 100;
+    this.maxPoints = this.DEFAULT_MAX_POINTS;
     this.gameTopics = [];
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
