@@ -9,6 +9,7 @@ import {GameLobbyPageComponent} from './game-lobby-section/game-lobby-page/game-
 import {GamePageComponent} from './game-section/game-page/game-page.component';
 import {CubePageComponent} from './cube-section/cube-page/cube-page.component';
 import {UserProfilePageComponent} from './profile/user-profile-page/user-profile-page.component';
+import {GamePlayPageComponent} from './game-section/game-play-page/game-play-page.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -20,7 +21,9 @@ const routes: Routes = [
   {path: 'gamelobby', component: GameLobbyPageComponent },
   {path: 'game/:id', component: GamePageComponent },
   {path: 'cube', component: CubePageComponent },
-  {path: 'profile', component: UserProfilePageComponent }
+  {path: 'profile', component: UserProfilePageComponent },
+  {path: 'cube', component: CubePageComponent },
+  {path: 'gameplay/:id', component: GamePlayPageComponent }
 
 ];
 

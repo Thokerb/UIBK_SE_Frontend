@@ -8,6 +8,7 @@ import {TokenStorageService} from '../security/token-storage.service';
 import * as SockJS from 'sockjs-client';
 import {CompatClient, Stomp, StompSubscription} from '@stomp/stompjs';
 import {GameAction} from '../redux/game/game.action';
+import {GenericResponse} from './rest-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class SocketService implements OnDestroy {
   private sectionSubscription: StompSubscription;
   private stompClient: CompatClient = null;
   private established = false;
+  private gameSubscription: StompSubscription;
   constructor(
     private tokenService: TokenStorageService,
     private store: Store,
@@ -26,6 +28,7 @@ export class SocketService implements OnDestroy {
 
 
   connect(): void {
+    console.log('connecting to websocket');
     const socket = new SockJS('http://localhost:8080/gkz-stomp-endpoint');
     this.stompClient = Stomp.over(socket);
     const stompClient = this.stompClient;
@@ -37,6 +40,7 @@ export class SocketService implements OnDestroy {
       _this.subscribeRoom();
 
     });
+
 
   }
 
@@ -57,7 +61,7 @@ export class SocketService implements OnDestroy {
       return;
     }
     if (this.cubeSubscription){
-      return;
+      this.unsubscribeCubes();
     }
     this.cubeSubscription = this.stompClient.subscribe('/topic/cubes', (hello) => {
       const response = JSON.parse(hello.body);
@@ -68,21 +72,39 @@ export class SocketService implements OnDestroy {
   }
 
   subscribeSections(): void{
-    console.log(this.established);
     if (!this.stompClient || !this.established){
       console.warn('websockets not yet initialized');
       setTimeout( () => {
-        this.subscribeCubes();
+        this.subscribeSections();
       }, 2000 );
       return;
     }
     if (this.sectionSubscription){
-      return;
+      this.unsubscribeSection();
     }
     this.sectionSubscription = this.stompClient.subscribe('/topic/updateSection', (hello) => {
-      const response = JSON.parse(hello.body);
+      const response = JSON.parse(hello.body) as GenericResponse;
       console.log(response);
-      this.store.dispatch(this.gameActions.setCurrentSection({section: response}));
+      this.store.dispatch(this.gameActions.setCurrentSection({section: response.object}));
+      console.log(hello.body);
+    });
+  }
+
+  subscribeGame(): void{
+    if (!this.stompClient || !this.established){
+      console.warn('websockets not yet initialized');
+      setTimeout( () => {
+        this.subscribeGame();
+      }, 2000 );
+      return;
+    }
+    if (this.gameSubscription){
+      this.unsubscribeGame();
+    }
+    this.gameSubscription = this.stompClient.subscribe('/topic/updateGame', (hello) => {
+      const response: GenericResponse = JSON.parse(hello.body);
+      console.log(response);
+      this.store.dispatch(this.gameActions.setCurrentGame({game: response.object}));
       console.log(hello.body);
     });
   }
@@ -103,6 +125,15 @@ export class SocketService implements OnDestroy {
     }
     this.sectionSubscription.unsubscribe();
     this.cubeSubscription = null;
+  }
+
+  unsubscribeGame(): void{
+    if (!this.gameSubscription){
+      console.warn('already unsubscribed from cubes');
+      return;
+    }
+    this.gameSubscription.unsubscribe();
+    this.gameSubscription = null;
   }
 
 

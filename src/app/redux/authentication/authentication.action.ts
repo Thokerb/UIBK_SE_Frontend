@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {Injectable} from '@angular/core';
-import {REGISTER_ERROR, User, USER_ROLE} from './authentication.reducer';
+import {REGISTER_ERROR, User} from './authentication.reducer';
 import {Credentials, RegisterValues} from '../../api/dto/Auth';
+import {USER_ROLES} from '../../api/dto/UserManagement';
 
 @Injectable()
 export class AuthenticationAction {
@@ -12,7 +13,7 @@ export class AuthenticationAction {
 
   setRoles = createAction(
     '[Auth] Set Role',
-    props<{ roles: USER_ROLE[]; }>()
+    props<{ roles: USER_ROLES[]; }>()
   );
 
   saveUser = createAction(

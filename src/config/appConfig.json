@@ -14,11 +14,13 @@
   "joinGame": "/api/game/add",
   "JoinTeam": "/api/team/addplayer",
   "RemovePlayerTeam": "/api/team/removeplayer",
-  "startGame": "",
-  "startSection": "",
-  "stopSection": "",
-  "guessedWord": "",
-  "strikeGameSection": "",
+  "startGame": "/api/game/startGame",
+  "startSection": "TODO: do we need this",
+  "stopSection": "TODO: do we need this",
+  "getSections": "/api/game/gamesections",
+  "guessedWord": "/api/game/guessRound",
+  "strikeGameSection": "/api/game/strike",
+  "timeoutSection": "/api/game/timeout",
   "Cube": "/api/cube",
   "CubeConfig": "/api/cube/config"
 }

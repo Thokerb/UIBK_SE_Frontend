@@ -5,7 +5,7 @@ import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
-import {USER_ROLE} from '../../redux/authentication/authentication.reducer';
+import {USER_ROLES} from "../../api/dto/UserManagement";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,7 @@ import {USER_ROLE} from '../../redux/authentication/authentication.reducer';
 })
 export class DashboardComponent implements OnInit {
 
-  userRoles: USER_ROLE[];
+  userRoles: USER_ROLES[];
   isAdmin: boolean;
   isOrganizer: boolean;
   constructor(private store: Store,
@@ -30,14 +30,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(this.selector.selectRoles).subscribe(rolesResult => {
-      if (rolesResult === USER_ROLE.NONE) {
-        this.userRoles = [USER_ROLE.NONE];
-      }
-      else {
-        this.userRoles = rolesResult;
-      }
-      this.isAdmin = this.userRoles.includes(USER_ROLE.ADMIN);
-      this.isOrganizer = this.userRoles.includes(USER_ROLE.ADMIN); // TODO
+      this.userRoles = rolesResult;
+      this.isAdmin = this.userRoles.includes(USER_ROLES.ADMIN);
+      this.isOrganizer = this.userRoles.includes(USER_ROLES.ORGANIZER);
     });
   }
 
