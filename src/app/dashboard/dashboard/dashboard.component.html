@@ -8,6 +8,7 @@
     <button (click)="onStatsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Statistiken"></button>
     <button (click)="onUserManagementBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple
             label="Benutzermanagement" *ngIf="isAdmin"></button>
-    <button (click)="onTopicsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Themenbereiche"></button>
+    <button (click)="onTopicsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple
+            label="Themenbereiche" *ngIf="isAdmin || isOrganizer"></button>
   </main>
 </div>

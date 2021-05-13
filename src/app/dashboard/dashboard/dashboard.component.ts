@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
 
   userRoles: USER_ROLE[];
   isAdmin: boolean;
+  isOrganizer: boolean;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private restService: RestServiceService,
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
         this.userRoles = rolesResult;
       }
       this.isAdmin = this.userRoles.includes(USER_ROLE.ADMIN);
+      this.isOrganizer = this.userRoles.includes(USER_ROLE.ADMIN); // TODO
     });
   }
 
