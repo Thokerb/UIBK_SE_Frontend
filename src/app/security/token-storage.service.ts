@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AuthenticationAction} from '../redux/authentication/authentication.action';
-import {USER_ROLE} from '../redux/authentication/authentication.reducer';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -16,7 +15,7 @@ export class TokenStorageService {
   signOut(): void {
     window.sessionStorage.clear();
     this.store.dispatch(this.authAction.setAuthentication({isAuthenticated: false}));
-    this.store.dispatch(this.authAction.setRoles({roles: [USER_ROLE.NONE]}));
+    this.store.dispatch(this.authAction.setRoles({roles: []}));
   }
 
   public saveToken(token: string): void {

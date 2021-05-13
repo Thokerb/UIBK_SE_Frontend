@@ -10,6 +10,11 @@ export class GameAction {
     props<{ item: Game; }>()
   );
 
+  init = createAction(
+    '[Game] Init',
+    props<{ gameId: number }>()
+  );
+
   setGames = createAction(
     '[Game] Set Games',
     props<{ games: GameLobbyElement[]; }>()

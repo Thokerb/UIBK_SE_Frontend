@@ -1,65 +1,125 @@
-<p>game-play-page works!</p>
-<div *ngIf="game && gameSection">
-<h1>{{game.gameName}}</h1>
-  <div>
-    <div *ngFor="let team of game.gameTeams">
-      <h5>{{team.teamName}}</h5>
-      <h6>Punkte: {{team.score}}</h6>
-      <p *ngFor="let player of team.players">{{player.username}}</p>
-    </div>
-  </div>
-  <p-divider></p-divider>
+<div class="p-grid p-ai-stretch fullgrid">
+  <div class="p-col"></div>
+  <div class="p-col-11 p-lg-10">
+    <!-- Main Content -->
+    <!-- We are getting the game async but instantly -->
+    <!-- General Game Info and Teams -->
+    <div *ngIf="game" class="p-d-flex p-flex-column" >
+      <div style="text-align: center" >
+        <h1>Spiel: {{game.gameName}}</h1>
+      </div>
+      <div class="p-grid">
+        <div *ngFor="let team of game.gameTeams" class="p-col-12 p-lg-6 p-mb-3">
+          <p-card *ngIf="myTeamId === team.teamId">
+            <h3><i class="pi pi-star"></i> {{team.teamName}}</h3>
+            <h5>Punkte: {{team.score}}</h5>
+            <p *ngFor="let player of team.players">
+              <i *ngIf="player.id === currentUser.id" class="pi pi-user p-mr-2"></i>
+              <i *ngIf="player.id !== currentUser.id" class="pi pi-chevron-right p-mr-2"></i>
+              {{player.username}}
+            </p>
 
-  <div *ngIf="gameSection.activeSection">
+          </p-card>
 
-    <h3>Verbleibende Zeit: {{gameTime}}</h3>
-
-    <div *ngIf="isActivePlayer">
-      <h1>Beschreibe das Wort: {{gameSection.word.word}}</h1>
-      <p-divider></p-divider>
-      <h2>Kategorie: {{gameSection.category}}</h2>
-    </div>
-
-    <div *ngIf="!isActiveTeam">
-
-      <h1>Wort: {{gameSection.word.word}}</h1>
-      <h2>Kategorie: {{gameSection.category}}</h2>
-
-      <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
-
-      <p-button label="Regelverstoß" (click)="strike()"></p-button>
-    </div>
-
-  </div>
-
-  <div *ngIf="!gameSection.activeSection">
-
-    <h3>Zeit: {{gameSection.reachedTime}}</h3>
-    <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
-    <h1>Wort: {{gameSection.word.word}}</h1>
-    <h2>Kategorie: {{gameSection.category}}</h2>
-
-
-    <div *ngIf="!isActiveTeam">
-
-      <h1>Wort: {{gameSection.word.word}}</h1>
-      <h2>Kategorie: {{gameSection.category}}</h2>
-
-      <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
-
-      <p-button label="Regelverstoß" (click)="strike()"></p-button>
+          <p-card *ngIf="myTeamId !== team.teamId">
+            <h3>{{team.teamName}}</h3>
+            <h5>Punkte: {{team.score}}</h5>
+            <p *ngFor="let player of team.players"><i class="pi pi-chevron-right p-mr-2"></i>{{player.username}}</p>
+          </p-card>
+        </div>
+      </div>
+      <div *ngIf="!gameSection" style="text-align: center" class="p-as-center middle">
+        <h1>Rolle den Würfel um die erste Aktivität zu starten !</h1>
+      </div>
     </div>
 
+    <!-- When we get a new game section -->
+    <div *ngIf="gameSection" style="margin-top: 8vh">
+      <div class="p-grid">
+        <!-- Game Information (Word, Category, etc) -->
+        <div class="p-col-12 p-lg-6" style="text-align: center" *ngIf="!gameSection.finished">
+
+          <div *ngIf="gameSection.activeSection">
+            <div *ngIf="!isActiveTeam">
+              <h1>Kontrolliere Team {{gameSection.activeTeam.teamName}}</h1>
+              <h1>Spieler: {{gameSection.activePlayer.username}}</h1>
+              <h1>Wort: {{gameSection.word.word}}</h1>
+              <h2>Kategorie: {{gameSection.category}}</h2>
+              <div class="p-d-flex p-jc-evenly p-mt-6">
+                <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
+
+                <p-button label="Regelverstoß" (click)="strike()"></p-button>
+              </div>
+            </div>
+            <div *ngIf="isActivePlayer">
+              <h1>Du bist dran !</h1>
+              <h1>Wort: {{gameSection.word.word}}</h1>
+              <h2>Kategorie: {{gameSection.category}}</h2>
+            </div>
+            <div *ngIf="isActiveTeam && !isActivePlayer">
+              <h1>Errate den Begriff !</h1>
+              <h2>Kategorie: {{gameSection.category}}</h2>
+            </div>
+          </div>
+
+          <div *ngIf="!gameSection.activeSection">
+            <h1>Runde vorbei</h1>
+            <h2>Rolle den Würfel um die nächste Runde zu starten</h2>
+            <h3>Team: {{gameSection.activeTeam.teamName}}</h3>
+            <h3>Spieler: {{gameSection.activePlayer.username}}</h3>
+            <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
+            <h1>Wort: {{gameSection.word.word}}</h1>
+            <h2>Kategorie: {{gameSection.category}}</h2>
+            <p-button *ngIf="!isActiveTeam" label="Regelverstoß" (click)="strike()"></p-button>
+
+          </div>
+
+          </div>
+
+
+
+        <!-- Game Time -->
+        <div class="p-col-12 p-lg-6" *ngIf="!gameSection.finished">
+          <div>
+            <div class="base-timer">
+              <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="base-timer__circle">
+                  <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                  <path
+                    id="base-timer-path-remaining"
+                    [style.strokeDasharray] = circleDasharray
+                    class="base-timer__path-remaining {{remainingPathColor}}"
+                    d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+                  ></path>
+                </g>
+              </svg>
+              <span id="base-timer-label" #basetimerlabel class="base-timer__label">{{gameTime}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- The game is finished -->
+        <div *ngIf="gameSection.finished">
+          <h2>Gratuliere Team {{gameSection.activeTeam.teamName}} hat gewonnen!</h2>
+          <!-- TODO: use statistic component here -->
+        </div>
+
+      </div>
+
+
+
+    </div>
+
   </div>
-
-
-  <div *ngIf="gameSection.finished">
-    <h2>Gratuliere Team {{gameSection.activeTeam.teamName}} hat gewonnen!</h2>
-  </div>
-
-
-
-
-
-
+  <div class="p-col"></div>
 </div>
+
+<div *ngIf="!game && !gameSection">
+  <h1>Game not initialized</h1>
+</div>
+

@@ -2,10 +2,19 @@ import { Injectable } from '@angular/core';
 import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CompleteGameDTO, Game, GameDTO, GameLobbyElement, GameLobbyResponse, GetGameResponse, JoinGameResponse, Word} from './dto/Game';
+import {
+  Game,
+  GameDTO,
+  GameLobbyResponse,
+  GameSectionResponse,
+  GetGameResponse,
+  JoinGameResponse,
+  Word
+} from './dto/Game';
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
+import {StatsResponse} from "./dto/Stats";
 
 @Injectable({
   providedIn: 'root'
@@ -66,9 +75,17 @@ export class RestServiceService {
     return this.http.get<Cube[]>(config.baseURI + config.Cube);
   }
 
+  addCubeToGame(gameId: string, cubeId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.joinGame}/${gameId}/${cubeId}`, null);
+  }
+
+  addTopicToGame(gameId: string, topicId: string): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>(`${config.baseURI + config.addTopicToGame}/${gameId}/${topicId}`, null);
+  }
+
   // TODO: JoinGameResponse
-  joinGame(playerName: string, gameId: number): Observable<boolean> {
-    return this.http.patch<boolean>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
+  joinGame(playerName: string, gameId: number): Observable<GenericResponse> {
+    return this.http.patch<GenericResponse>( `${config.baseURI + config.joinGame}/${gameId}/${playerName}`, null);
   }
 
   getGame(id: number): Observable<GetGameResponse> {
@@ -88,18 +105,26 @@ export class RestServiceService {
     return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
   }
 
-  removePlayerFromTeam(gameId: number, id: string): Observable<GenericResponse> {
+  getStats(userId: string): Observable<StatsResponse> {
+    return this.http.get<StatsResponse>(config.baseURI + config.getStats + '/' + userId);
+  }
+
+  removePlayerFromTeam(gameId: number, id: string, teamId: number): Observable<GenericResponse> {
     const object = {
       gameId: gameId,
       username: id,
-      teamId: 0
+      teamId: teamId
     };
     return this.http.patch<GenericResponse>(config.baseURI + config.RemovePlayerTeam, object);
   }
 
   // TODO: adjust
   startGame(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.startGame, gameId);
+    return this.http.patch<GenericResponse>(config.baseURI + config.startGame + '/' + gameId, null);
+  }
+
+  createGame(game: Game | any): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(config.baseURI + config.createGame, game);
   }
 
   // TODO: adjust
@@ -112,12 +137,20 @@ export class RestServiceService {
     return this.http.post<GenericResponse>(config.baseURI + config.stopSection, gameId);
   }
 
-  guessedWord(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.guessedWord, gameId);
+  guessedWord(gameId: number, wordId: string): Observable<GenericResponse>{
+    return this.http.patch<GenericResponse>(config.baseURI + config.guessedWord + '/' + gameId + '/' + wordId, null);
   }
 
   strikeGameSection(gameId: number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(config.baseURI + config.strikeGameSection, gameId);
+    return this.http.patch<GenericResponse>(config.baseURI + config.strikeGameSection + '/' + gameId, null);
+  }
+
+  getGameSections(gameId: number): Observable<GameSectionResponse>{
+    return this.http.get<GameSectionResponse>(config.baseURI + config.getSections + '/' + gameId);
+  }
+
+  sectionTimeout(gameId: number): Observable<GenericResponse>{
+    return this.http.patch<GenericResponse>(config.baseURI + config.timeoutSection + '/' + gameId, null);
   }
 }
 
