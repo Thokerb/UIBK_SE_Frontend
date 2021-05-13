@@ -87,13 +87,14 @@ export class CreateGamePageComponent implements OnInit {
 
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
-    this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId}));
+    // TODO interface for displayCubes
+    this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId, inactive: !cube.calibrated}));
   }
 
   refreshAvailableCubes(): void {
     this.restService.getAllCubes().subscribe(cubes => {
-      // this.setAvailableCubes(cubes);
-      this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]); // Test
+      this.setAvailableCubes(cubes);
+      // this.setAvailableCubes([{cubeId: '1'}, {cubeId: '2'}]); // Test
       console.log('New available cubes:');
       console.log(cubes);
     });

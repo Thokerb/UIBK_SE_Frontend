@@ -36,8 +36,9 @@
       <div class="p-col-12">
         <label for="input-cube">
           Würfel:
-          <p-dropdown [options]="displayCubes" optionLabel="name" optionValue="code" (onChange)="cubeChange($event)"
-                      placeholder="Würfel auswählen" id="input-cube" required>
+          <p-dropdown [options]="displayCubes" optionLabel="name" optionValue="code" optionDisabled="inactive"
+                      (onChange)="cubeChange($event)"
+                      placeholder="Kalibrierten Würfel auswählen" id="input-cube" required>
           </p-dropdown>
         </label>
       </div>
