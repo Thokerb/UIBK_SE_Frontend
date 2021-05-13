@@ -37,6 +37,28 @@ export class StatsPageComponent implements OnInit {
       const currentUserId = userResult.id;
       console.log('Current user id: ' + currentUserId);
       this.restService.getStats(currentUserId).subscribe(statsResult => {
+        // Test
+        /*
+        statsResult = {
+          success: true,
+          object: {
+            userId: 'admin',
+            totalGuesses: 3,
+            totalTimeForAllGuesses: 1676,
+            topics: [
+              {
+                topicId: 1,
+                topic: 'SPORT',
+                maxPoints: 9,
+                reachedPoints: 9,
+                totalGuesses: 3,
+                timeForAllGuesses: 1676
+              }
+            ]
+          },
+          description: 'Player Stats'
+        };
+         */
         this.stats = statsResult.object;
         console.log('get stats: ');
         console.log(this.stats);

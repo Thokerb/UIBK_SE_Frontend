@@ -18,4 +18,5 @@ export interface TopicStats {
   maxPoints: number;
   reachedPoints: number;
   totalGuesses: number;
+  timeForAllGuesses: number;
 }
