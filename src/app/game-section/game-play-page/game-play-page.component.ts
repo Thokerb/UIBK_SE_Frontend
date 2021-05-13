@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 interface COLOR_CODE {
   color: string;
   threshold: number;
-};
+}
 
 @Component({
   selector: 'app-game-play-page',
@@ -20,6 +20,15 @@ interface COLOR_CODE {
   styleUrls: ['./game-play-page.component.css']
 })
 export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
+
+
+  constructor(private store: Store,
+              private gameActions: GameAction,
+              private gameSelector: GameSelector,
+              private restService: RestServiceService,
+              private socketService: SocketService,
+              private route: ActivatedRoute,
+              private authSelector: AuthenticationSelector) { }
   game: CompleteGameDTO;
   currentUser: User;
   gameSection: GameSection;
@@ -33,14 +42,25 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('basetimerlabel') basetimerlabel: ElementRef;
 
+  FULL_DASH_ARRAY = 283;
 
-  constructor(private store: Store,
-              private gameActions: GameAction,
-              private gameSelector: GameSelector,
-              private restService: RestServiceService,
-              private socketService: SocketService,
-              private route: ActivatedRoute,
-              private authSelector: AuthenticationSelector) { }
+
+  circleDasharray: string;
+  TIME_LIMIT: number;
+  timerInterval = null;
+  remainingPathColor = 'green';
+  info: COLOR_CODE = {
+    color: 'green',
+    threshold: 0
+  };
+  warning: COLOR_CODE = {
+    color: 'orange',
+    threshold: 20
+  };
+  error: COLOR_CODE = {
+    color: 'red',
+    threshold: 10
+  };
 
   ngAfterViewInit(): void {
   }
@@ -65,11 +85,20 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.store.select(this.gameSelector.selectCurrentSection).subscribe(next => {
       console.log(next);
-      if(!next)return;
+      if (!next) {return; }
       this.gameSection = next;
-      this.gameTime = next.maxTime;
-      if(!this.gameSection.finished && this.gameSection.activeSection){
+      // this.circleDasharray = '283';
+      if (!this.gameSection.finished && this.gameSection.activeSection){
+        this.gameTime = next.maxTime;
         this.startTimer2();
+      }
+
+      if (!this.gameSection.activeSection){
+        clearInterval(this.timerInterval);
+        this.gameTime = Math.round(next.reachedTime / 100) / 10;
+      }
+      if (this.gameSection.finished){
+        clearInterval(this.timerInterval);
       }
 
       if (this.currentUser){
@@ -82,7 +111,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
   startTimer(): void{
     clearInterval(this.timer);
     this.timer = setInterval(() => {
-      if(this.gameTime <= 0){
+      if (this.gameTime <= 0){
         alert('timeout');
         clearInterval(this.timer);
         this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
@@ -98,8 +127,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   wortErraten(): void {
-    console.log(this.gameSection.word);
-    clearInterval(this.timer);
+    clearInterval(this.timerInterval);
     this.restService.guessedWord(this.game.gameId, this.gameSection.word.word).subscribe(next => console.log(next));
     // TODO: inform backend about gameSection End
   }
@@ -109,37 +137,13 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.restService.strikeGameSection(this.game.gameId).subscribe(next => console.log(next));
   }
 
-  FULL_DASH_ARRAY = 283;
-
-
-  circleDasharray: string;
-  TIME_LIMIT: number;
-  timerInterval = null;
-  remainingPathColor = 'green';
-  info: COLOR_CODE = {
-    color: 'green',
-    threshold: 0
-  };
-  warning: COLOR_CODE = {
-    color: 'orange',
-    threshold: 10
-  };
-  error: COLOR_CODE = {
-    color: 'red',
-    threshold: 5
-  };
-
-
-
-
-
-
-  startTimer2() {
+  startTimer2(): void {
     clearInterval(this.timerInterval);
     this.TIME_LIMIT = this.gameTime;
 
     this.timerInterval = setInterval(() => {
-      if(this.gameTime <= 0){
+      if (this.gameTime <= 10) {this.gameTime = 30; }
+      if (this.gameTime <= 0){
         alert('timeout');
         clearInterval(this.timerInterval);
         this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
@@ -151,7 +155,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 1000);
   }
 
-  setRemainingPathColor(timeLeft) {
+  setRemainingPathColor(timeLeft): void {
     if (timeLeft <= this.error.threshold) {
       this.remainingPathColor = 'red';
     } else if (timeLeft <= this.warning.threshold) {
@@ -164,7 +168,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return rawTimeFraction - (1 / this.TIME_LIMIT) * (1 - rawTimeFraction);
   }
 
-  setCircleDasharray() {
+  setCircleDasharray(): void {
     const circleDasharray = `${(
       this.calculateTimeFraction() * this.FULL_DASH_ARRAY
     ).toFixed(0)} 283`;

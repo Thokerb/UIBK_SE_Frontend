@@ -41,3 +41,7 @@ app-user-management-page{
 .headerMiddle{
   text-align: center;
 }
+
+app-game-play-page{
+  flex-grow: 1;
+}
