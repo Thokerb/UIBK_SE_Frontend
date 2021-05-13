@@ -58,7 +58,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
         const playerInTeams: PlayerDTO[] = next.gameTeams.map(x => x.players).reduce((acc, val) => acc.concat(val), []);
         this.nimbusPlayer = next.gamePlayers.filter(x => !playerInTeams.map(y => y.id).includes(x.id)).map(x => x.username);
         console.log(this.nimbusPlayer);
-        if (this.nimbusPlayer.length === 0 && next.gamePlayers.length >= next.gameNumberTeams * 2) {
+        if (this.nimbusPlayer.length === 0 && next.gamePlayers.length >= next.gameNumberTeams * 1) {
           this.gameDisabled = false;
         } else {
           this.gameDisabled = true;
