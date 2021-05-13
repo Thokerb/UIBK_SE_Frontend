@@ -16,6 +16,7 @@
   "RemovePlayerTeam": "/api/team/removeplayer",
   "createGame": "/api/game",
   "addTopicToGame": "/api/game/addTopic",
+  "getStats": "/api/stats/admin",
   "startGame": "",
   "startSection": "",
   "stopSection": "",
