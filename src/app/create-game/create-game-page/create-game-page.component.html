@@ -12,13 +12,13 @@
         <label for="input-max-points">
           Punktemaximum:
         </label>
-        <input type="number" min="0" max="100" placeholder="Punktemaximum" id="input-max-points" name="max-points" />
+        <input type="number" min="0" [defaultValue]="100" placeholder="Punktemaximum" id="input-max-points" name="max-points" />
       </div>
       <div>
         <label for="input-number-teams">
           Anzahl Teams:
         </label>
-        <input type="number" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
+        <input type="number" min="2" max="6" [defaultValue]="2" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
         <span>(2-6 Teams zu je 2-4 SpielerInnen)</span>
       </div>
       <div>
@@ -26,8 +26,10 @@
           Themengebiete:
         </label>
       </div>
-      <button (click)="onCreateBtn($event)">Erstellen</button>
-      <button (click)="onCancelBtn($event)">Abbrechen</button>
+      <div>
+        <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-py-4">Erstellen</button>
+        <button (click)="onCancelBtn($event)" pButton pRipple label="Abbrechen" class="p-col-12 p-py-4">Abbrechen</button>
+      </div>
     </form>
   </main>
 </div>
