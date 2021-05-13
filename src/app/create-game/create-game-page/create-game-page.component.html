@@ -1,19 +1,31 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Create Game</h1>
   <main class="full p-grid p-dir-row">
-    <div>
-      <label for="input-game-name">
-        Spielname:
+    <form>
+      <div>
+        <label for="input-game-name">
+          Spielname:
+        </label>
         <input type="text" placeholder="Spielname" id="input-game-name" name="game-name" />
-      </label>
-      <label for="input-max-points">
-        Punktemaximum:
+      </div>
+      <div>
+        <label for="input-max-points">
+          Punktemaximum:
+        </label>
         <input type="number" min="0" max="100" placeholder="Punktemaximum" id="input-max-points" name="max-points" />
-      </label>
-      <label for="input-number-teams">
-        Anzahl Teams:
+      </div>
+      <div>
+        <label for="input-number-teams">
+          Anzahl Teams:
+        </label>
         <input type="number" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
-      </label>
-    </div>
+        <span>(2-6 Teams zu je 2-4 SpielerInnen)</span>
+      </div>
+      <div>
+        <label for="input-number-teams">
+          Themengebiete:
+        </label>
+      </div>
+    </form>
   </main>
 </div>
