@@ -5,7 +5,7 @@ import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
-import {USER_ROLES} from "../../api/dto/UserManagement";
+import {USER_ROLES} from '../../api/dto/UserManagement';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,13 +26,21 @@ export class DashboardComponent implements OnInit {
   ) {
     this.userRoles = [];
     this.isAdmin = false;
+    this.isOrganizer = false;
   }
 
   ngOnInit(): void {
     this.store.select(this.selector.selectRoles).subscribe(rolesResult => {
+      console.log('user roles');
+      console.log(rolesResult);
       this.userRoles = rolesResult;
-      this.isAdmin = this.userRoles.includes(USER_ROLES.ADMIN);
-      this.isOrganizer = this.userRoles.includes(USER_ROLES.ORGANIZER);
+      // this.isAdmin = this.userRoles.includes(USER_ROLES.ADMIN);
+      // this.isOrganizer = this.userRoles.includes(USER_ROLES.ORGANIZER);
+      // @ts-ignore
+      this.isAdmin = rolesResult.includes('ADMIN');
+      // @ts-ignore
+      this.isOrganizer = rolesResult.includes('ORGANIZER');
+      console.log('isAdmin? ' + this.isAdmin);
     });
   }
 
@@ -56,13 +64,19 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/statistics');
   }
 
-  // TODO authentication
-
   onUserManagementBtn(): void {
+    if (!this.isAdmin) {
+      console.warn('Insufficient permissions');
+      return;
+    }
     this.router.navigateByUrl('/admin/usermanagement');
   }
 
   onTopicsBtn(): void {
+    if (!(this.isAdmin || this.isOrganizer)) {
+      console.warn('Insufficient permissions');
+      return;
+    }
     this.router.navigateByUrl('/gametopic');
   }
 
