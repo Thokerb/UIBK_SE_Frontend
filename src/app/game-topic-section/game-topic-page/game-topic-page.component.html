@@ -1,6 +1,11 @@
 <app-game-topic-upload></app-game-topic-upload>
 <app-game-topic-table></app-game-topic-table>
-<button pButton type="button" (click)="add = true" class="p-button-lg p-button-raised p-button-rounded" icon="pi pi-plus"> </button>
+
+<div class="p-grid p-ai-center p-mt-3">
+  <div style="margin: auto">
+<button style="height: 5rem; width: 5rem;" pButton type="button" (click)="add = true" class="p-button-lg p-button-raised p-button-rounded" icon="pi pi-plus"> </button>
+  </div>
+</div>
 
 <p-dialog *ngIf="this.add" header="Topic bearbeiten" [(visible)]="add" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false" [maximizable]="true">

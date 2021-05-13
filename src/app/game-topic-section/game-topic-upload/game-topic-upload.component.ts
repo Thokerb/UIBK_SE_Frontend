@@ -21,18 +21,19 @@ export class GameTopicUploadComponent implements OnInit {
 
   onFileUpload($event): void {
     console.log($event);
-    const file = $event.target as HTMLInputElement;
-    if (file.files.length === 0) {
+    const f = $event.files[0] as File;
+    if (!f) {
       this.selectedFile = null;
       this.uploadTopic = null;
       return;
     }
-    this.selectedFile = file.files[0];
+    this.selectedFile = f;
     const fileReader = new FileReader();
     fileReader.readAsText(this.selectedFile, 'UTF-8');
     fileReader.onload = () => {
       this.uploadTopic = JSON.parse(fileReader.result as string);
       console.log(this.uploadTopic);
+      this.upload(this.uploadTopic);
     };
     fileReader.onerror = (error) => {
       console.log(error);

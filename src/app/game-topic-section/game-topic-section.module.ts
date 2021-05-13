@@ -13,6 +13,7 @@ import {ListboxModule} from 'primeng/listbox';
 import {FormsModule} from '@angular/forms';
 import {ChipsModule} from 'primeng/chips';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
 
 
 
@@ -29,7 +30,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ListboxModule,
     FormsModule,
     ChipsModule,
-    InputTextareaModule
+    InputTextareaModule,
+    FileUploadModule
   ]
 })
 export class GameTopicSectionModule { }
