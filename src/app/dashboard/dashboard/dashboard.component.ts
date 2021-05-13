@@ -45,6 +45,21 @@ export class DashboardComponent implements OnInit {
   openCubeSite(): void {
     this.router.navigateByUrl('/cube');
   }
+
+  onStatsBtn(): void {
+    this.router.navigateByUrl('/statistics');
+  }
+
+  // TODO authentication
+
+  onUserManagementBtn(): void {
+    this.router.navigateByUrl('/admin/usermanagement');
+  }
+
+  onTopicsBtn(): void {
+    this.router.navigateByUrl('/gametopic');
+  }
+
   sendToSocket(): void {
     this.webSocket.send();
   }
