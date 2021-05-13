@@ -90,6 +90,9 @@ export class CreateGamePageComponent implements OnInit {
     this.createGame();
   }
 
+  /**
+   * TODO error handling
+   */
   createGame(): void {
     console.log(this.maxPoints);
     const game: Game | any = {
