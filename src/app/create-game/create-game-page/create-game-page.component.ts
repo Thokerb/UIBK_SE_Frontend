@@ -110,7 +110,6 @@ export class CreateGamePageComponent implements OnInit {
       console.log('loaded topics');
       console.log(topics);
       this.availableTopics = topics;
-      // TODO update state
     });
   }
 
