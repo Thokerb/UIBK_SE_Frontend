@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
 import {TodoSelector} from '../../redux/todo/todo.selector';
-import {TodoReducer} from '../../redux/todo/todo.reducer';
-import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
+import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
+import {USER_ROLE} from '../../redux/authentication/authentication.reducer';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,19 +14,29 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  todo: Observable<string[]>;
-  username: string;
-  roomID: string;
+  userRoles: USER_ROLE[];
+  isAdmin: boolean;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
-              private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
-              private router: Router
-              ) { }
+              private router: Router,
+              private selector: AuthenticationSelector
+  ) {
+    this.userRoles = [];
+    this.isAdmin = false;
+  }
 
   ngOnInit(): void {
-    this.todo = this.store.select(this.todoSelector.selectAllTodos);
+    this.store.select(this.selector.selectRoles).subscribe(rolesResult => {
+      if (rolesResult === USER_ROLE.NONE) {
+        this.userRoles = [USER_ROLE.NONE];
+      }
+      else {
+        this.userRoles = rolesResult;
+      }
+      this.isAdmin = this.userRoles.includes(USER_ROLE.ADMIN);
+    });
   }
 
   onLobbyBtn(): void {
