@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './user-profile-page.component.html',
-  styleUrls: ['./user-profile-page.component.css']
+  templateUrl: './create-game-page.component.html',
+  styleUrls: ['./create-game-page.component.css']
 })
 export class CreateGamePageComponent implements OnInit {
 
