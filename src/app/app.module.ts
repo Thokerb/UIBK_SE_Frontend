@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import * as fromRoot from './redux/AppState';
-import {TodoModule} from './todo/todo.module';
+import {DashboardModule} from './dashboard/dashboard.module';
 import {ReduxModule} from './redux/redux.module';
 import {AppReducer} from './redux/AppReducer';
 import {storeLogger} from 'ngrx-store-logger';
@@ -57,7 +57,7 @@ export const metaReducers = environment.production ? [] : [logger];
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TodoModule,
+    DashboardModule,
     HttpClientModule,
     ReduxModule,
     StoreModule.forRoot(REDUCER_TOKEN,

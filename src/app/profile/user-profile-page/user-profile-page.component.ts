@@ -10,10 +10,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './user-profile-page.component.html',
+  styleUrls: ['./user-profile-page.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class UserProfilePageComponent implements OnInit {
 
   todo: Observable<string[]>;
   username: string;
@@ -26,25 +26,12 @@ export class DashboardComponent implements OnInit {
               private router: Router
               ) { }
 
+  // TODO page only accessible after auth / login
+  // TODO get and display user profile info (id, username, email, roles, etc.)
   ngOnInit(): void {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
-  onLobbyBtn(): void {
-    this.router.navigateByUrl('/gamelobby');
-  }
-
-  onCreateGameBtn(): void {
-    this.router.navigateByUrl('/createGame');
-  }
-
-  onPlayerProfileBtn(): void {
-    this.router.navigateByUrl('/profile');
-  }
-
-  openCubeSite(): void {
-    this.router.navigateByUrl('/cube');
-  }
   sendToSocket(): void {
     this.webSocket.send();
   }

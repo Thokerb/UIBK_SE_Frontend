@@ -44,6 +44,8 @@ export interface Teams {
 
 export interface CompleteGameDTO{
   active: boolean;
+  started: boolean;
+  finished: boolean;
   gameId: number;
   gameName: string;
   gameNumberTeams: number;
@@ -67,7 +69,7 @@ export enum Category {
 }
 
 export interface GameSection {
-  sectionId;
+  sectionId: number;
   Game: CompleteGameDTO;
   activeTeam: Teams;  // finished winner team
   activePlayer: PlayerDTO;
@@ -92,6 +94,12 @@ export interface GameLobbyResponse{
   success: boolean;
   description: string;
   object: GameLobbyElement[];
+}
+
+export interface GameSectionResponse {
+  success: boolean;
+  description: string;
+  object: GameSection[];
 }
 
 export interface PlayerDTO {

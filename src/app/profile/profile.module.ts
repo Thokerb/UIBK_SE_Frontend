@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [UserProfilePageComponent],
     imports: [
         CommonModule,
         ButtonModule,
@@ -16,4 +16,4 @@ import {FormsModule} from '@angular/forms';
         FormsModule
     ]
 })
-export class TodoModule { }
+export class ProfileModule { }

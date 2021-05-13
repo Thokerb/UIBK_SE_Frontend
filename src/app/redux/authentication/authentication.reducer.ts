@@ -2,13 +2,14 @@ import {createReducer, on} from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {AuthenticationAction} from './authentication.action';
 import {REGISTER_STATUS} from '../../api/dto/Auth';
+import {USER_ROLES} from '../../api/dto/UserManagement';
 
 
 export interface AuthenticationState {
   authenticated: boolean;
   registered: boolean;
   registerError: REGISTER_ERROR;
-  roles: USER_ROLE[];
+  roles: USER_ROLES[];
   user: User;
   loginError: boolean;
 }
@@ -19,17 +20,12 @@ export enum REGISTER_ERROR {
   EMAILTAKEN
 }
 
-export enum USER_ROLE {
-  NONE,
-  USER,
-  ADMIN
-}
 
 export interface User {
   id: string;
   username: string;
   email: string;
-  roles: USER_ROLE[];
+  roles: USER_ROLES[];
   accessToken: string;
   tokenType: string;
 }
@@ -38,11 +34,11 @@ export interface User {
 export const initialState: AuthenticationState = {
   authenticated: false,
   registered: false,
-  roles: [USER_ROLE.NONE],
+  roles: [],
   registerError: REGISTER_ERROR.NONE,
   user: {
     username: null,
-    roles: [USER_ROLE.NONE],
+    roles: [],
     accessToken: null,
     email: null,
     id: null,

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {AuthService} from '../../api/auth.service';
 import {Action} from '@ngrx/store';
@@ -52,6 +52,44 @@ export class GameEffect {
           ];
         }
 
+      })
+    )
+  );
+
+  initGame: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.init),
+      switchMap(({gameId}) => this.restService.getGame(gameId)),
+      switchMap(data => {
+        console.log(data);
+        if (data){
+          return [
+            this.gameActions.setCurrentGame({game: data.object}),
+          ];
+        }
+        else{
+          return EMPTY;
+        }
+      })
+    )
+  );
+  initGameSection: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(this.gameActions.init),
+      switchMap(({gameId}) => this.restService.getGameSections(gameId)),
+      switchMap(data => {
+        console.log(data);
+        if (data && data.success){
+          const section = data.object[data.object.length - 1];
+          return [
+            this.gameActions.setCurrentSection({section: section}),
+          ];
+        }
+        else{
+          return [
+            this.gameActions.setCurrentSection({section: null}),
+          ];
+        }
       })
     )
   );

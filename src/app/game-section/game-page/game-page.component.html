@@ -16,12 +16,13 @@
 
 
         <div class="p-grid">
-          <div class="p-col-10">
+          <div class="p-col-6 p-md-9 p-lg-10">
             <div *ngFor="let player of nimbusPlayer">
+              <i class="pi pi-user" *ngIf="currentUser.username === player"></i>
               {{player}}
             </div>
           </div>
-          <div class="p-col-2">
+          <div class="p-col-6 p-md-3 p-lg-2">
             <p-button label="Team beitreten" (click)="removeTeam()"></p-button>
 
           </div>
@@ -36,13 +37,13 @@
           </div>
         </ng-template>
         <div class="p-grid">
-          <div class="p-col-10">
+          <div class="p-col-6 p-md-9 p-lg-10">
             <div *ngFor="let player of team.players">
-              <i class="pi pi-check" *ngIf="currentUser.id === player.id"></i>
+              <i class="pi pi-user" *ngIf="currentUser.id === player.id"></i>
               {{player.username}}
             </div>
           </div>
-          <div class="p-col-2">
+          <div class="p-col-6 p-md-3 p-lg-2">
             <p-button label="Team beitreten" (click)="joinTeam(team.teamId)"></p-button>
           </div>
         </div>
@@ -63,3 +64,4 @@
   <div class="p-col"></div>
 </div>
 
+<app-game-play-page *ngIf="gameplay"></app-game-play-page>
