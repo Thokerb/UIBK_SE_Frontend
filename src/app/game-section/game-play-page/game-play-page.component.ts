@@ -106,8 +106,8 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
         }
         else {
           this.gameTime = next.maxTime;
+          this.startTimer2();
         }
-        this.startTimer2();
       }
 
       if (!this.gameSection.activeSection){
