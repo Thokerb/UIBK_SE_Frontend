@@ -21,6 +21,7 @@ export class StatsPageComponent implements OnInit {
   stats: Stats;
   mostPlayedTopicsData: any;
   bestTopicsData: any;
+  numDistinctTopics: number;
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
@@ -28,6 +29,7 @@ export class StatsPageComponent implements OnInit {
               ) {
     this.mostPlayedTopicsData = null;
     this.bestTopicsData = null;
+    this.numDistinctTopics = 0;
   }
 
   ngOnInit(): void {
@@ -45,6 +47,8 @@ export class StatsPageComponent implements OnInit {
 
   prepareChartData(): void {
 
+    this.numDistinctTopics = this.stats.topics.length;
+
     // Pie chart for most played topics
     this.mostPlayedTopicsData = {
       labels: this.stats.topics.map(topic => topic.topic),
@@ -55,9 +59,9 @@ export class StatsPageComponent implements OnInit {
       ]
     };
 
-    // TODO sort
     const bestTopics = this.stats.topics
-      .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}));
+      .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}))
+      .sort((t1, t2) => t1.rating - t2.rating);
 
     // Bar chart for best topics
     this.bestTopicsData = {
