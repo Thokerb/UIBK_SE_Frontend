@@ -33,7 +33,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
   }
   game: CompleteGameDTO;
   currentUser: User;
-  gameSection: GameSection;
+  gameSection: GameSection = null;
   isActivePlayer: boolean;
   isActiveTeam: boolean;
   myTeamId: number;
@@ -78,6 +78,10 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     });
     this.store.select(this.gameSelector.selectCurrentGame).subscribe(next =>
       {
+        if(!next || next.gameId !== this.id){
+          console.warn("previous game",next);
+          return;
+        }
         this.game = next;
         if (this.currentUser && this.game){
           this.myTeamId = this.game.gameTeams.find(x => x.players.map(y => y.id).includes(this.currentUser.id)).teamId;
@@ -87,10 +91,22 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     this.store.select(this.gameSelector.selectCurrentSection).subscribe(next => {
       console.log(next);
       if (!next) {return; }
+      let prevStrikes: number;
+      let prevId: number;
+      if(this.gameSection){
+        prevStrikes = this.gameSection.strikes;
+        prevId = this.gameSection.sectionId;
+      }
+
       this.gameSection = next;
       // this.circleDasharray = '283';
       if (!this.gameSection.finished && this.gameSection.activeSection){
-        this.gameTime = next.maxTime;
+        if(this.gameSection.sectionId === prevId && this.gameSection.strikes !== prevStrikes){
+          // got a strike
+        }
+        else {
+          this.gameTime = next.maxTime;
+        }
         this.startTimer2();
       }
 
@@ -114,9 +130,10 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (this.gameTime <= 0){
-        alert('timeout');
         clearInterval(this.timer);
-        this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
+        if(this.isActivePlayer){
+          this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
+        }
       }else{
         this.gameTime = this.gameTime - 1;
       }
@@ -145,7 +162,6 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
 
     this.timerInterval = setInterval(() => {
       if (this.gameTime <= 0){
-        alert('timeout');
         clearInterval(this.timerInterval);
         this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
       }else{

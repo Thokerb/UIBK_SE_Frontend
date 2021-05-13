@@ -86,7 +86,9 @@ export class GameEffect {
           ];
         }
         else{
-          return EMPTY;
+          return [
+            this.gameActions.setCurrentSection({section: null}),
+          ];
         }
       })
     )

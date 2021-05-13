@@ -38,6 +38,7 @@ export class GameLobbyTableComponent implements OnInit {
     this.restService.joinGame(this.user.username, game.gameID).subscribe(next => {
       if (next && next.success){
         this.zone.run(() => {
+          this.store.dispatch(this.gameAction.setCurrentSection({section: null}));
           this.router.navigateByUrl('/game/' + game.gameID);
         });
       }
