@@ -3,10 +3,7 @@ import * as config from '../../config/appConfig.json';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
-  CompleteGameDTO,
-  Game,
   GameDTO,
-  GameLobbyElement,
   GameLobbyResponse,
   GameSectionResponse,
   GetGameResponse,
