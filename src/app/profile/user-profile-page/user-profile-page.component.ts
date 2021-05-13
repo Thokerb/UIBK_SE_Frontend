@@ -17,7 +17,7 @@ import {User} from '../../api/dto/UserManagement';
 })
 export class UserProfilePageComponent implements OnInit {
 
-  user: Partial<User>;
+  user: Partial<User> | null;
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
@@ -27,7 +27,6 @@ export class UserProfilePageComponent implements OnInit {
     this.user = null;
   }
 
-  // TODO display data
   ngOnInit(): void {
 
     this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
