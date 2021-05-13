@@ -5,6 +5,7 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
+import {SliderModule} from "primeng/slider";
 
 @NgModule({
   declarations: [CreateGamePageComponent],
@@ -13,7 +14,8 @@ import {InputTextModule} from 'primeng/inputtext';
     ButtonModule,
     RippleModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
+    SliderModule
   ]
 })
 export class CreateGameModule { }

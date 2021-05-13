@@ -11,6 +11,8 @@ import {AuthenticationAction} from '../../redux/authentication/authentication.ac
 import {GameAction} from '../../redux/game/game.action';
 import {Game} from '../../api/dto/Game';
 import * as config from '../../../config/appConfig.json';
+import {SliderModule} from 'primeng/slider';
+
 
 @Component({
   selector: 'app-create-game',
@@ -53,6 +55,7 @@ export class CreateGamePageComponent implements OnInit {
 
   createGame(): void {
     console.warn('Not yet implemented');
+    console.log(this.maxPoints);
     const game: Game = {
       gameId: 1, // TODO ?
       gameName: this.gameName,
@@ -61,7 +64,7 @@ export class CreateGamePageComponent implements OnInit {
       gameTopics: this.gameTopics,
       gameNumberTeams: this.numTeams
     };
-    this.store.dispatch(this.gameAction.addGame({item: game}));
+    // this.store.dispatch(this.gameAction.addGame({item: game}));
     // TODO create game, topic, cube, player
   }
 
