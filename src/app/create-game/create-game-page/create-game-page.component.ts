@@ -30,6 +30,14 @@ export class CreateGamePageComponent implements OnInit {
     this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
+  onCreateBtn(ev: MouseEvent): void {
+    console.warn('Not yet implemented');
+  }
+
+  onCancelBtn(ev: MouseEvent): void {
+    console.warn('Not yet implemented');
+  }
+
   sendToSocket(): void {
     this.webSocket.send();
   }
