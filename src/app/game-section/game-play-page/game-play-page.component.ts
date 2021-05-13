@@ -96,7 +96,8 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
 
       if (!this.gameSection.activeSection){
         clearInterval(this.timerInterval);
-        this.gameTime = Math.round(next.reachedTime / 100) / 10;
+        // this.remainingPathColor = 'green';
+        this.gameTime = next.maxTime - Math.round(next.reachedTime / 100) / 10;
       }
       if (this.gameSection.finished){
         clearInterval(this.timerInterval);
@@ -143,7 +144,6 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     this.TIME_LIMIT = this.gameTime;
 
     this.timerInterval = setInterval(() => {
-      if (this.gameTime <= 10) {this.gameTime = 30; }
       if (this.gameTime <= 0){
         alert('timeout');
         clearInterval(this.timerInterval);
@@ -161,6 +161,9 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
       this.remainingPathColor = 'red';
     } else if (timeLeft <= this.warning.threshold) {
       this.remainingPathColor = 'orange';
+    }
+    else {
+      this.remainingPathColor = 'green';
     }
   }
 

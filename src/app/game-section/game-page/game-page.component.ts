@@ -16,7 +16,7 @@ import {SocketService} from '../../api/socket.service';
   styleUrls: ['./game-page.component.css']
 })
 export class GamePageComponent implements OnInit, OnDestroy {
-  id: any;
+  id: number;
   game: CompleteGameDTO;
   nimbusPlayer: string[];
   gameDisabled = true;
@@ -43,11 +43,11 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.socketService.subscribeGame();
     this.socketService.subscribeSections();
     this.store.select(this.authSelector.selectCurrentUser).subscribe(next => this.currentUser = next);
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('id');
     this.store.select(this.gameSelector.selectCurrentGame).subscribe(next => {
       this.game = next;
       console.log(next);
-      if (next) {
+      if (next && next.gameId === this.id) {
         if (next.started){
           this.zone.run(() => {
             this.router.navigateByUrl('/gameplay/' + this.game.gameId);
