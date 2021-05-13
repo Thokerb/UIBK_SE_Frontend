@@ -82,6 +82,12 @@ export class CreateGamePageComponent implements OnInit {
     this.selectedCubeId = ev.value;
   }
 
+  topicChange(ev): void {
+    console.log('topic change');
+    console.log(ev);
+    this.selectedTopics = ev.value.map(topicId => `${topicId}`);
+  }
+
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
     this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId}));
@@ -105,16 +111,16 @@ export class CreateGamePageComponent implements OnInit {
    * TODO error handling
    */
   createGame(): void {
-    console.log(this.maxPoints);
     const game: Game | any = {
       gameId: '1', // doesn't matter
       gameName: this.gameName,
       gameMaxPoints: this.maxPoints,
-      gameTopics: this.selectedTopics,
+      gameTopics: [],
       gameNumberTeams: this.numTeams,
       gamePlayers: [],
       gameTeams: []
     };
+    console.log(game);
     // 1. Create game
     console.log('creating game: ');
     console.log(game);
