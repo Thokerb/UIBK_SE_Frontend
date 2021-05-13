@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {TodoSelector} from '../../redux/todo/todo.selector';
@@ -49,7 +49,8 @@ export class CreateGamePageComponent implements OnInit {
               private webSocket: SocketService,
               private router: Router,
               private gameAction: GameAction,
-              private authSelector: AuthenticationSelector
+              private authSelector: AuthenticationSelector,
+              private zone: NgZone,
               ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
@@ -116,7 +117,13 @@ export class CreateGamePageComponent implements OnInit {
         // 4. Join current player
         this.store.select(this.authSelector.selectCurrentUser).subscribe(authResult => {
           const currentUser = authResult;
-          this.restService.joinGame(currentUser.username, newGame.gameId).subscribe(next2 => console.log(next2));
+          this.restService.joinGame(currentUser.username, newGame.gameId).subscribe(playerJoinResult => {
+            console.log(playerJoinResult);
+
+            this.zone.run(() => {
+              this.router.navigateByUrl('/game/' + newGame.gameId);
+            });
+          });
         });
       });
     });
