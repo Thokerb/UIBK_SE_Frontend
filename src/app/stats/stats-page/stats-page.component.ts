@@ -9,6 +9,7 @@ import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {ChartModule} from 'primeng/chart';
 import {Stats} from '../../api/dto/Stats';
+import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
 
 @Component({
   selector: 'app-stats',
@@ -21,14 +22,20 @@ export class StatsPageComponent implements OnInit {
   mostPlayedTopicsData: any;
   constructor(private store: Store,
               private restService: RestServiceService,
-              private webSocket: SocketService
+              private webSocket: SocketService,
+              private authSelector: AuthenticationSelector
               ) {
     this.mostPlayedTopicsData = null;
   }
 
   ngOnInit(): void {
-    // TODO get
-    this.prepareChartData();
+    this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
+      const currentUserId = userResult.id;
+      this.restService.getStats(currentUserId).subscribe(statsResult => {
+        this.stats = statsResult.object;
+        this.prepareChartData();
+      });
+    });
   }
 
   prepareChartData(): void {

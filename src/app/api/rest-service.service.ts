@@ -14,6 +14,7 @@ import {
 import {DeleteUserResponse, UpdateUserRequest, User} from './dto/UserManagement';
 import {GameTopicDTO, GameTopicResponse, UploadGameTopicResponse} from './dto/GameTopic';
 import {Cube, CubeSide, UpdateCubeResponse} from './dto/Cube';
+import {StatsResponse} from "./dto/Stats";
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,10 @@ export class RestServiceService {
 
   updateCubeSite(side: CubeSide): Observable<UpdateCubeResponse> {
     return this.http.patch<UpdateCubeResponse>(config.baseURI + config.CubeConfig, side);
+  }
+
+  getStats(userId: string): Observable<StatsResponse> {
+    return this.http.get<StatsResponse>(config.baseURI + config.getStats + '/' + userId);
   }
 
   removePlayerFromTeam(gameId: number, id: string, teamId: number): Observable<GenericResponse> {

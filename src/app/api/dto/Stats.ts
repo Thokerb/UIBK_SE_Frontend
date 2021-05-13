@@ -1,5 +1,5 @@
 
-export interface GameTopicResponse {
+export interface StatsResponse {
   success: boolean;
   description: string;
   object: Stats;
