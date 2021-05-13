@@ -18,8 +18,8 @@
         <label for="input-number-teams">
           Anzahl Teams:
         </label>
-        <input type="number" min="2" max="6" [defaultValue]="2" [(ngModel)]="numTeams" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
-        <span>(2-6 Teams zu je 2-4 SpielerInnen)</span>
+        <input type="number" min="{{MIN_NUM_TEAMS}}" max="{{MAX_NUM_TEAMS}}" [defaultValue]="MIN_NUM_TEAMS" [(ngModel)]="numTeams" placeholder="Anzahl Teams" id="input-number-teams" name="number-teams" />
+        <span>({{MIN_NUM_TEAMS}}-{{MAX_NUM_TEAMS}} Teams zu je 2-4 SpielerInnen)</span>
       </div>
       <div>
         <label for="input-number-teams">

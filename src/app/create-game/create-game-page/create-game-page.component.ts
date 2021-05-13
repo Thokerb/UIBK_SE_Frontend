@@ -23,6 +23,9 @@ export class CreateGamePageComponent implements OnInit {
   username: string;
   roomID: string;
 
+  readonly MIN_NUM_TEAMS = 2;
+  readonly MAX_NUM_TEAMS = 6;
+
   gameName: string;
   maxPoints: number;
   numTeams: number;
@@ -36,7 +39,7 @@ export class CreateGamePageComponent implements OnInit {
               private gameAction: GameAction
               ) {
     // TODO set init values (from config?)
-    this.numTeams = 2;
+    this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
   }
 
