@@ -7,6 +7,9 @@ import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
+import {AuthenticationAction} from "../../redux/authentication/authentication.action";
+import {GameAction} from "../../redux/game/game.action";
+import {Game} from "../../api/dto/Game";
 
 @Component({
   selector: 'app-create-game',
@@ -23,7 +26,8 @@ export class CreateGamePageComponent implements OnInit {
               private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
-              private router: Router
+              private router: Router,
+              private gameAction: GameAction
               ) { }
 
   ngOnInit(): void {
@@ -32,7 +36,20 @@ export class CreateGamePageComponent implements OnInit {
 
   onCreateBtn(ev: MouseEvent): void {
     ev.preventDefault();
+    this.createGame();
+  }
+
+  createGame(): void {
     console.warn('Not yet implemented');
+    const game: Game = {
+      gameId: 1,
+      gameName: '',
+      gameMaxPoints: 100,
+      gamePlayers: [],
+      gameTopics: [],
+      gameNumberTeams: 2
+    };
+    this.store.dispatch(this.gameAction.addGame({item: game}));
   }
 
   onCancelBtn(ev: MouseEvent): void {
