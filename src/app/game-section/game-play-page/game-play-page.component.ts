@@ -113,7 +113,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
       if (!this.gameSection.activeSection){
         clearInterval(this.timerInterval);
         // this.remainingPathColor = 'green';
-        this.gameTime = +(next.maxTime - Math.round(next.reachedTime / 100) / 10).toString().slice(0,2);
+        this.gameTime = +(next.maxTime - Math.round(next.reachedTime / 100) / 10).toString().slice(0, next.maxTime.toString().length);
       }
       if (this.gameSection.finished){
         clearInterval(this.timerInterval);
