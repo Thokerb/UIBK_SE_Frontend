@@ -15,21 +15,13 @@ import {Router} from '@angular/router';
 })
 export class StatsPageComponent implements OnInit {
 
-  todo: Observable<string[]>;
-  username: string;
-  roomID: string;
   constructor(private store: Store,
-              private todoSelector: TodoSelector,
-              private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private router: Router
               ) { }
 
-  // TODO page only accessible after auth / login
-  // TODO get and display user profile info (id, username, email, roles, etc.)
   ngOnInit(): void {
-    this.todo = this.store.select(this.todoSelector.selectAllTodos);
   }
 
   sendToSocket(): void {
