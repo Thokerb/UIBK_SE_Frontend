@@ -31,8 +31,11 @@ export class StatsPageComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
       const currentUserId = userResult.id;
+      console.log('Current user id: ' + currentUserId);
       this.restService.getStats(currentUserId).subscribe(statsResult => {
         this.stats = statsResult.object;
+        console.log('get stats: ');
+        console.log(this.stats);
         this.prepareChartData();
       });
     });

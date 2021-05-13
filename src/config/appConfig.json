@@ -23,7 +23,7 @@
   "timeoutSection": "/api/game/timeout",
   "createGame": "/api/game",
   "addTopicToGame": "/api/game/addTopic",
-  "getStats": "/api/stats/admin",
+  "getStats": "/api/stats",
   "Cube": "/api/cube",
   "CubeConfig": "/api/cube/config",
   "minNumTeams": 2,
