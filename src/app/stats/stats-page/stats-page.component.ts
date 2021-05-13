@@ -8,6 +8,7 @@ import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {ChartModule} from 'primeng/chart';
+import {Stats} from '../../api/dto/Stats';
 
 @Component({
   selector: 'app-stats',
@@ -16,17 +17,22 @@ import {ChartModule} from 'primeng/chart';
 })
 export class StatsPageComponent implements OnInit {
 
+  stats: Stats;
   mostPlayedTopicsData: any;
   constructor(private store: Store,
               private restService: RestServiceService,
-              private webSocket: SocketService,
-              private router: Router
+              private webSocket: SocketService
               ) {
     this.mostPlayedTopicsData = null;
   }
 
   ngOnInit(): void {
-    // TODO get & prepare data
+    // TODO get
+    this.prepareChartData();
+  }
+
+  prepareChartData(): void {
+    // TODO
   }
 
   sendToSocket(): void {
