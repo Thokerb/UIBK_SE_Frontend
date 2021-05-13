@@ -42,6 +42,7 @@ export class CreateGamePageComponent implements OnInit {
               ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = 100;
+    this.gameTopics = [];
   }
 
   ngOnInit(): void {
@@ -54,18 +55,23 @@ export class CreateGamePageComponent implements OnInit {
   }
 
   createGame(): void {
-    console.warn('Not yet implemented');
     console.log(this.maxPoints);
-    const game: Game = {
-      gameId: 1, // TODO ?
+    const game: Game | any = {
+      gameId: '1', // doesn't matter
       gameName: this.gameName,
       gameMaxPoints: this.maxPoints,
       gamePlayers: [],
       gameTopics: this.gameTopics,
-      gameNumberTeams: this.numTeams
+      gameNumberTeams: this.numTeams,
+      gameTeams: []
     };
-    // this.store.dispatch(this.gameAction.addGame({item: game}));
-    // TODO create game, topic, cube, player
+    // 1. Create game
+    console.log('creating game: ' + JSON.stringify(game));
+    this.restService.createGame(game).subscribe(next => console.log(next));
+    console.warn('Not yet implemented');
+    // TODO 2. Topic?
+    // TODO 3. Cube
+    // TODO 4. Join current player
   }
 
   onCancelBtn(ev: MouseEvent): void {
