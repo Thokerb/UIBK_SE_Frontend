@@ -20,6 +20,7 @@
   "getSections": "/api/game/gamesections",
   "guessedWord": "/api/game/guessRound",
   "strikeGameSection": "/api/game/strike",
+  "minPlayers": 2,
   "timeoutSection": "/api/game/timeout",
   "Cube": "/api/cube",
   "CubeConfig": "/api/cube/config"
