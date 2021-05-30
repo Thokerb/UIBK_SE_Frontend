@@ -51,6 +51,7 @@ export class CreateGamePageComponent implements OnInit {
   ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = this.DEFAULT_MAX_POINTS;
+    this.selectedCubeId = undefined;
     this.selectedTopics = [];
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
@@ -152,6 +153,16 @@ export class CreateGamePageComponent implements OnInit {
 
     if ((this.gameName === '') || (this.gameName === ' ')) {
       console.warn('Game name must not be empty');
+      return;
+    }
+
+    if (this.selectedTopics.length < 1) {
+      console.warn('At least one topic needs to be selected');
+      return;
+    }
+
+    if (this.selectedCubeId === undefined) {
+      console.warn('A cube needs to be selected');
       return;
     }
 
