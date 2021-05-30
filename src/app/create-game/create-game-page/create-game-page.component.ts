@@ -145,24 +145,30 @@ export class CreateGamePageComponent implements OnInit {
       gamePlayers: [],
       gameTeams: []
     };
-    console.log(game);
+    // console.log(game);
     // 1. Create game
-    console.log('creating game: ');
-    console.log(game);
+    // console.log('creating game: ');
+    // console.log(game);
+
+    if ((this.gameName === '') || (this.gameName === ' ')) {
+      console.warn('Game name must not be empty');
+      return;
+    }
+
     this.restService.createGame(game).subscribe(createGameResult => {
       console.log(createGameResult);
       const newGame = createGameResult.object;
 
       // 2. Add topics to game
-      console.log('Selected topics:');
-      console.log(this.selectedTopics);
+      // console.log('Selected topics:');
+      // console.log(this.selectedTopics);
       this.selectedTopics.forEach((topicId: string) => {
         // TODO wait for multiple
         this.restService.addTopicToGame(newGame.gameId, topicId).subscribe(topicResult => console.log(topicResult));
       });
 
       // 3. Add cube to game
-      console.log('selected cube id: ' + this.selectedCubeId);
+      // console.log('selected cube id: ' + this.selectedCubeId);
       this.restService.addCubeToGame(newGame.gameId, this.selectedCubeId).subscribe(cubeResult => {
         console.log(cubeResult);
 
