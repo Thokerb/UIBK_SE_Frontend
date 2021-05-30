@@ -34,7 +34,7 @@
     <span class="p-float-label">
       <input id="float-input" [(ngModel)]="wordToAdd" type="text" pInputText>
       <label for="float-input">Wort</label>
-      <p-button label="Hinzufügen" icon="pi pi-check" class="p-lg-1" iconPos="left" [disabled]="!wordToAdd" (click)="addWord(wordToAdd,editTopic)"></p-button>
+      <button pButton label="Hinzufügen" icon="pi pi-check" class="p-lg-1" iconPos="left" [disabled]="!wordToAdd" (click)="addWord(wordToAdd,editTopic)"></button>
 
     </span>
 
