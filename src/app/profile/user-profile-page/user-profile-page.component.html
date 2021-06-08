@@ -4,7 +4,11 @@
     <div>
       <p>Benutzer ID: {{user.id}}</p>
       <p>Benutzername: {{user.username}}</p>
-      <p>E-Mail Adresse: {{user.email}}</p>
+      <p>
+        E-Mail Adresse:
+        <span>{{user.email}}</span>
+        <span *ngIf="user.email == null" class="empty-text">Keine E-Mail Adresse vorhanden</span>
+      </p>
       <p>Benutzer Rollen:
         <span style="text-transform: capitalize">{{user.roles.join(", ")}}</span>
       </p>

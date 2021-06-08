@@ -31,6 +31,7 @@ export class UserProfilePageComponent implements OnInit {
 
     this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
       this.user = userResult;
+      console.log(this.user.email);
     });
   }
 
