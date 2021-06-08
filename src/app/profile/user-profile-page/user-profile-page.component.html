@@ -1,5 +1,5 @@
 <div class="full p-p-4">
-  <h1 class="p-mb-4">User Profile</h1>
+  <h1 class="p-mb-4">Spielerprofil</h1>
   <main class="full p-grid p-dir-row">
     <div>
       <p>Benutzer ID: {{user.id}}</p>
@@ -7,10 +7,12 @@
       <p>
         E-Mail Adresse:
         <span>{{user.email}}</span>
-        <span *ngIf="user.email == null" class="empty-text">Keine E-Mail Adresse vorhanden</span>
+        <span *ngIf="user.email === undefined" class="empty-text">Keine E-Mail Adresse vorhanden</span>
       </p>
-      <p>Benutzer Rollen:
-        <span style="text-transform: capitalize">{{user.roles.join(", ")}}</span>
+      <p>
+        Benutzer Rollen:
+        <span>{{userRolesText}}</span>
+        <span *ngIf="userRolesText === null" class="empty-text">Keine Rollen vorhanden</span>
       </p>
     </div>
   </main>
