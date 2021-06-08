@@ -4,7 +4,7 @@ import {GameAction} from '../../redux/game/game.action';
 import {GameSelector} from '../../redux/game/game.selector';
 import {RestServiceService} from '../../api/rest-service.service';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
-import {CompleteGameDTO, GameSection, SectionStatus, Teams} from '../../api/dto/Game';
+import {Category, CompleteGameDTO, GameSection, SectionStatus, Teams} from '../../api/dto/Game';
 import {User} from '../../redux/authentication/authentication.reducer';
 import {SocketService} from '../../api/socket.service';
 import {ActivatedRoute} from '@angular/router';
@@ -78,8 +78,8 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     });
     this.store.select(this.gameSelector.selectCurrentGame).subscribe(next =>
       {
-        if(!next || next.gameId !== this.id){
-          console.warn("previous game",next);
+        if (!next || next.gameId !== this.id){
+          console.warn('previous game', next);
           return;
         }
         this.game = next;
@@ -93,7 +93,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
       if (!next) {return; }
       let prevStrikes: number;
       let prevId: number;
-      if(this.gameSection){
+      if (this.gameSection){
         prevStrikes = this.gameSection.strikes;
         prevId = this.gameSection.sectionId;
       }
@@ -101,7 +101,7 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
       this.gameSection = next;
       // this.circleDasharray = '283';
       if (!this.gameSection.finished && this.gameSection.activeSection){
-        if(this.gameSection.sectionId === prevId && this.gameSection.strikes !== prevStrikes){
+        if (this.gameSection.sectionId === prevId && this.gameSection.strikes !== prevStrikes){
           // got a strike
         }
         else {
@@ -126,12 +126,27 @@ export class GamePlayPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  getPunkte(category: Category): number{
+    const catParsed = Category['' + category];
+    switch (catParsed) {
+      case Category.PANTOMIME:
+        return 3;
+      case Category.SPRECHEN:
+        return 2;
+      case Category.ZEICHNEN:
+        return 4;
+      case Category.REIM:
+        return 1;
+
+    }
+  }
+
   startTimer(): void{
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (this.gameTime <= 0){
         clearInterval(this.timer);
-        if(this.isActivePlayer){
+        if (this.isActivePlayer){
           this.restService.sectionTimeout(this.game.gameId).subscribe(next => console.log(next));
         }
       }else{

@@ -62,10 +62,10 @@ export enum SectionStatus {
 }
 
 export enum Category {
-  'CAT1',
-  'CAT2',
-  'CAT3',
-  'CAT4'
+  'PANTOMIME',
+  'SPRECHEN',
+  'ZEICHNEN',
+  'REIM'
 }
 
 export interface GameSection {

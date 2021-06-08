@@ -45,6 +45,7 @@
               <h1>Spieler: {{gameSection.activePlayer.username}}</h1>
               <h1>Wort: {{gameSection.word.word}}</h1>
               <h2>Kategorie: {{gameSection.category}}</h2>
+              <h2>Punkte: {{getPunkte(gameSection.category)}}</h2>
               <div class="p-d-flex p-jc-evenly p-mt-6">
                 <p-button label="Wort erraten" (click)="wortErraten()"></p-button>
 
@@ -55,10 +56,12 @@
               <h1>Du bist dran !</h1>
               <h1>Wort: {{gameSection.word.word}}</h1>
               <h2>Kategorie: {{gameSection.category}}</h2>
+              <h2>Punkte: {{getPunkte(gameSection.category)}}</h2>
             </div>
             <div *ngIf="isActiveTeam && !isActivePlayer">
               <h1>Errate den Begriff !</h1>
               <h2>Kategorie: {{gameSection.category}}</h2>
+              <h2>Punkte: {{getPunkte(gameSection.category)}}</h2>
             </div>
           </div>
 
@@ -68,6 +71,7 @@
             <h3>Team: {{gameSection.activeTeam.teamName}}</h3>
             <h3>Spieler: {{gameSection.activePlayer.username}}</h3>
             <h3>Erreichte Punkte: {{gameSection.reachedPoints}}</h3>
+            <h2>Maximale Punkte: {{getPunkte(gameSection.category)}}</h2>
             <h1>Wort: {{gameSection.word.word}}</h1>
             <h2>Kategorie: {{gameSection.category}}</h2>
             <p-button *ngIf="!isActiveTeam" label="Wort erraten" (click)="wortErraten()"></p-button>
