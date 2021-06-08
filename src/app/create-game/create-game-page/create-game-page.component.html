@@ -49,6 +49,12 @@
         </p-dropdown>
         <p class="help-text" *ngIf="displayCubes.length < 1">(Kein Würfel vorhanden)</p>
       </div>
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col err-text" id="err-text">
+        <p *ngIf="errText !== undefined">Fehler:</p>
+        <ng-template ngFor let-item [ngForOf]="(errText || '').split('\n')" let-i="index">
+          <p>{{item}}</p>
+        </ng-template>
+      </div>
       <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-row">
         <div class="p-col"></div>
         <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-lg-5 p-py-4"></button>

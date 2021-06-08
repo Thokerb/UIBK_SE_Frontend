@@ -39,6 +39,7 @@ export class CreateGamePageComponent implements OnInit {
   selectedCubeId: string;
   availableTopics: GameTopicDTO[];
   selectedTopics: string[];
+  errText: string | undefined;
   constructor(private store: Store,
               private todoSelector: TodoSelector,
               private todoActions: TodoAction,
@@ -59,6 +60,7 @@ export class CreateGamePageComponent implements OnInit {
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
     this.displayCubes = [];
+    this.errText = undefined;
   }
 
   ngOnInit(): void {
@@ -135,6 +137,29 @@ export class CreateGamePageComponent implements OnInit {
     this.createGame();
   }
 
+  inputValidation(): boolean {
+    let errStr = '';
+    if ((this.gameName === '') || (this.gameName === ' ')) {
+      errStr += 'Spielname darf nicht leer sein\n';
+    }
+
+    if (this.selectedTopics.length < 1) {
+      errStr += 'Mindestens ein Themengebiet muss ausgewählt werden\n';
+    }
+
+    if (this.selectedCubeId === undefined) {
+      errStr += 'Ein Würfel muss ausgewählt werden\n';
+    }
+
+    if (errStr !== '') {
+      console.warn(errStr);
+      this.errText = errStr;
+      return false;
+    }
+    this.errText = undefined;
+    return true;
+  }
+
   /**
    * TODO error handling
    */
@@ -154,18 +179,7 @@ export class CreateGamePageComponent implements OnInit {
     // console.log(game);
 
     console.log(this.gameName);
-    if ((this.gameName === '') || (this.gameName === ' ')) {
-      console.warn('Game name must not be empty');
-      return;
-    }
-
-    if (this.selectedTopics.length < 1) {
-      console.warn('At least one topic needs to be selected');
-      return;
-    }
-
-    if (this.selectedCubeId === undefined) {
-      console.warn('A cube needs to be selected');
+    if (!this.inputValidation()) {
       return;
     }
 

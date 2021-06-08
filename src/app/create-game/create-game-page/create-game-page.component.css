@@ -13,3 +13,14 @@ input, .input {
   width: 100%;
 }
 
+.err-text {
+  color: red;
+}
+
+.err-text p {
+  margin: 2px 0;
+}
+
+.err-text p:first-child {
+  font-weight: 500;
+}
