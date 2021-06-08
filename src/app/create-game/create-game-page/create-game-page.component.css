@@ -4,3 +4,12 @@ label {
   margin-bottom: 5px;
   margin-top: 10px;
 }
+
+.help-text {
+  font-style: italic;
+}
+
+input, .input {
+  width: 100%;
+}
+

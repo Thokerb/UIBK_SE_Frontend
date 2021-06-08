@@ -2,14 +2,14 @@
   <h1 class="p-mb-4">Spiel erstellen</h1>
   <main class="full">
     <form class="full p-grid p-dir-col">
-      <div class="p-col-3 p-grid p-dir-col">
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col">
         <label for="input-game-name">
           Spielname:
         </label>
         <input type="text" placeholder="Spielname" id="input-game-name" name="game-name" [(ngModel)]="gameName"
                required="" pInputText />
       </div>
-      <div class="p-col-3 p-grid p-dir-col">
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col">
         <label for="input-max-points">
           Punktemaximum: {{maxPoints}}
         </label>
@@ -18,7 +18,7 @@
                id="input-max-points" name="max-points" required="" /> -->
         <p-slider (onChange)="onMaxPointsChange($event)" [min]="0" [max]="100" [step]="1" orientation="horizontal" id="input-max-points"></p-slider>
       </div>
-      <div class="p-col-3 p-grid p-dir-col">
+      <div class="p-col-12 p-lg-4 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col">
         <label for="input-number-teams">
           Anzahl Teams:
         </label>
@@ -31,14 +31,15 @@
                        [step]="1" placeholder="Anzahl Teams" id="input-number-teams"></p-inputNumber>
         <p class="help-text">({{MIN_NUM_TEAMS}}-{{MAX_NUM_TEAMS}} Teams zu je 2-4 SpielerInnen)</p>
       </div>
-      <div class="p-col-3 p-grid p-dir-col">
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col">
         <label for="input-topics">
           Themengebiete:
         </label>
         <p-listbox [options]="availableTopics" optionLabel="topic" optionValue="topicId" id="input-topics"
-                   [checkbox]="true" [multiple]="true" (onChange)="topicChange($event)"></p-listbox>
+                   [checkbox]="true" [multiple]="true" (onChange)="topicChange($event)" filter="true">
+        </p-listbox>
       </div>
-      <div class="p-col-3 p-grid p-dir-col">
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-col">
         <label for="input-cube">
           Würfel:
         </label>
@@ -48,7 +49,7 @@
         </p-dropdown>
         <p class="help-text" *ngIf="displayCubes.length < 1">(Kein Würfel vorhanden)</p>
       </div>
-      <div class="p-col-12 p-grid p-dir-row">
+      <div class="p-col-12 p-lg-3 p-lg-offset-4 p-md-6 p-md-offset-3 p-grid p-dir-row">
         <div class="p-col"></div>
         <button (click)="onCreateBtn($event)" pButton pRipple label="Spiel Erstellen" class="p-col-12 p-lg-5 p-py-4"></button>
         <div class="p-col"></div>

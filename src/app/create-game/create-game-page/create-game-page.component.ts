@@ -101,7 +101,6 @@ export class CreateGamePageComponent implements OnInit {
 
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
-    // TODO interface for displayCubes
     this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId, inactive: !cube.calibrated}));
   }
 
