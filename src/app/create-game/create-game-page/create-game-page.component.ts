@@ -81,14 +81,14 @@ export class CreateGamePageComponent implements OnInit {
   }
 
   cubeChange(ev): void {
-    console.log('cube change');
-    console.log(ev);
+    // console.log('cube change');
+    // console.log(ev);
     this.selectedCubeId = ev.value;
   }
 
   topicChange(ev): void {
-    console.log('topic change');
-    console.log(ev);
+    // console.log('topic change');
+    // console.log(ev);
     this.selectedTopics = ev.value.map(topicId => `${topicId}`);
   }
 
@@ -121,13 +121,13 @@ export class CreateGamePageComponent implements OnInit {
   loadTopics(): void {
     this.restService.getAllGameTopics().subscribe(topicsResult => {
       const topics = [];
-      console.log('topicsResult');
-      console.log(topicsResult);
+      // console.log('topicsResult');
+      // console.log(topicsResult);
       for (const key of Object.keys(topicsResult.object)){
         topics.push(topicsResult.object[key]);
       }
-      console.log('loaded topics');
-      console.log(topics);
+      // console.log('loaded topics');
+      // console.log(topics);
       this.availableTopics = topics;
     });
   }
@@ -153,6 +153,7 @@ export class CreateGamePageComponent implements OnInit {
 
     if (errStr !== '') {
       console.warn(errStr);
+      this.messageService.add({severity: 'error', summary: 'Eingabe', detail: errStr});
       this.errText = errStr;
       return false;
     }
@@ -178,7 +179,6 @@ export class CreateGamePageComponent implements OnInit {
     // console.log('creating game: ');
     // console.log(game);
 
-    console.log(this.gameName);
     if (!this.inputValidation()) {
       return;
     }
