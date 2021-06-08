@@ -1,19 +1,29 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Spielerprofil</h1>
   <main class="full p-grid p-dir-row">
-    <div>
-      <p>Benutzer ID: {{user.id}}</p>
-      <p>Benutzername: {{user.username}}</p>
-      <p>
-        E-Mail Adresse:
-        <span>{{user.email}}</span>
-        <span *ngIf="user.email === undefined" class="empty-text">Keine E-Mail Adresse vorhanden</span>
-      </p>
-      <p>
-        Benutzer Rollen:
-        <span>{{userRolesText}}</span>
-        <span *ngIf="userRolesText === null" class="empty-text">Keine Rollen vorhanden</span>
-      </p>
-    </div>
+    <p-card header="Spielerprofil von {{user.username}}" class="p-col-12 p-md-6 p-lg-4">
+      <div class="user-attr">
+        <p>Benutzer ID:</p>
+        <p>{{user.id}}</p>
+      </div>
+      <div class="user-attr">
+        <p>Benutzername:</p>
+        <p>{{user.username}}</p>
+      </div>
+      <div class="user-attr">
+        <p>E-Mail Adresse:</p>
+        <p>
+          <span>{{user.email}}</span>
+          <span *ngIf="user.email == undefined" class="empty-text">Keine E-Mail Adresse vorhanden</span>
+        </p>
+      </div>
+      <div class="user-attr">
+        <p>Benutzer Rollen:</p>
+        <p>
+          <span>{{userRolesText}}</span>
+          <span *ngIf="userRolesText === null" class="empty-text">Keine Rollen vorhanden</span>
+        </p>
+      </div>
+    </p-card>
   </main>
 </div>

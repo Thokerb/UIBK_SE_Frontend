@@ -5,6 +5,7 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import {CardModule} from "primeng/card";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ButtonModule,
     RippleModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    CardModule
   ]
 })
 export class ProfileModule { }

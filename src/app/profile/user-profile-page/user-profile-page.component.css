@@ -2,3 +2,17 @@
 .empty-text {
   font-style: italic;
 }
+
+.user-attr {
+  margin-bottom: 13px;
+}
+
+p {
+  margin: 2px 0;
+}
+
+.p-card .p-card-title {
+  border-bottom-color: #495057;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
