@@ -1,7 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {TodoSelector} from '../../redux/todo/todo.selector';
-import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
@@ -41,8 +39,6 @@ export class CreateGamePageComponent implements OnInit {
   selectedTopics: string[];
   errText: string | undefined;
   constructor(private store: Store,
-              private todoSelector: TodoSelector,
-              private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private router: Router,
