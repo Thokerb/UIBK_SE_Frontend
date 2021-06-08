@@ -13,6 +13,7 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
 import {GameTopicDTO} from '../../api/dto/GameTopic';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {MessageService} from 'primeng/api';
 
 interface DisplayCube {
   name: string;
@@ -47,10 +48,12 @@ export class CreateGamePageComponent implements OnInit {
               private gameAction: GameAction,
               private authSelector: AuthenticationSelector,
               private gameTopicSelector: GametopicSelector,
+              private messageService: MessageService,
               private zone: NgZone,
   ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = this.DEFAULT_MAX_POINTS;
+    this.gameName = '';
     this.selectedCubeId = undefined;
     this.selectedTopics = [];
     this.availableCubes = [];
@@ -150,6 +153,7 @@ export class CreateGamePageComponent implements OnInit {
     // console.log('creating game: ');
     // console.log(game);
 
+    console.log(this.gameName);
     if ((this.gameName === '') || (this.gameName === ' ')) {
       console.warn('Game name must not be empty');
       return;
