@@ -1,14 +1,14 @@
 <div class="full p-p-4">
   <h1 class="p-mb-4">Dashboard</h1>
   <main class="full p-grid p-dir-row">
-    <button (click)="onLobbyBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Spielelobby"></button>
-    <button (click)="onCreateGameBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Spiel erstellen"></button>
-    <button (click)="onPlayerProfileBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Spielerprofil"></button>
-    <button (click)="openCubeSite()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Würfel konfigurieren"></button>
-    <button (click)="onStatsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="Statistiken"></button>
+    <button (click)="onLobbyBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="🕹 Spielelobby"></button>
+    <button (click)="onCreateGameBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="🎮 Spiel erstellen"></button>
+    <button (click)="onPlayerProfileBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="👤 Spielerprofil"></button>
+    <button (click)="openCubeSite()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="🎲 Würfel konfigurieren"></button>
+    <button (click)="onStatsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple label="📊 Statistiken"></button>
     <button (click)="onUserManagementBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple
-            label="Benutzermanagement" *ngIf="isAdmin"></button>
+            label="👥 Benutzermanagement" *ngIf="isAdmin"></button>
     <button (click)="onTopicsBtn()" class="main-button p-col-12 p-lg-3 p-py-4 p-mb-4 p-mr-4" pButton pRipple
-            label="Themenbereiche" *ngIf="isAdmin || isOrganizer"></button>
+            label="📃 Themenbereiche" *ngIf="isAdmin || isOrganizer"></button>
   </main>
 </div>
