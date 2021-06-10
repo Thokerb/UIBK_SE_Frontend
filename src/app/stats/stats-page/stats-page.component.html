@@ -21,12 +21,12 @@
       <p-table [value]="topics">
         <ng-template pTemplate="header">
           <tr>
-            <th>TopicID</th>
-            <th>Topic</th>
-            <th>Max Points</th>
-            <th>Reached Points</th>
-            <th>Total Guesses [s]</th>
-            <th>Time for all guesses [s]</th>
+            <th>Thema-ID</th>
+            <th>Thema</th>
+            <th>Maximale Anzahl der Punkte</th>
+            <th>Erreichte Punkte</th>
+            <th>Gesamtanzahl der Rateversuche [s]</th>
+            <th>Gesamtzeit für alle Rateversuche [s]</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-topic>
@@ -46,8 +46,8 @@
       <p-table [value]="userTimesPlayed" *ngIf="userTimesPlayed != null">
         <ng-template pTemplate="header">
           <tr>
-            <th>Player name</th>
-            <th>num games</th>
+            <th>SpielerIn</th>
+            <th>Anzahl der gemeinsamen Spiele</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-playerData>
