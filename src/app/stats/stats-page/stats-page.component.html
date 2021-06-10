@@ -44,21 +44,19 @@
         </ng-template>
       </p-table>
     </div>
-    <h2>MitspielerInnen Statistiken</h2>
+    <h2>Team Statistiken</h2>
     <div>
-      <h3>MitspielerInnen</h3>
+      <h3>MitspielerInnen des letzten Teams</h3>
       <div class="help-text" *ngIf="(userTimesPlayed == null) || (userTimesPlayed.length < 1)">Unzureichende Daten</div>
       <p-table [value]="userTimesPlayed" *ngIf="(userTimesPlayed != null) && (userTimesPlayed.length > 0)">
         <ng-template pTemplate="header">
           <tr>
-            <th>SpielerIn</th>
-            <th>Anzahl der gemeinsamen Spiele</th>
+            <th>Name der Spielerin / des Spielers</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-playerData>
+        <ng-template pTemplate="body" let-playerName>
           <tr>
-            <td>{{playerData.playerName}}</td>
-            <td>{{playerData.numGames}}</td>
+            <td>{{playerName}}</td>
           </tr>
         </ng-template>
       </p-table>

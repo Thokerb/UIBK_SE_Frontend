@@ -91,7 +91,12 @@ export class StatsPageComponent implements OnInit {
 
   prepareChartData(): void {
 
+    this.topics = this.stats.topics;
+    this.numDistinctTopics = this.stats.topics.length;
+
     if (this.stats.userTimesPlayed != null) {
+      this.userTimesPlayed = this.stats.userTimesPlayed;
+      /*
       this.userTimesPlayed = [];
       for (const playerName in this.stats.userTimesPlayed) {
         const numGames = this.stats.userTimesPlayed[playerName];
@@ -100,10 +105,8 @@ export class StatsPageComponent implements OnInit {
           numGames: numGames
         });
       }
+       */
     }
-    this.topics = this.stats.topics;
-
-    this.numDistinctTopics = this.stats.topics.length;
 
     // Pie chart for most played topics
     this.mostPlayedTopicsData = {
