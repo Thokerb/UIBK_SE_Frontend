@@ -16,6 +16,31 @@
       <h3>Beste Themen</h3>
       <p-chart type="bar" [data]="bestTopicsData"></p-chart>
     </div>
+    <div>
+      <h3>Themen Statistiken</h3>
+      <p-table [value]="topics">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>TopicID</th>
+            <th>Topic</th>
+            <th>Max Points</th>
+            <th>Reached Points</th>
+            <th>Total Guesses</th>
+            <th>Time for all guesses</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-topic>
+          <tr>
+            <td>{{topic.topicId}}</td>
+            <td>{{topic.topic}}</td>
+            <td>{{topic.maxPoints}}</td>
+            <td>{{topic.reachedPoints}}</td>
+            <td>{{topic.totalGuesses}}</td>
+            <td>{{topic.timeForAllGuesses}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
 
     <!-- TODO -->
   </main>

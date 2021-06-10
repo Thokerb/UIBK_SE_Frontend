@@ -7,6 +7,28 @@ import {Router} from '@angular/router';
 import {ChartModule} from 'primeng/chart';
 import {Stats} from '../../api/dto/Stats';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
+import {TableModule} from 'primeng/table';
+
+interface StatsResult {
+  success: boolean;
+  object: {
+    userId: string;
+    totalGuesses: number;
+    totalTimeForAllGuesses: number;
+    topics: StatsTopic[],
+  };
+  description: string;
+}
+
+interface StatsTopic {
+  topicId: number;
+  topic: string;
+  maxPoints: number;
+  reachedPoints: number;
+  totalGuesses: number;
+  timeForAllGuesses: number;
+}
+
 
 @Component({
   selector: 'app-stats',
@@ -14,19 +36,20 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
   styleUrls: ['./stats-page.component.css']
 })
 export class StatsPageComponent implements OnInit {
-
   stats: Stats;
   mostPlayedTopicsData: any;
   bestTopicsData: any;
   numDistinctTopics: number;
+  topics: StatsTopic[] | null;
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private authSelector: AuthenticationSelector
-              ) {
+  ) {
     this.mostPlayedTopicsData = null;
     this.bestTopicsData = null;
     this.numDistinctTopics = 0;
+    this.topics = null;
   }
 
   ngOnInit(): void {
