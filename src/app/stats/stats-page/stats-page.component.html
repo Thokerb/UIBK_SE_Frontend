@@ -25,7 +25,7 @@
             <th>Thema</th>
             <th>Maximale Anzahl der Punkte</th>
             <th>Erreichte Punkte</th>
-            <th>Gesamtanzahl der Rateversuche [s]</th>
+            <th>Gesamtanzahl der Rateversuche</th>
             <th>Gesamtzeit für alle Rateversuche [s]</th>
           </tr>
         </ng-template>
@@ -35,7 +35,7 @@
             <td>{{topic.topic}}</td>
             <td>{{topic.maxPoints}}</td>
             <td>{{topic.reachedPoints}}</td>
-            <td>{{topic.totalGuesses / 1000}}</td>
+            <td>{{topic.totalGuesses}}</td>
             <td>{{topic.timeForAllGuesses / 1000}}</td>
           </tr>
         </ng-template>
