@@ -101,6 +101,7 @@ export class StatsPageComponent implements OnInit {
         });
       }
     }
+    this.topics = this.stats.topics;
 
     this.numDistinctTopics = this.stats.topics.length;
 
