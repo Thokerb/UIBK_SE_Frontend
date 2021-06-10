@@ -7,7 +7,7 @@
       <p>Gesamtzeit für alle Rateversuche: {{stats.totalTimeForAllGuesses / 1000}} Sekunden</p>
       <p>Anzahl der gespielten Themen: {{numDistinctTopics}}</p>
     </div>
-    <h2>Topics</h2>
+    <h2>Thema Statistiken</h2>
     <div>
       <h3>Meistgespielte Themen</h3>
       <p-chart type="pie" [data]="mostPlayedTopicsData"></p-chart>
@@ -18,7 +18,8 @@
     </div>
     <div>
       <h3>Themen</h3>
-      <p-table [value]="topics">
+      <div class="help-text" *ngIf="(topics == null) || (topics.length < 1)">Unzureichende Daten</div>
+      <p-table [value]="topics" *ngIf="(topics != null) && (topics.length > 0)">
         <ng-template pTemplate="header">
           <tr>
             <th>Thema-ID</th>
@@ -41,9 +42,11 @@
         </ng-template>
       </p-table>
     </div>
+    <h2>MitspielerInnen Statistiken</h2>
     <div>
       <h3>MitspielerInnen</h3>
-      <p-table [value]="userTimesPlayed" *ngIf="userTimesPlayed != null">
+      <div class="help-text" *ngIf="(userTimesPlayed == null) || (userTimesPlayed.length < 1)">Unzureichende Daten</div>
+      <p-table [value]="userTimesPlayed" *ngIf="(userTimesPlayed != null) && (userTimesPlayed.length > 0)">
         <ng-template pTemplate="header">
           <tr>
             <th>SpielerIn</th>
