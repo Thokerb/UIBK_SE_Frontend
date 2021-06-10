@@ -15,7 +15,8 @@ interface StatsResult {
     userId: string;
     totalGuesses: number;
     totalTimeForAllGuesses: number;
-    topics: StatsTopic[],
+    topics: StatsTopic[];
+    userTimesPlayed: any[];
   };
   description: string;
 }
@@ -41,6 +42,7 @@ export class StatsPageComponent implements OnInit {
   bestTopicsData: any;
   numDistinctTopics: number;
   topics: StatsTopic[] | null;
+  userTimesPlayed: any[];
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
@@ -88,6 +90,17 @@ export class StatsPageComponent implements OnInit {
   }
 
   prepareChartData(): void {
+
+    if (this.stats.userTimesPlayed != null) {
+      this.userTimesPlayed = [];
+      for (const playerName in this.stats.userTimesPlayed) {
+        const numGames = this.stats.userTimesPlayed[playerName];
+        this.userTimesPlayed.push({
+          playerName: playerName,
+          numGames: numGames
+        });
+      }
+    }
 
     this.numDistinctTopics = this.stats.topics.length;
 

@@ -17,7 +17,7 @@
       <p-chart type="bar" [data]="bestTopicsData"></p-chart>
     </div>
     <div>
-      <h3>Themen Statistiken</h3>
+      <h3>Themen</h3>
       <p-table [value]="topics">
         <ng-template pTemplate="header">
           <tr>
@@ -41,7 +41,22 @@
         </ng-template>
       </p-table>
     </div>
-
-    <!-- TODO -->
+    <div>
+      <h3>MitspielerInnen</h3>
+      <p-table [value]="userTimesPlayed" *ngIf="userTimesPlayed != null">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Player name</th>
+            <th>num games</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-playerData>
+          <tr>
+            <td>{{playerData.playerName}}</td>
+            <td>{{playerData.numGames}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </main>
 </div>
