@@ -113,7 +113,8 @@ export class StatsPageComponent implements OnInit {
       labels: this.stats.topics.map(topic => topic.topic),
       datasets: [
         {
-          data: this.stats.topics.map(topic => topic.totalGuesses)
+          data: this.stats.topics.map(topic => topic.totalGuesses),
+          backgroundColor: '#FF0000'
         }
       ]
     };
@@ -127,8 +128,8 @@ export class StatsPageComponent implements OnInit {
       labels: bestTopics.map(topic => topic.topic),
       datasets: [{
         barPercentage: 0.5,
-        barThickness: 6,
-        maxBarThickness: 8,
+        barThickness: 15,
+        maxBarThickness: 15,
         minBarLength: 2,
         data: bestTopics.map(topic => topic.rating)
       }]
