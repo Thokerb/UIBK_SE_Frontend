@@ -4,16 +4,19 @@ import { UserProfilePageComponent } from './user-profile-page/user-profile-page.
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
-
+import { BrowserModule } from '@angular/platform-browser';
+import {CardModule} from "primeng/card";
 
 
 @NgModule({
   declarations: [UserProfilePageComponent],
-    imports: [
-        CommonModule,
-        ButtonModule,
-        RippleModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    ButtonModule,
+    RippleModule,
+    BrowserModule,
+    FormsModule,
+    CardModule
+  ]
 })
 export class ProfileModule { }

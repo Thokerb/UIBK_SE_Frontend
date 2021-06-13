@@ -29,6 +29,7 @@ import {CommonModule} from '@angular/common';
 import {GameSectionModule} from './game-section/game-section.module';
 import {CubeSectionModule} from './cube-section/cube-section.module';
 import {CreateGameModule} from './create-game/create-game.module';
+import {ProfileModule} from './profile/profile.module';
 import {StatsModule} from './stats/stats.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromRoot.AppState>>('Registered Reducers', {
@@ -84,6 +85,7 @@ export const metaReducers = environment.production ? [] : [logger];
     ButtonModule,
     MenubarModule,
     UserManagementSectionModule,
+    ProfileModule,
     GameTopicSectionModule,
     GameLobbySectionModule,
     SharedModule,
