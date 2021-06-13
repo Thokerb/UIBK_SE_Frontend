@@ -5,10 +5,10 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
-import {SliderModule} from "primeng/slider";
-import {DropdownModule} from "primeng/dropdown";
-import {ListboxModule} from "primeng/listbox";
-import {InputNumberModule} from "primeng/inputnumber";
+import {SliderModule} from 'primeng/slider';
+import {DropdownModule} from 'primeng/dropdown';
+import {ListboxModule} from 'primeng/listbox';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [CreateGamePageComponent],

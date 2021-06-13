@@ -1,7 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {TodoSelector} from '../../redux/todo/todo.selector';
-import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
@@ -13,6 +11,7 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
 import {GametopicSelector} from '../../redux/gameTopic/gametopic.selector';
 import {GameTopicDTO} from '../../api/dto/GameTopic';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {MessageService} from 'primeng/api';
 
 interface DisplayCube {
   name: string;
@@ -38,24 +37,26 @@ export class CreateGamePageComponent implements OnInit {
   selectedCubeId: string;
   availableTopics: GameTopicDTO[];
   selectedTopics: string[];
+  errText: string | undefined;
   constructor(private store: Store,
-              private todoSelector: TodoSelector,
-              private todoActions: TodoAction,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private router: Router,
               private gameAction: GameAction,
               private authSelector: AuthenticationSelector,
               private gameTopicSelector: GametopicSelector,
+              private messageService: MessageService,
               private zone: NgZone,
   ) {
     this.numTeams = this.MIN_NUM_TEAMS;
     this.maxPoints = this.DEFAULT_MAX_POINTS;
+    this.gameName = '';
     this.selectedCubeId = undefined;
     this.selectedTopics = [];
     this.availableCubes = [];
     // this.displayCubes = [{name: 'c', code: '1'}, {name: 'c2', code: '2'}]; // Test
     this.displayCubes = [];
+    this.errText = undefined;
   }
 
   ngOnInit(): void {
@@ -76,14 +77,14 @@ export class CreateGamePageComponent implements OnInit {
   }
 
   cubeChange(ev): void {
-    console.log('cube change');
-    console.log(ev);
+    // console.log('cube change');
+    // console.log(ev);
     this.selectedCubeId = ev.value;
   }
 
   topicChange(ev): void {
-    console.log('topic change');
-    console.log(ev);
+    // console.log('topic change');
+    // console.log(ev);
     this.selectedTopics = ev.value.map(topicId => `${topicId}`);
   }
 
@@ -101,7 +102,6 @@ export class CreateGamePageComponent implements OnInit {
 
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
     this.availableCubes = cubes;
-    // TODO interface for displayCubes
     this.displayCubes = this.availableCubes.map(cube => ({name: 'Würfel ' + cube.cubeId, code: cube.cubeId, inactive: !cube.calibrated}));
   }
 
@@ -117,13 +117,13 @@ export class CreateGamePageComponent implements OnInit {
   loadTopics(): void {
     this.restService.getAllGameTopics().subscribe(topicsResult => {
       const topics = [];
-      console.log('topicsResult');
-      console.log(topicsResult);
+      // console.log('topicsResult');
+      // console.log(topicsResult);
       for (const key of Object.keys(topicsResult.object)){
         topics.push(topicsResult.object[key]);
       }
-      console.log('loaded topics');
-      console.log(topics);
+      // console.log('loaded topics');
+      // console.log(topics);
       this.availableTopics = topics;
     });
   }
@@ -131,6 +131,30 @@ export class CreateGamePageComponent implements OnInit {
   onCreateBtn(ev: MouseEvent): void {
     ev.preventDefault();
     this.createGame();
+  }
+
+  inputValidation(): boolean {
+    let errStr = '';
+    if ((this.gameName === '') || (this.gameName === ' ')) {
+      errStr += 'Spielname darf nicht leer sein\n';
+    }
+
+    if (this.selectedTopics.length < 1) {
+      errStr += 'Mindestens ein Themengebiet muss ausgewählt werden\n';
+    }
+
+    if (this.selectedCubeId === undefined) {
+      errStr += 'Ein Würfel muss ausgewählt werden\n';
+    }
+
+    if (errStr !== '') {
+      console.warn(errStr);
+      this.messageService.add({severity: 'error', summary: 'Eingabe', detail: errStr});
+      this.errText = errStr;
+      return false;
+    }
+    this.errText = undefined;
+    return true;
   }
 
   /**
@@ -151,18 +175,7 @@ export class CreateGamePageComponent implements OnInit {
     // console.log('creating game: ');
     // console.log(game);
 
-    if ((this.gameName === '') || (this.gameName === ' ')) {
-      console.warn('Game name must not be empty');
-      return;
-    }
-
-    if (this.selectedTopics.length < 1) {
-      console.warn('At least one topic needs to be selected');
-      return;
-    }
-
-    if (this.selectedCubeId === undefined) {
-      console.warn('A cube needs to be selected');
+    if (!this.inputValidation()) {
       return;
     }
 
