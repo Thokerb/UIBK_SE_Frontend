@@ -5,17 +5,19 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {ChartModule} from 'primeng/chart';
+import {TableModule} from "primeng/table";
 
 
 
 @NgModule({
   declarations: [StatsPageComponent],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    RippleModule,
-    FormsModule,
-    ChartModule
-  ]
+    imports: [
+        CommonModule,
+        ButtonModule,
+        RippleModule,
+        FormsModule,
+        ChartModule,
+        TableModule
+    ]
 })
 export class StatsModule { }

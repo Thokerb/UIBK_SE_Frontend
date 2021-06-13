@@ -1,15 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {TodoSelector} from '../../redux/todo/todo.selector';
-import {TodoReducer} from '../../redux/todo/todo.reducer';
-import {TodoAction} from '../../redux/todo/todo.action';
 import {RestServiceService} from '../../api/rest-service.service';
 import {SocketService} from '../../api/socket.service';
 import {Router} from '@angular/router';
 import {ChartModule} from 'primeng/chart';
 import {Stats} from '../../api/dto/Stats';
 import {AuthenticationSelector} from '../../redux/authentication/authentication.selector';
+import {TableModule} from 'primeng/table';
+
+interface StatsResult {
+  success: boolean;
+  object: {
+    userId: string;
+    totalGuesses: number;
+    totalTimeForAllGuesses: number;
+    topics: StatsTopic[];
+    userTimesPlayed: any[];
+  };
+  description: string;
+}
+
+interface StatsTopic {
+  topicId: number;
+  topic: string;
+  maxPoints: number;
+  reachedPoints: number;
+  totalGuesses: number;
+  timeForAllGuesses: number;
+}
+
 
 @Component({
   selector: 'app-stats',
@@ -17,19 +37,21 @@ import {AuthenticationSelector} from '../../redux/authentication/authentication.
   styleUrls: ['./stats-page.component.css']
 })
 export class StatsPageComponent implements OnInit {
-
   stats: Stats;
   mostPlayedTopicsData: any;
   bestTopicsData: any;
   numDistinctTopics: number;
+  topics: StatsTopic[] | null;
+  userTimesPlayed: any[];
   constructor(private store: Store,
               private restService: RestServiceService,
               private webSocket: SocketService,
               private authSelector: AuthenticationSelector
-              ) {
+  ) {
     this.mostPlayedTopicsData = null;
     this.bestTopicsData = null;
     this.numDistinctTopics = 0;
+    this.topics = null;
   }
 
   ngOnInit(): void {
@@ -69,14 +91,30 @@ export class StatsPageComponent implements OnInit {
 
   prepareChartData(): void {
 
+    this.topics = this.stats.topics;
     this.numDistinctTopics = this.stats.topics.length;
+
+    if (this.stats.userTimesPlayed != null) {
+      this.userTimesPlayed = this.stats.userTimesPlayed;
+      /*
+      this.userTimesPlayed = [];
+      for (const playerName in this.stats.userTimesPlayed) {
+        const numGames = this.stats.userTimesPlayed[playerName];
+        this.userTimesPlayed.push({
+          playerName: playerName,
+          numGames: numGames
+        });
+      }
+       */
+    }
 
     // Pie chart for most played topics
     this.mostPlayedTopicsData = {
       labels: this.stats.topics.map(topic => topic.topic),
       datasets: [
         {
-          data: this.stats.topics.map(topic => topic.totalGuesses)
+          data: this.stats.topics.map(topic => topic.totalGuesses),
+          backgroundColor: '#FF0000'
         }
       ]
     };
@@ -90,8 +128,8 @@ export class StatsPageComponent implements OnInit {
       labels: bestTopics.map(topic => topic.topic),
       datasets: [{
         barPercentage: 0.5,
-        barThickness: 6,
-        maxBarThickness: 8,
+        barThickness: 15,
+        maxBarThickness: 15,
         minBarLength: 2,
         data: bestTopics.map(topic => topic.rating)
       }]

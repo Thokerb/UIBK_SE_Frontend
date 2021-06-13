@@ -10,6 +10,7 @@ export interface Stats {
   totalGuesses: number;
   totalTimeForAllGuesses: number;
   topics: Array<TopicStats>;
+  userTimesPlayed: any[];
 }
 
 export interface TopicStats {
