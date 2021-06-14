@@ -134,8 +134,6 @@ export class StatsPageComponent implements OnInit {
         data: bestTopics.map(topic => topic.rating)
       }]
     };
-
-    // TODO more
   }
 
   sendToSocket(): void {
