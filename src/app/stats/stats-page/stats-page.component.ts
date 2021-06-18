@@ -30,6 +30,7 @@ interface StatsTopic {
   timeForAllGuesses: number;
 }
 
+const chartBgColors = ['#FFE0E6', '#FFECD9', '#DBF2F2', '#D7ECFB', '#EBE0FF'];
 
 @Component({
   selector: 'app-stats',
@@ -96,7 +97,7 @@ export class StatsPageComponent implements OnInit {
       datasets: [
         {
           data: this.stats.topics.map(topic => topic.totalGuesses),
-          backgroundColor: '#FF0000',
+          backgroundColor: chartBgColors,
           label: 'Most Played Topics'
         }
       ]
@@ -140,7 +141,7 @@ export class StatsPageComponent implements OnInit {
         minBarLength: 2,
         data: bestTopics.map(topic => topic.rating),
         label: 'Topic Rating',
-        backgroundColor: ['#FFE0E6', '#FFECD9', '#DBF2F2', '#D7ECFB', '#EBE0FF']
+        backgroundColor: chartBgColors
       }]
     };
 
