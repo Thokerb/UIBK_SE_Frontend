@@ -16,7 +16,7 @@
     <div>
       <h3>Beste Themen</h3>
       <div class="help-text" *ngIf="(topics == null) || (topics.length < 1)">Unzureichende Daten</div>
-      <p-chart type="bar" [data]="bestTopicsData" [options]="bestTopicsOptions"></p-chart>
+      <p-chart type="bar" [data]="bestTopicsData" [options]="bestTopicsOptions" *ngIf="(topics != null) && (topics.length > 0)"></p-chart>
     </div>
     <div>
       <h3>Themen</h3>
