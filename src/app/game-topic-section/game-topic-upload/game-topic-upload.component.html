@@ -1,7 +1,7 @@
 <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onFileUpload($event)"></p-fileUpload>
 
 <input type="file" (change)="onFileUpload($event)">
-<button pButton [disabled]="!uploadTopic" (click)="upload(uploadTopic)">Upload</button>
+<button pButton [disabled]="!uploadTopic" (click)="upload(uploadTopic)" label="Upload"></button>
 
 <div class="p-grid" *ngIf="false">
   <div class="p-col"></div>

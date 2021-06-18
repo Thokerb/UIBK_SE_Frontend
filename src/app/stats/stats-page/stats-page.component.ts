@@ -74,7 +74,7 @@ export class StatsPageComponent implements OnInit {
   prepareChartData(): void {
 
     this.topics = this.stats.topics;
-    this.topics = [];
+    // this.topics = [];
     this.numDistinctTopics = this.stats.topics.length;
 
     if (this.stats?.userTimesPlayed != null) {
@@ -92,16 +92,18 @@ export class StatsPageComponent implements OnInit {
     }
 
     // Pie chart for most played topics
-    this.mostPlayedTopicsData = {
-      labels: this.stats.topics.map(topic => topic.topic),
-      datasets: [
-        {
-          data: this.stats.topics.map(topic => topic.totalGuesses),
-          backgroundColor: chartBgColors,
-          label: 'Most Played Topics'
-        }
-      ]
-    };
+    if (this.stats?.topics?.length > 0) {
+      this.mostPlayedTopicsData = {
+        labels: this.stats.topics.map(topic => topic.topic),
+        datasets: [
+          {
+            data: this.stats.topics.map(topic => topic.totalGuesses),
+            backgroundColor: chartBgColors,
+            label: 'Most Played Topics'
+          }
+        ]
+      };
+    }
 
     const bestTopics = this.stats.topics
       .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}))
