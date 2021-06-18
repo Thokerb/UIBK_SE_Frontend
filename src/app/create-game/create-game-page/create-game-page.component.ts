@@ -97,7 +97,15 @@ export class CreateGamePageComponent implements OnInit {
   onNumTeamsChange(ev): void {
     // console.log('onMaxPointsChange');
     // console.log(ev);
-    this.numTeams = ev.value;
+    if (ev.value < this.MIN_NUM_TEAMS){
+      this.numTeams = this.MIN_NUM_TEAMS;
+    }
+    else if (ev.value > this.MAX_NUM_TEAMS){
+      this.numTeams = this.MAX_NUM_TEAMS;
+    }
+    else {
+      this.numTeams = ev.value;
+    }
   }
 
   setAvailableCubes(cubes: Array<Partial<Cube>>): void {
