@@ -30,12 +30,15 @@ export class AppComponent {
       this.store.dispatch(this.authAction.saveUser({user: this.tokenStorageService.getUser() }));
       this.store.dispatch(this.authAction.setRoles({roles: this.tokenStorageService.getUser().roles}));
     }
+    /*
     if (!this.tokenStorageService.getUser()){
       if (this.router.url.includes('register')){
         return;
       }
       this.router.navigateByUrl('/login');
     }
+
+     */
   }
 
   logout(): void {

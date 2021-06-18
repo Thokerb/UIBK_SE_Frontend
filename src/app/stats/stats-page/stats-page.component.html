@@ -3,8 +3,8 @@
   <main class="full p-grid p-dir-col p-px-6">
     <h2>Allgemeine Statistiken</h2>
     <div>
-      <p>Gesamtanzahl der Rateversuche: {{stats.totalGuesses || '?'}}</p>
-      <p>Gesamtzeit für alle Rateversuche: {{(stats.totalTimeForAllGuesses / 1000) || '?'}} Sekunden</p>
+      <p>Gesamtanzahl der Rateversuche: {{stats?.totalGuesses || '?'}}</p>
+      <p>Gesamtzeit für alle Rateversuche: {{(stats?.totalTimeForAllGuesses / 1000) || '?'}} Sekunden</p>
       <p>Anzahl der gespielten Themen: {{numDistinctTopics || '?'}}</p>
     </div>
     <h2>Thema Statistiken</h2>
@@ -16,7 +16,7 @@
     <div>
       <h3>Beste Themen</h3>
       <div class="help-text" *ngIf="(topics == null) || (topics.length < 1)">Unzureichende Daten</div>
-      <p-chart type="bar" [data]="bestTopicsData"></p-chart>
+      <p-chart type="bar" [data]="bestTopicsData" [options]="bestTopicsOptions"></p-chart>
     </div>
     <div>
       <h3>Themen</h3>

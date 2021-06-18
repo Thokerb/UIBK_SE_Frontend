@@ -40,6 +40,7 @@ export class StatsPageComponent implements OnInit {
   stats: Stats;
   mostPlayedTopicsData: any;
   bestTopicsData: any;
+  bestTopicsOptions: any;
   numDistinctTopics: number;
   topics: StatsTopic[] | null;
   userTimesPlayed: any[];
@@ -52,49 +53,30 @@ export class StatsPageComponent implements OnInit {
     this.bestTopicsData = null;
     this.numDistinctTopics = 0;
     this.topics = null;
+    this.bestTopicsOptions = null;
   }
 
   ngOnInit(): void {
     this.store.select(this.authSelector.selectCurrentUser).subscribe(userResult => {
       const currentUserId = userResult.id;
-      console.log('Current user id: ' + currentUserId);
+      // console.log('Current user id: ' + currentUserId);
       this.restService.getStats(currentUserId).subscribe(statsResult => {
-        // Test
-        /*
-        statsResult = {
-          success: true,
-          object: {
-            userId: 'admin',
-            totalGuesses: 3,
-            totalTimeForAllGuesses: 1676,
-            topics: [
-              {
-                topicId: 1,
-                topic: 'SPORT',
-                maxPoints: 9,
-                reachedPoints: 9,
-                totalGuesses: 3,
-                timeForAllGuesses: 1676
-              }
-            ]
-          },
-          description: 'Player Stats'
-        };
-         */
         this.stats = statsResult.object;
         console.log('get stats: ');
         console.log(this.stats);
         this.prepareChartData();
       });
+      // this.prepareChartData();
     });
   }
 
   prepareChartData(): void {
 
     this.topics = this.stats.topics;
+    this.topics = [];
     this.numDistinctTopics = this.stats.topics.length;
 
-    if (this.stats.userTimesPlayed != null) {
+    if (this.stats?.userTimesPlayed != null) {
       this.userTimesPlayed = this.stats.userTimesPlayed;
       /*
       this.userTimesPlayed = [];
@@ -114,7 +96,8 @@ export class StatsPageComponent implements OnInit {
       datasets: [
         {
           data: this.stats.topics.map(topic => topic.totalGuesses),
-          backgroundColor: '#FF0000'
+          backgroundColor: '#FF0000',
+          label: 'Most Played Topics'
         }
       ]
     };
@@ -123,16 +106,62 @@ export class StatsPageComponent implements OnInit {
       .map(topic => ({topic: topic.topic, rating: topic.reachedPoints / topic.maxPoints}))
       .sort((t1, t2) => t1.rating - t2.rating);
 
+    /*
+    const bestTopics = [
+      {
+        topic: '1',
+        rating: 0.5
+      },
+      {
+        topic: '1',
+        rating: 0.5
+      },
+      {
+        topic: '1',
+        rating: 0.5
+      },
+      {
+        topic: '1',
+        rating: 0.5
+      },
+      {
+        topic: '1',
+        rating: 0.5
+      }
+    ];
+
+     */
+
     // Bar chart for best topics
     this.bestTopicsData = {
       labels: bestTopics.map(topic => topic.topic),
       datasets: [{
-        barPercentage: 0.5,
-        barThickness: 15,
-        maxBarThickness: 15,
+        barPercentage: 1.0,
         minBarLength: 2,
-        data: bestTopics.map(topic => topic.rating)
+        data: bestTopics.map(topic => topic.rating),
+        label: 'Topic Rating',
+        backgroundColor: ['#FFE0E6', '#FFECD9', '#DBF2F2', '#D7ECFB', '#EBE0FF']
       }]
+    };
+
+    let maxRating = 0;
+    for (const topic of bestTopics) {
+      if (topic.rating > maxRating) { maxRating = topic.rating; }
+    }
+
+    this.bestTopicsOptions = {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          type: 'linear',
+          display: true,
+          position: 'left',
+          ticks: {
+            min: 0,
+            max: 1.0
+          }
+        }]
+      }
     };
   }
 
